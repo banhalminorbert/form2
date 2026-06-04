@@ -2978,22 +2978,56 @@
         autosaveStatus.textContent = message;
       };
 
-      const getFieldLabel = (field) => {
-        if (!field) return field?.name || '';
-        const directLabel = field.id ? form.querySelector(`label[for="${CSS.escape(field.id)}"]`) : null;
-        if (directLabel) return directLabel.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
-        const parentLabel = field.closest('label');
-        if (parentLabel) return parentLabel.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+      const cleanLabelText = (value) => String(value || '')
+        .replace(/\*/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      const getGroupQuestion = (field) => {
+        if (!field) return '';
         const group = field.closest('.form-group');
-        const groupLabel = group?.querySelector('.field-label, label');
-        return (groupLabel?.textContent || field.name || '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+        if (!group) return '';
+        const explicitGroupLabel = group.querySelector(':scope > .field-label');
+        if (explicitGroupLabel) return cleanLabelText(explicitGroupLabel.textContent);
+        const directLabel = Array.from(group.children).find((child) => child.tagName === 'LABEL');
+        if (directLabel) return cleanLabelText(directLabel.textContent);
+        return '';
+      };
+
+      const getFieldLabel = (field) => {
+        if (!field) return '';
+        const groupQuestion = getGroupQuestion(field);
+        const directLabel = field.id ? form.querySelector(`label[for="${CSS.escape(field.id)}"]`) : null;
+        const parentLabel = field.closest('label');
+        const ownLabel = directLabel || parentLabel;
+        const ownText = cleanLabelText(ownLabel?.textContent || '');
+
+        if (field.type === 'radio' || field.type === 'checkbox') {
+          return ownText || field.value || field.name || '';
+        }
+
+        if (groupQuestion) return groupQuestion;
+        if (ownText) return ownText;
+        return cleanLabelText(field.name || '');
+      };
+
+      const getOptionText = (field) => {
+        if (!field) return '';
+        if (field.tagName === 'SELECT') {
+          const selectedText = cleanLabelText(field.selectedOptions?.[0]?.textContent || '');
+          return selectedText === 'Kérem válasszon' ? '' : selectedText;
+        }
+        if (field.type === 'checkbox' || field.type === 'radio') {
+          return getFieldLabel(field) || field.value || 'Kiválasztva';
+        }
+        return (field.value || '').trim();
       };
 
       const getSerializableFields = () => {
         if (!form) return [];
         return Array.from(form.elements).filter((field) => {
           if (!field.name) return false;
-          if (field.type === 'hidden' || field.type === 'submit' || field.type === 'button') return false;
+          if (field.type === 'hidden' || field.type === 'submit' || field.type === 'button' || field.type === 'reset') return false;
           if (field.name === '_honey') return false;
           return true;
         });
@@ -3063,31 +3097,28 @@
 
       const collectAnsweredFields = () => {
         const rows = [];
-        const groupedChecks = new Map();
+        const groupedChoices = new Map();
+
         getSerializableFields().forEach((field) => {
-          if (field.type === 'checkbox') {
+          if (field.type === 'checkbox' || field.type === 'radio') {
             if (!field.checked) return;
-            const label = getFieldLabel(field);
-            const existing = groupedChecks.get(field.name) || { question: label, values: [] };
-            existing.values.push(label);
-            groupedChecks.set(field.name, existing);
+            const question = getGroupQuestion(field) || field.name;
+            const existing = groupedChoices.get(field.name) || { question, values: [] };
+            existing.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
+            groupedChoices.set(field.name, existing);
             return;
           }
-          if (field.type === 'radio') {
-            if (!field.checked) return;
-            rows.push({ question: getFieldLabel(field), value: getFieldLabel(field) });
-            return;
-          }
-          const value = field.tagName === 'SELECT'
-            ? (field.selectedOptions?.[0]?.textContent || '').trim()
-            : (field.value || '').trim();
-          if (!value || value === 'Kérem válasszon') return;
+
+          const value = getOptionText(field);
+          if (!value) return;
           rows.push({ question: getFieldLabel(field), value });
         });
-        groupedChecks.forEach((item) => {
+
+        groupedChoices.forEach((item) => {
           rows.push({ question: item.question, value: item.values.join('\n') });
         });
-        return rows;
+
+        return rows.filter((row) => row.question && row.value);
       };
 
       const buildPdfMarkup = () => {
@@ -3106,27 +3137,44 @@
           showAlert('Még nincs kitöltött válasz, amit PDF-be lehetne menteni.');
           return;
         }
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = buildPdfMarkup();
+
+        const exportHost = document.createElement('div');
+        exportHost.setAttribute('aria-hidden', 'true');
+        exportHost.style.position = 'absolute';
+        exportHost.style.left = '-10000px';
+        exportHost.style.top = '0';
+        exportHost.style.width = '794px';
+        exportHost.style.background = '#ffffff';
+        exportHost.style.color = '#111827';
+        exportHost.innerHTML = buildPdfMarkup();
+        document.body.appendChild(exportHost);
+
+        const exportNode = exportHost.firstElementChild;
         const fileName = 'digitalis-entitas-audit-valaszok-' + new Date().toISOString().slice(0, 10) + '.pdf';
-        if (window.html2pdf) {
-          await window.html2pdf().set({
-            margin: 10,
-            filename: fileName,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-          }).from(wrapper.firstElementChild).save();
-        } else {
-          const printWindow = window.open('', '_blank');
-          if (!printWindow) {
-            showAlert('A PDF exporthoz engedélyezni kell az új ablak megnyitását, vagy próbálja újra később.');
-            return;
+
+        try {
+          if (window.html2pdf && exportNode) {
+            await window.html2pdf().set({
+              margin: 10,
+              filename: fileName,
+              image: { type: 'jpeg', quality: 0.98 },
+              html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+              jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+              pagebreak: { mode: ['css', 'legacy'] }
+            }).from(exportNode).save();
+          } else {
+            const printWindow = window.open('', '_blank');
+            if (!printWindow) {
+              showAlert('A PDF exporthoz engedélyezni kell az új ablak megnyitását, vagy próbálja újra később.');
+              return;
+            }
+            printWindow.document.write('<!doctype html><html><head><title>Audit válaszok</title><style>body{font-family:Arial,sans-serif;color:#111827;padding:24px}.pdf-answer{break-inside:avoid;margin:0 0 12px;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb}.pdf-question{display:block;font-weight:700;margin-bottom:5px}.pdf-value{white-space:pre-wrap;font-size:13px}</style></head><body>' + buildPdfMarkup() + '</body></html>');
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
           }
-          printWindow.document.write('<!doctype html><html><head><title>Audit válaszok</title></head><body>' + buildPdfMarkup() + '</body></html>');
-          printWindow.document.close();
-          printWindow.focus();
-          printWindow.print();
+        } finally {
+          exportHost.remove();
         }
       };
 
