@@ -1,0 +1,3352 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digitális Entitásépítési Audit és Deep Search Stratégia | Bánhalmi Norbert e.U.</title>
+  <meta name="description" content="C-level digitális entitásépítési és deep search audit személyes márkáknak, cégeknek és márkáknak a magyar és nemzetközi piaci láthatóság erősítésére." />
+  <meta name="author" content="Bánhalmi Norbert e.U." />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#17283D" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM — Premium executive strategic audit
+       Deep blue (trust) · gold (restrained premium accent) ·
+       light neutral (calm, legible). Cormorant Garamond + Inter.
+       ========================================================= */
+    :root {
+      /* Core neutrals */
+      --paper:        #FBFAF7;
+      --paper-2:      #F4F2EC;
+      --card:         #FFFFFF;
+      --card-tint:    #FCFBF8;
+
+      /* Ink / text */
+      --ink:          #15202E;   /* near-black blue, headings */
+      --ink-soft:     #2A3645;   /* body strong */
+      --body:         #3C4655;   /* body text */
+      --muted:        #6B7280;   /* secondary text */
+      --muted-2:      #8A9099;
+
+      /* Deep blue identity */
+      --blue:         #17283D;
+      --blue-dark:    #0E1A2A;
+      --blue-mid:     #213A57;
+      --blue-line:    rgba(23, 40, 61, 0.14);
+      --blue-soft:    rgba(23, 40, 61, 0.05);
+
+      /* Gold accent (used sparingly) */
+      --gold:         #C9A227;
+      --gold-soft:    #D8B650;
+      --gold-deep:    #A8841C;
+      --gold-line:    rgba(201, 162, 39, 0.32);
+      --gold-tint:    rgba(201, 162, 39, 0.08);
+
+      /* Light ivory for use ON dark blue surfaces */
+      --on-dark:      #F3F1EA;
+      --on-dark-soft: rgba(243, 241, 234, 0.82);
+
+      /* Feedback */
+      --error:        #C0392B;
+      --success:      #1E8E4E;
+
+      /* Lines + shadows (soft, never heavy) */
+      --hairline:     rgba(23, 40, 61, 0.12);
+      --shadow-sm:    0 1px 2px rgba(23, 40, 61, 0.04), 0 6px 16px rgba(23, 40, 61, 0.05);
+      --shadow-md:    0 2px 6px rgba(23, 40, 61, 0.05), 0 14px 34px rgba(23, 40, 61, 0.07);
+      --shadow-lg:    0 4px 10px rgba(14, 26, 42, 0.06), 0 26px 60px rgba(14, 26, 42, 0.10);
+
+      --radius:       18px;
+      --radius-sm:    12px;
+      --radius-lg:    24px;
+
+      --serif:        'Cormorant Garamond', 'Georgia', 'Times New Roman', serif;
+      --sans:         'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--body);
+      line-height: 1.7;
+      min-height: 100vh;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      background:
+        radial-gradient(1200px 600px at 100% -8%, rgba(23, 40, 61, 0.05), transparent 60%),
+        radial-gradient(900px 500px at -8% 110%, var(--gold-tint), transparent 60%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      background-attachment: fixed;
+    }
+
+    ::selection { background: rgba(201, 162, 39, 0.22); color: var(--ink); }
+
+    .container { width: min(1140px, calc(100% - 40px)); margin: 0 auto; }
+
+    /* ---------- Shared heading rhythm ---------- */
+    h1, h2, h3, h4 { color: var(--ink); font-weight: 600; }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+    header {
+      position: relative;
+      text-align: center;
+      padding: clamp(56px, 8vw, 92px) clamp(20px, 5vw, 56px) clamp(40px, 5vw, 56px);
+      margin: 22px 0 40px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, var(--card) 0%, var(--card-tint) 100%);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--gold) 55%, var(--blue-mid));
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border: 1px solid var(--blue-line);
+      border-radius: 999px;
+      color: var(--blue-mid);
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      background: var(--blue-soft);
+      margin-bottom: 26px;
+    }
+
+    header h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(2.1rem, 4.6vw, 3.7rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      max-width: 16ch;
+      margin: 0 auto 22px;
+    }
+
+    header > p {
+      font-size: clamp(1rem, 1.3vw, 1.12rem);
+      color: var(--body);
+      max-width: 64ch;
+      margin: 0 auto;
+      line-height: 1.78;
+    }
+
+    .header-brand {
+      margin-top: 30px;
+      padding-top: 22px;
+      border-top: 1px solid var(--hairline);
+      font-size: 0.84rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* =========================================================
+       INTRO GRID
+       ========================================================= */
+    .intro-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .intro-box, .promise-box, .story-box {
+      border-radius: var(--radius);
+      padding: clamp(24px, 3vw, 36px);
+    }
+
+    .intro-box {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      border-left: 3px solid var(--gold);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .promise-box {
+      background:
+        radial-gradient(140% 120% at 100% 0%, rgba(201, 162, 39, 0.14), transparent 55%),
+        linear-gradient(160deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-mid) 100%);
+      color: var(--on-dark);
+      border: 1px solid rgba(201, 162, 39, 0.28);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .intro-box h2, .story-box h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 2.2vw, 1.9rem);
+      line-height: 1.18;
+      margin-bottom: 16px;
+      color: var(--ink);
+    }
+
+    .promise-box h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.5rem, 2.2vw, 1.95rem);
+      line-height: 1.16;
+      margin-bottom: 16px;
+      color: #EBC85A;
+    }
+
+    .intro-box p, .story-box p { color: var(--body); margin-bottom: 12px; }
+    .intro-box p:last-child, .story-box p:last-child { margin-bottom: 0; }
+    .promise-box p { color: var(--on-dark-soft); margin-bottom: 12px; }
+    .promise-box p:last-child { margin-bottom: 0; }
+    .promise-box strong { color: #EBC85A; font-weight: 600; }
+
+    .intro-box ul, .story-box ul { margin: 14px 0 0 1.1em; }
+    .intro-box li, .story-box li { margin-bottom: 9px; color: var(--body); }
+    .intro-box li::marker { color: var(--gold); }
+    .promise-box ul { margin: 14px 0 0 1.1em; }
+    .promise-box li { margin-bottom: 9px; color: var(--on-dark-soft); }
+    .promise-box li::marker { color: var(--gold-soft); }
+
+    /* =========================================================
+       STORY GRID
+       ========================================================= */
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin: 0 0 26px;
+    }
+
+    .story-box {
+      background: var(--card-tint);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-sm);
+    }
+    .story-box h2 { font-size: clamp(1.3rem, 1.9vw, 1.55rem); color: var(--ink); }
+
+    /* =========================================================
+       VALUE STRIP
+       ========================================================= */
+    .value-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin: 0 0 36px;
+    }
+
+    .value-tile {
+      padding: clamp(20px, 2.4vw, 28px);
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+    .value-tile::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--gold), var(--blue-mid));
+      opacity: 0.7;
+    }
+    .value-tile strong {
+      display: block;
+      font-family: var(--serif);
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 1.35rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 8px;
+    }
+    .value-tile span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.62;
+    }
+
+    /* =========================================================
+       EXECUTIVE ASSURANCE / DELIVERABLES / NEXT STEPS
+       ========================================================= */
+    .executive-assurance, .deliverables-box, .next-steps-box {
+      margin: 0 0 36px;
+      padding: clamp(28px, 3.4vw, 44px);
+      border-radius: var(--radius-lg);
+      background: var(--card);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-md);
+    }
+
+    .executive-assurance h2, .deliverables-box h2, .next-steps-box h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      line-height: 1.12;
+      color: var(--ink);
+      margin-bottom: 16px;
+      letter-spacing: -0.005em;
+    }
+
+    .executive-assurance p, .deliverables-box p, .next-steps-box p {
+      color: var(--body);
+      font-size: 1rem;
+      line-height: 1.78;
+      margin-bottom: 12px;
+      max-width: 70ch;
+    }
+    .executive-assurance p:last-of-type { margin-bottom: 0; }
+
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 26px;
+    }
+
+    .deliverable-item {
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      background: var(--card-tint);
+      border: 1px solid var(--hairline);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .deliverable-item:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .deliverable-item strong {
+      display: block;
+      color: var(--ink);
+      font-weight: 600;
+      margin-bottom: 7px;
+      font-size: 1rem;
+    }
+    .deliverable-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.58;
+    }
+
+    /* =========================================================
+       FORM SHELL
+       ========================================================= */
+    form {
+      background: var(--card);
+      padding: clamp(24px, 3.6vw, 48px);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 44px;
+    }
+
+    .success-message {
+      display: none;
+      background: rgba(30, 142, 78, 0.08);
+      border: 1px solid rgba(30, 142, 78, 0.26);
+      border-left: 4px solid var(--success);
+      padding: 16px 20px;
+      margin-bottom: 26px;
+      border-radius: var(--radius-sm);
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .success-message.show { display: block; }
+
+    /* ---------- Progress (sticky) ---------- */
+    .progress-shell {
+      position: sticky;
+      top: 12px;
+      z-index: 50;
+      margin: 0 0 30px;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-sm);
+      -webkit-backdrop-filter: blur(12px) saturate(140%);
+      backdrop-filter: blur(12px) saturate(140%);
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+      color: var(--blue-mid);
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .progress-meta span:last-child { color: var(--gold-deep); }
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--blue-soft);
+      overflow: hidden;
+    }
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue-mid), var(--gold));
+      transition: width 0.35s ease;
+    }
+    .progress-hint {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.84rem;
+      line-height: 1.55;
+    }
+
+    .form-alert {
+      display: none;
+      margin: 0 0 22px;
+      padding: 14px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(192, 57, 43, 0.28);
+      border-left: 4px solid var(--error);
+      background: rgba(192, 57, 43, 0.06);
+      color: var(--ink-soft);
+      font-weight: 500;
+    }
+    .form-alert.show { display: block; }
+
+    /* ---------- Form lead + path cards ---------- */
+    .form-lead {
+      margin-bottom: 28px;
+      padding: clamp(20px, 2.6vw, 28px);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-line);
+    }
+    .form-lead h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.35rem, 2vw, 1.7rem);
+      line-height: 1.18;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .form-lead p { color: var(--body); }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 22px 0 34px;
+    }
+    .path-card {
+      border: 1px solid var(--hairline);
+      background: var(--card-tint);
+      border-radius: var(--radius);
+      padding: clamp(20px, 2.4vw, 28px);
+    }
+    .path-card h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .path-card p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ---------- Section titles ---------- */
+    .section-title {
+      margin: 44px 0 20px;
+      padding-top: 28px;
+      border-top: 1px solid var(--hairline);
+    }
+    .section-title h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      line-height: 1.14;
+      color: var(--ink);
+      margin-bottom: 10px;
+      letter-spacing: -0.005em;
+    }
+    .section-title p { color: var(--muted); max-width: 70ch; font-size: 0.98rem; }
+
+    /* =========================================================
+       ACCORDIONS
+       ========================================================= */
+    details.accordion {
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      background: var(--card);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+    details.accordion[open] {
+      border-color: var(--blue-line);
+      box-shadow: var(--shadow-md);
+    }
+    details.accordion summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 20px clamp(18px, 2.4vw, 26px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      font-size: 0.98rem;
+      letter-spacing: 0.005em;
+      transition: background 0.2s ease;
+    }
+    details.accordion summary:hover { background: var(--blue-soft); }
+    details.accordion[open] summary {
+      background: var(--blue-soft);
+      border-bottom: 1px solid var(--hairline);
+    }
+    details.accordion summary::-webkit-details-marker { display: none; }
+    details.accordion summary::after {
+      content: '+';
+      width: 32px; height: 32px; min-width: 32px;
+      display: grid; place-items: center;
+      border-radius: 50%;
+      border: 1px solid var(--gold-line);
+      color: var(--gold-deep);
+      font-size: 1.3rem; font-weight: 400; line-height: 1;
+      background: var(--gold-tint);
+      transition: transform 0.25s ease, background 0.2s ease;
+    }
+    details.accordion[open] summary::after { content: '−'; transform: rotate(180deg); }
+
+    .accordion-body { padding: clamp(18px, 2.4vw, 28px); }
+
+    .micro-intro {
+      margin: 0 0 24px;
+      padding: 16px 18px;
+      border-left: 3px solid var(--gold);
+      background: var(--gold-tint);
+      border-radius: var(--radius-sm);
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+      line-height: 1.65;
+    }
+
+
+
+    .strategy-suite-note {
+      margin: 30px 0 18px;
+      padding: clamp(20px, 2.4vw, 28px);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--card), var(--card-tint));
+      border: 1px solid var(--blue-line);
+      box-shadow: var(--shadow-sm);
+    }
+    .strategy-suite-note h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.35rem, 2vw, 1.75rem);
+      line-height: 1.16;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .strategy-suite-note p {
+      color: var(--body);
+      font-size: 0.96rem;
+      line-height: 1.7;
+      max-width: 76ch;
+    }
+
+    /* =========================================================
+       FORM FIELDS
+       ========================================================= */
+    .form-group { margin-bottom: 24px; }
+
+    .form-group label, .field-label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: var(--ink-soft);
+      font-size: 0.96rem;
+    }
+    .required { color: var(--error); font-weight: 600; }
+
+    .field-help {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+      line-height: 1.58;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-sm);
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--ink-soft);
+      background: var(--card-tint);
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--muted-2); }
+
+    .form-group input:hover,
+    .form-group textarea:hover,
+    .form-group select:hover { border-color: var(--blue-line); }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      background: var(--card);
+      border-color: var(--blue-mid);
+      box-shadow: 0 0 0 4px rgba(23, 40, 61, 0.10);
+    }
+
+    .form-group textarea { min-height: 120px; resize: vertical; line-height: 1.65; }
+
+    .form-group select {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23213A57' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 42px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    /* ---------- Checkbox / radio ---------- */
+    .checkbox-group, .radio-group {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .checkbox-item, .radio-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--card-tint);
+      border: 1px solid var(--hairline);
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+    .checkbox-item:hover, .radio-item:hover {
+      border-color: var(--blue-line);
+      background: var(--blue-soft);
+    }
+    .checkbox-item input, .radio-item input {
+      margin-top: 3px;
+      width: 18px; height: 18px;
+      flex: 0 0 auto;
+      cursor: pointer;
+      accent-color: var(--blue-mid);
+    }
+    .checkbox-item label, .radio-item label {
+      margin: 0;
+      font-weight: 400;
+      color: var(--body);
+      cursor: pointer;
+      line-height: 1.55;
+      font-size: 0.96rem;
+    }
+
+    .inline-field {
+      display: grid;
+      grid-template-columns: auto minmax(170px, 1fr);
+      gap: 12px;
+      align-items: center;
+    }
+    .inline-field input { padding: 10px 12px; }
+
+    /* =========================================================
+       BILLING SUMMARY
+       ========================================================= */
+    .billing-summary {
+      margin: 30px 0 20px;
+      padding: clamp(22px, 2.8vw, 30px);
+      border-radius: var(--radius);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-line);
+    }
+    .billing-summary h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+      color: var(--ink);
+      margin-bottom: 10px;
+      line-height: 1.16;
+    }
+    .billing-summary p {
+      color: var(--body);
+      font-size: 0.97rem;
+      line-height: 1.7;
+    }
+
+    /* =========================================================
+       TERMS / PRIVACY PANELS
+       ========================================================= */
+    .terms-panel, .privacy-panel {
+      margin-top: 22px;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--hairline);
+      background: var(--card);
+    }
+    .terms-panel summary, .privacy-panel summary {
+      padding: 18px 22px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--ink);
+      background: var(--blue-soft);
+      list-style: none;
+      position: relative;
+    }
+    .terms-panel summary::-webkit-details-marker,
+    .privacy-panel summary::-webkit-details-marker { display: none; }
+    .terms-panel summary::after, .privacy-panel summary::after {
+      content: '+';
+      position: absolute;
+      right: 22px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      color: var(--gold-deep);
+    }
+    .terms-panel[open] summary::after, .privacy-panel[open] summary::after { content: '−'; }
+
+    .terms-body, .privacy-body {
+      padding: clamp(18px, 2.4vw, 26px);
+      color: var(--body);
+      font-size: 0.94rem;
+      line-height: 1.7;
+    }
+    .terms-body h3, .privacy-body h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin: 22px 0 8px;
+      color: var(--ink);
+    }
+    .terms-body h3:first-child, .privacy-body h3:first-child { margin-top: 0; }
+    .terms-body ul, .privacy-body ul { margin: 8px 0 14px 1.2em; }
+    .terms-body li, .privacy-body li { margin-bottom: 7px; }
+    .terms-body li::marker, .privacy-body li::marker { color: var(--gold); }
+
+    .terms-body .terms-meta {
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-line);
+      margin-bottom: 18px;
+    }
+    .terms-warning {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: var(--radius-sm);
+      background: rgba(192, 57, 43, 0.05);
+      border: 1px solid rgba(192, 57, 43, 0.18);
+      color: var(--ink-soft);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       COMMERCIAL SECTION (price appears only here)
+       ========================================================= */
+    .commercial-section {
+      margin: 44px 0 26px;
+      padding: clamp(26px, 3.4vw, 44px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--blue-line);
+      background:
+        radial-gradient(120% 90% at 100% 0%, var(--gold-tint), transparent 55%),
+        var(--card);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .commercial-section::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--blue), var(--gold) 60%, var(--blue-mid));
+    }
+
+    .commercial-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 26px;
+      align-items: start;
+      margin-bottom: 26px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--hairline);
+    }
+    .commercial-header h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .commercial-header p { color: var(--muted); max-width: 64ch; font-size: 1rem; line-height: 1.72; }
+
+    .price-badge {
+      min-width: 220px;
+      padding: 24px 26px;
+      border-radius: var(--radius);
+      background: linear-gradient(160deg, var(--blue-dark), var(--blue) 70%, var(--blue-mid));
+      color: var(--on-dark);
+      text-align: center;
+      border: 1px solid rgba(201, 162, 39, 0.34);
+      box-shadow: var(--shadow-md);
+    }
+    .price-badge span {
+      display: block;
+      color: #EBC85A;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .price-badge strong {
+      display: block;
+      font-family: var(--serif);
+      font-size: 2.6rem;
+      line-height: 1;
+      color: var(--on-dark);
+      letter-spacing: -0.01em;
+    }
+    .price-badge p { color: var(--on-dark-soft); font-size: 0.82rem; margin-top: 8px; }
+
+    .commercial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin: 22px 0;
+    }
+    .commercial-card {
+      padding: clamp(20px, 2.4vw, 26px);
+      border-radius: var(--radius);
+      background: var(--card-tint);
+      border: 1px solid var(--hairline);
+    }
+    .commercial-card h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+      line-height: 1.16;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .commercial-card p { color: var(--body); font-size: 0.95rem; line-height: 1.68; margin-bottom: 8px; }
+    .commercial-card ul { margin: 10px 0 0 1.1em; color: var(--body); font-size: 0.94rem; }
+    .commercial-card li { margin-bottom: 8px; }
+    .commercial-card li::marker { color: var(--gold); }
+
+    .price-decision {
+      margin-top: 24px;
+      padding: clamp(22px, 2.8vw, 30px);
+      border-radius: var(--radius);
+      background: linear-gradient(160deg, var(--blue-dark), var(--blue) 70%, var(--blue-mid));
+      color: var(--on-dark);
+      border: 1px solid rgba(201, 162, 39, 0.30);
+      box-shadow: var(--shadow-lg);
+    }
+    .price-decision span {
+      display: block;
+      color: #EBC85A;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 8px;
+    }
+    .price-decision strong {
+      display: block;
+      font-family: var(--serif);
+      color: var(--on-dark);
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
+      line-height: 1.04;
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .price-decision p { color: var(--on-dark-soft); margin: 0; line-height: 1.66; font-size: 0.97rem; }
+
+    .process-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin: 26px 0;
+    }
+    .process-step {
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-line);
+    }
+    .process-step strong {
+      display: block;
+      color: var(--gold-deep);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 7px;
+    }
+    .process-step span { color: var(--body); font-size: 0.9rem; line-height: 1.5; display: block; }
+
+    .acknowledgement-panel {
+      margin-top: 26px;
+      padding: clamp(20px, 2.4vw, 26px);
+      border-radius: var(--radius);
+      background: var(--gold-tint);
+      border: 1px solid var(--gold-line);
+    }
+    .acknowledgement-panel .checkbox-item {
+      background: var(--card);
+      border: 1px solid var(--hairline);
+    }
+    .acknowledgement-panel label { font-weight: 500; color: var(--ink-soft); }
+
+    .fineprint {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.83rem;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       UTILITY PANEL (autosave + PDF)
+       ========================================================= */
+    .utility-panel {
+      margin: 28px 0 8px;
+      padding: clamp(20px, 2.4vw, 26px);
+      border-radius: var(--radius);
+      background: var(--card-tint);
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-sm);
+    }
+    .utility-panel h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: 1.3rem;
+      line-height: 1.16;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .utility-panel p { color: var(--muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 16px; }
+    .utility-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .utility-status {
+      flex: 1 1 220px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+    button {
+      padding: 15px 30px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--gold);
+      color: var(--blue-dark);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.25s, background 0.25s;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    button:hover {
+      background: var(--gold-soft);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(201, 162, 39, 0.28);
+    }
+    button:active { transform: translateY(0); }
+    button:focus-visible {
+      outline: 2px solid var(--blue-mid);
+      outline-offset: 3px;
+    }
+
+    /* Primary submit = deep blue (authority); gold reserved as accent */
+    button[type="submit"] {
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      color: var(--on-dark);
+      box-shadow: 0 12px 28px rgba(23, 40, 61, 0.20);
+      padding: 16px 36px;
+    }
+    button[type="submit"]:hover {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      box-shadow: 0 16px 36px rgba(23, 40, 61, 0.28);
+    }
+
+    .button-secondary {
+      background: var(--card);
+      color: var(--ink-soft);
+      border: 1px solid var(--blue-line);
+      box-shadow: none;
+    }
+    .button-secondary:hover {
+      background: var(--blue-soft);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    .button-tertiary {
+      background: transparent;
+      color: var(--blue-mid);
+      border: 1px solid var(--blue-line);
+      box-shadow: none;
+    }
+    .button-tertiary:hover {
+      background: var(--blue-soft);
+      color: var(--ink);
+      box-shadow: none;
+    }
+
+    button[disabled] {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+      box-shadow: none !important;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 34px;
+      flex-wrap: wrap;
+    }
+
+    .submit-note {
+      margin-top: 18px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+      max-width: 60ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .legal-note {
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-line);
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       PDF EXPORT (print document — kept light/legible)
+       ========================================================= */
+    .pdf-export-document {
+      font-family: Inter, Arial, sans-serif;
+      color: #111827;
+      background: #ffffff;
+      padding: 28px;
+      line-height: 1.55;
+    }
+    .pdf-export-document h1 {
+      font-family: Georgia, serif;
+      font-size: 26px;
+      margin: 0 0 8px;
+      color: #111827;
+    }
+    .pdf-export-document .pdf-meta {
+      color: #4b5563;
+      font-size: 12px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid #d1d5db;
+      padding-bottom: 12px;
+    }
+    .pdf-export-document .pdf-answer {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      margin: 0 0 12px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #f9fafb;
+    }
+    .pdf-export-document .pdf-question {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #111827;
+    }
+    .pdf-export-document .pdf-value {
+      white-space: pre-wrap;
+      color: #1f2937;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       FOOTER (deep blue)
+       ========================================================= */
+    footer {
+      margin: 0 0 56px;
+      padding: clamp(32px, 4vw, 48px) clamp(24px, 3vw, 40px);
+      text-align: center;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(160deg, var(--blue-dark), var(--blue));
+      border: 1px solid rgba(201, 162, 39, 0.22);
+      color: var(--on-dark);
+      box-shadow: var(--shadow-lg);
+    }
+    footer h4 { color: #EBC85A; margin-bottom: 12px; font-weight: 600; font-size: 1.1rem; }
+    footer p, footer .footer-section, footer div { color: var(--on-dark-soft); }
+    footer .footer-section { margin-bottom: 18px; }
+    footer .footer-section:last-child { margin-bottom: 0; }
+    footer small { color: rgba(243, 241, 234, 0.6); }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin: 18px 0;
+    }
+    .footer-links a {
+      color: #EBC85A;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #F4DA86; text-decoration: underline; }
+
+    /* =========================================================
+       PASSWORD LANDING GATE
+       ========================================================= */
+    body.locked {
+      overflow-x: hidden;
+      background:
+        radial-gradient(1000px 700px at 12% 8%, rgba(201, 162, 39, 0.16), transparent 50%),
+        radial-gradient(900px 600px at 100% 100%, rgba(33, 58, 87, 0.55), transparent 55%),
+        linear-gradient(150deg, #17283D 0%, #101D2E 52%, #0A1422 100%);
+      color: var(--on-dark);
+    }
+    body.locked::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 40%);
+      pointer-events: none;
+    }
+
+    .password-gate {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: clamp(20px, 4vw, 48px) 16px;
+      color: var(--on-dark);
+    }
+
+    .gate-shell {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .gate-card {
+      padding: clamp(30px, 4vw, 52px);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(201, 162, 39, 0.26);
+      background:
+        radial-gradient(120% 100% at 100% 0%, rgba(201, 162, 39, 0.10), transparent 55%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.025));
+      box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+    }
+
+    .gate-login {
+      padding: clamp(28px, 3.4vw, 44px);
+      align-self: center;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, #FFFFFF, #FAF9F5);
+      border: 1px solid rgba(201, 162, 39, 0.30);
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.30);
+      color: var(--ink);
+    }
+
+    .gate-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(201, 162, 39, 0.14);
+      border: 1px solid rgba(201, 162, 39, 0.34);
+      color: #EBC85A;
+      font-weight: 600;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 26px;
+    }
+
+    .gate-card h1 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(2.1rem, 4.6vw, 3.8rem);
+      line-height: 1.06;
+      letter-spacing: -0.01em;
+      color: #FFFFFF;
+      margin-bottom: 22px;
+    }
+
+    .gate-lead {
+      font-size: clamp(0.98rem, 1.3vw, 1.12rem);
+      line-height: 1.78;
+      color: rgba(243, 241, 234, 0.85);
+      max-width: 62ch;
+      margin-bottom: 22px;
+    }
+
+    .gate-callout {
+      padding: 18px 22px;
+      border-radius: var(--radius);
+      background: rgba(201, 162, 39, 0.12);
+      border: 1px solid rgba(201, 162, 39, 0.30);
+      color: rgba(243, 241, 234, 0.92);
+      line-height: 1.7;
+      margin: 24px 0;
+    }
+    .gate-callout strong, .gate-ritual strong { color: #EBC85A; }
+
+    .gate-ritual {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 24px;
+    }
+    .ritual-item {
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: rgba(243, 241, 234, 0.85);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+
+    .gate-login h2 {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+      line-height: 1.08;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+    .gate-login p {
+      color: var(--body);
+      font-size: 0.96rem;
+      line-height: 1.7;
+      margin-bottom: 22px;
+    }
+
+    .password-form label {
+      display: block;
+      color: var(--ink) !important;
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+    .password-form input {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(23, 40, 61, 0.24);
+      background: #FFFFFF;
+      color: var(--ink) !important;
+      -webkit-text-fill-color: var(--ink);
+      font: inherit;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .password-form input:focus {
+      outline: none;
+      border-color: var(--blue-mid);
+      box-shadow: 0 0 0 4px rgba(23, 40, 61, 0.12);
+    }
+    .password-form button {
+      width: 100%;
+      margin-top: 4px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      color: var(--on-dark);
+      padding: 16px;
+      box-shadow: 0 12px 28px rgba(23, 40, 61, 0.20);
+    }
+    .password-form button:hover {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      box-shadow: 0 16px 36px rgba(23, 40, 61, 0.26);
+    }
+
+    .password-error {
+      min-height: 24px;
+      color: var(--error);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-top: 12px;
+    }
+
+    .gate-meta {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--hairline);
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+
+    body.unlocked {
+      background:
+        radial-gradient(1200px 600px at 100% -8%, rgba(23, 40, 61, 0.05), transparent 60%),
+        radial-gradient(900px 500px at -8% 110%, var(--gold-tint), transparent 60%),
+        linear-gradient(180deg, var(--paper) 0%, var(--paper-2) 100%);
+      color: var(--body);
+    }
+    body.unlocked .password-gate { display: none; }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 980px) {
+      .intro-grid { grid-template-columns: 1fr; }
+      .deliverable-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .gate-shell { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      body { font-size: 15.5px; }
+      .story-grid,
+      .value-strip,
+      .path-grid,
+      .form-row,
+      .deliverable-grid,
+      .commercial-grid {
+        grid-template-columns: 1fr;
+      }
+      .commercial-header { grid-template-columns: 1fr; }
+      .price-badge { min-width: 0; }
+      .gate-ritual { grid-template-columns: 1fr; }
+      .progress-shell { top: 8px; }
+    }
+
+    @media (max-width: 520px) {
+      .container { width: min(100% - 28px, 1140px); }
+      header { padding: 48px 22px 36px; margin-top: 14px; }
+      .button-group { flex-direction: column; }
+      .button-group button { width: 100%; }
+      .inline-field { grid-template-columns: 1fr; }
+      .process-strip { grid-template-columns: 1fr; }
+      details.accordion summary { align-items: flex-start; font-size: 0.94rem; }
+      .utility-actions { flex-direction: column; align-items: stretch; }
+      .utility-actions button { width: 100%; }
+    }
+
+
+
+    @media (max-width: 520px) {
+      .progress-shell {
+        top: 6px;
+        padding: 10px 12px;
+        border-radius: 14px;
+      }
+      .progress-meta {
+        margin-bottom: 7px;
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+      }
+      .progress-hint {
+        display: none;
+      }
+      .progress-track {
+        height: 6px;
+      }
+      .gate-login, .gate-card {
+        padding: 24px 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body class="locked">
+
+  <section class="password-gate" id="passwordGate" aria-label="Jelszóval védett bevezető">
+    <div class="gate-shell">
+      <div class="gate-card">
+        <div class="gate-eyebrow">Üdvözöljük · stratégiai belépés</div>
+        <h1>Ez egy mély digitális diagnózis. Kérjük, szánjon rá valódi figyelmet.</h1>
+        <p class="gate-lead">
+          Ez a kérdőív azt térképezi fel, hogyan érti ma Önt, a cégét vagy a márkáját a digitális világ: a keresők, az AI-rendszerek, a magyar piac és a nemzetközi döntéshozók.
+        </p>
+        <div class="gate-callout">
+          <strong>Becsült kitöltési idő:</strong> 45–90 perc. Mélyebb, stratégiai válaszokkal 90–120 perc. Nem kell sietni: minden jó válasz később pontosabb stratégiává válik.
+        </div>
+        <div class="gate-ritual" aria-label="Kitöltési javaslatok">
+          <div class="ritual-item"><strong>Vonuljon félre.</strong><br>Keressen nyugodt helyet, ahol nem szakítják félbe.</div>
+          <div class="ritual-item"><strong>Kapcsolja be a kedvenc zenéjét.</strong><br>A jó ritmus segít tisztábban gondolkodni.</div>
+          <div class="ritual-item"><strong>Töltsön egy italt.</strong><br>Kávé, tea, víz vagy valami ünnepibb — a lényeg a figyelem.</div>
+          <div class="ritual-item"><strong>Nézzen rá őszintén.</strong><br>A múlt, a jelen és a jövőkép együtt adja ki a valódi digitális entitást.</div>
+        </div>
+      </div>
+      <div class="gate-login">
+        <h2>Belépés a kérdőívhez</h2>
+        <p>A kérdőív jelszóval védett, hogy ez a stratégiai anyag ne alkalmi kattintgatásként induljon, hanem tudatos, nyugodt folyamatként.</p>
+        <form class="password-form" id="passwordForm" autocomplete="off">
+          <label for="gatePassword">Jelszó</label>
+          <input type="password" id="gatePassword" inputmode="text" autocomplete="current-password" aria-describedby="passwordError" />
+          <button type="submit">KÉRDŐÍV MEGNYITÁSA</button>
+          <div class="password-error" id="passwordError" role="alert" aria-live="polite"></div>
+        </form>
+        <div class="gate-meta">
+          A belépés után a kérdőív automatikusan ment ebben a böngészőben, és a válaszok PDF-be is letölthetők. A linket és a jelszót csak az érintett kapcsolattartókkal ossza meg.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="protectedContent" hidden>
+  <div class="container">
+    <header>
+      <div class="eyebrow">Digitális entitásépítés · Deep Search · AI-érthetőség</div>
+      <h1>Digitális Entitásépítési Audit és Deep Search Stratégia</h1>
+      <p>Ez az űrlap azért készült, hogy feltérképezze egy cég, márka vagy személyes márka múltját, jelenét és jövőképét. A cél: az AI, a keresők, a magyar piac és a nemzetközi piac tisztán, pontosan és hitelesen értse, ki Ön, mit képvisel, és miért ajánlható.</p>
+      <div class="header-brand">Bánhalmi Norbert e.U. | Wien, Österreich</div>
+    </header>
+
+    <section class="intro-grid" aria-label="Bevezetés">
+      <div class="intro-box">
+        <h2>Mi történik egy digitális entitásépítéskor?</h2>
+        <p>A modern keresés már nem csak kulcsszavakat olvas. Az AI-rendszerek, a keresők, a partnerek és a leendő ügyfelek azt próbálják megérteni, hogy Ön vagy a cége pontosan kicsoda, milyen bizonyítékok támasztják alá a hitelességét, és milyen helyzetben ajánlható nyugodt szívvel.</p>
+        <p>Ez az űrlap azért készült, hogy feltérképezze egy cég, márka vagy személyes márka múltját, jelenét és jövőképét. A cél: az AI, a keresők, a magyar piac és a nemzetközi piac tisztán, pontosan és hitelesen értse, ki Ön, mit képvisel, és miért ajánlható.</p>
+        <ul>
+          <li>rendezzük a múltbeli digitális nyomokat, régi neveket, domaineket és ellentmondásokat,</li>
+          <li>megnézzük, ma mit ért vagy ért félre Önről, a cégéről vagy a márkájáról az AI,</li>
+          <li>feltárjuk a digitális kockázati pontokat, reputációs sérülékenységeket és hiányzó bizonyítékokat,</li>
+          <li>időrendi, lépésről lépésre követhető stratégiát készítünk a kívánt magyar vagy külföldi piaci célhoz.</li>
+        </ul>
+      </div>
+
+      <div class="promise-box">
+        <h2>96 órás digitális entitásdiagnózis</h2>
+        <p>A beküldés után <strong>96 órán belül</strong> megmutatjuk, hogyan látja Önt, a cégét vagy a márkáját a digitális világ — és mit kell megépíteni ahhoz, hogy az AI pontosan értse és ajánlani tudja.</p>
+        <p>Ez nem szépen becsomagolt általánosság, hanem döntési anyag: feltárja, hol erős az entitás, hol hiányos a jel, hol tévedhet az AI, és milyen sorrendben érdemes építkezni.</p>
+        <p>A cél egyszerű: lássuk a valóságot, tisztítsuk a jelet, építsük fel az entitást.</p>
+      </div>
+    </section>
+
+    <section class="story-grid" aria-label="Példatörténetek">
+      <div class="story-box">
+        <h2>Példatörténet: magyar cég külföldi piacra lép</h2>
+        <p>Egy magyar gyártó, kereskedő vagy szolgáltató cég erős referenciákkal rendelkezik, de a piac és az AI csak mozaikdarabokat lát belőle: régi domain, félkész angol bemutatkozás, hiányzó bizonyítékok, pontatlan adatlapok. A cég értékes, csak a digitális térben még nem úgy néz ki, mint aki exportképes. Az entitásépítés célja, hogy a magyar és külföldi vevő is ugyanazt lássa: megbízható, ellenőrizhető, ajánlható szereplőt.</p>
+      </div>
+      <div class="story-box">
+        <h2>Példatörténet: tulajdonosból személyes márka</h2>
+        <p>Egy tulajdonos vagy ügyvezető évek óta épít céget, kapcsolatokat és tudást, de az interneten csak halvány körvonalak látszanak róla. Az AI ilyenkor udvariasan bizonytalan: szakértő, tulajdonos, befektető, iparági arc vagy „valaki a LinkedInről”? Az entitásépítés célja, hogy a személy, a cég és a szakmai bizonyítékok végre egy irányba mutassanak.</p>
+      </div>
+    </section>
+
+    <section class="value-strip" aria-label="A digitális entitásdiagnózis értéke röviden">
+      <div class="value-tile">
+        <strong>Know the truth</strong>
+        <span>Feltárjuk, mit lát ma a digitális tér, a kereső és az AI a személyből, cégből vagy márkából.</span>
+      </div>
+      <div class="value-tile">
+        <strong>Fix the signal</strong>
+        <span>Megmutatjuk, hol hiányos, félreérthető vagy gyenge a digitális jel, és mit kell először rendezni.</span>
+      </div>
+      <div class="value-tile">
+        <strong>Build the entity</strong>
+        <span>Időrendi, lépésről lépésre követhető stratégia készül a magyar és nemzetközi piaci célhoz.</span>
+      </div>
+    </section>
+
+    <section class="executive-assurance" aria-label="Mit tartalmaz az audit pontosan">
+      <h2>Mit kap az ügyfél 96 órán belül?</h2>
+      <p>A legtöbb cég és személyes márka nem azért láthatatlan az AI számára, mert nincs értéke. Hanem azért, mert a digitális térben nincs elég tiszta, összekapcsolt és ellenőrizhető jel róla.</p>
+      <p>Ez az audit nem véleményt ad. Feltárja a valóságot, kijelöli a gyenge pontokat, és megmutatja, milyen sorrendben kell felépíteni a személyes vagy céges entitást.</p>
+      <div class="deliverable-grid">
+        <div class="deliverable-item"><strong>1. Digitális valóságkép</strong><span>Mit lát ma a Google, a kereső, az AI és a piac.</span></div>
+        <div class="deliverable-item"><strong>2. AI-érthetőségi vizsgálat</strong><span>Mit ért félre, mit nem talál, és hol improvizálhat a rendszer.</span></div>
+        <div class="deliverable-item"><strong>3. Kockázati térkép</strong><span>Gyenge, félreérthető vagy reputációsan érzékeny pontok üzleti nyelven.</span></div>
+        <div class="deliverable-item"><strong>4. Bizonyítékhiány</strong><span>Milyen források, strukturált adatok, sajtó- vagy tartalmi elemek hiányoznak.</span></div>
+        <div class="deliverable-item"><strong>5. Építési sorrend</strong><span>Mit kell előbb rendezni, és mit csak utána érdemes kommunikálni.</span></div>
+        <div class="deliverable-item"><strong>6. Egyedi megvalósítási irány</strong><span>Az audit végén világos stratégiai irány és személyre szabott ajánlati alap készül.</span></div>
+      </div>
+    </section>
+
+    <form action="https://formsubmit.co/office@vipach.at" method="POST" id="assessmentForm" accept-charset="UTF-8" novalidate>
+            <input type="hidden" name="_subject" value="Digitális Entitás Audit - Bánhalmi Norbert e.U.">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_template" value="html">
+      <input type="hidden" name="_next" value="https://form.vipach.at/">
+
+
+      <div class="success-message" id="successMessage">
+        ✓ Köszönjük a válaszokat. A beküldött adatok alapján elindul a 96 órás deep search alapú audit és stratégiai előkészítés.
+      </div>
+
+      <div class="progress-shell" aria-label="Űrlap kitöltési állapot">
+        <div class="progress-meta">
+          <span>Kitöltési állapot</span>
+          <span id="progressText">0% kész</span>
+        </div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+        <div class="progress-hint" id="progressHint">Kezdje az alapadatokkal. A lenyíló blokkok miatt csak annyit lát egyszerre, amennyire éppen szüksége van.</div>
+      </div>
+
+      <div class="form-alert" id="formAlert" role="alert"></div>
+
+      <div class="form-lead">
+        <h2>Hogyan érdemes kitölteni?</h2>
+        <p>Nem kell marketingesnek, jogásznak vagy AI-kutatónak lenni hozzá. Őszinte, józan válaszok kellenek. Ami még bizonytalan, azt is érdemes leírni, mert a stratégia pont attól lesz jó, hogy nem díszletet építünk, hanem a valós helyzetből indulunk.</p>
+      </div>
+
+      <div class="path-grid">
+        <div class="path-card">
+          <h3>1. irány: tulajdonos, ügyvezető vagy személyes márka</h3>
+          <p>Ez a rész azt vizsgálja, hogy a személy szakmai múltja, hitelessége, reputációja, szerepe és jövőképe mennyire érthető a magyar piacon, a külföldi piacon és az AI-rendszerek számára.</p>
+        </div>
+        <div class="path-card">
+          <h3>2. irány: cég, márka vagy szervezet</h3>
+          <p>Ez a rész azt mutatja meg, hogy a cég vagy márka múltja, jelenlegi működése, termékei, bizonyítékai és növekedési céljai hogyan tehetők itthon és külföldön is érthetővé, ellenőrizhetővé és ajánlhatóvá.</p>
+        </div>
+      </div>
+
+      <div class="section-title">
+        <h2>0. Kapcsolattartási és auditindítási adatok</h2>
+        <p>Ezek az adatok szükségesek ahhoz, hogy az auditot el tudjuk indítani, és a 96 órán belül elkészülő elemzést a megfelelő személynek küldjük el.</p>
+      </div>
+
+      <details class="accordion" open>
+        <summary>Alapadatok és audit fókusz</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Itt határozzuk meg, kinek és milyen céllal készül az elemzés. Ez segít eldönteni, hogy az audit inkább személyes márkaépítésre, cégépítésre, magyar piaci erősítésre és nemzetközi piacra lépésre vagy reputációs tisztításra fókuszáljon.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactName">Kapcsolattartó teljes neve <span class="required">*</span></label>
+              <span class="field-help">Az a kapcsolattartó, akihez vissza tudunk kérdezni. Jó stratégia ritkán születik teljes csendben — néha egyetlen pontosítás aranyat ér.</span>
+              <input type="text" id="contactName" name="name" autocomplete="name" required />
+            </div>
+            <div class="form-group">
+              <label for="contactEmail">E-mail-cím <span class="required">*</span></label>
+              <span class="field-help">Ide küldjük az elemzést, a pontosító kérdéseket és az audit utáni következő lépéseket.</span>
+              <input type="email" id="contactEmail" name="email" autocomplete="email" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="contactPhone">Telefonszám</label>
+              <span class="field-help">Akkor hasznos, ha a beküldött információ alapján gyors pontosításra van szükség.</span>
+              <input type="tel" id="contactPhone" name="contactPhone" autocomplete="tel" />
+            </div>
+            <div class="form-group">
+              <label for="preferredLanguage">Elemzés preferált nyelve</label>
+              <span class="field-help">A stratégia nyelve üzleti döntés is: másképp beszélünk a magyar piacnak, másképp egy osztrák, német vagy nemzetközi partnernek.</span>
+              <select id="preferredLanguage" name="preferredLanguage">
+                <option value="">Kérem válasszon</option>
+                <option value="hu">Magyar</option>
+                <option value="en">Angol</option>
+                <option value="de">Német</option>
+                <option value="mixed">Többnyelvű összefoglaló</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="field-label">Mire készüljön elsődlegesen az audit?</span>
+            <span class="field-help">Ez kijelöli a kutatás fő útvonalát. Több cél is választható, mert a tulajdonos és a cég digitális képe sokszor kézen fogva jár — néha túl szorosan is.</span>
+            <div class="checkbox-group">
+              <div class="checkbox-item"><input type="checkbox" id="focus-owner" name="auditFocus" value="Tulajdonos vagy ügyvezető személyes márkája" /><label for="focus-owner">Tulajdonos vagy ügyvezető személyes márkája</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="focus-company" name="auditFocus" value="Cég vagy márka nemzetközi láthatósága" /><label for="focus-company">Cég vagy márka nemzetközi láthatósága</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="focus-ai" name="auditFocus" value="AI-érthetőség és hallucination risk csökkentése" /><label for="focus-ai">AI-érthetőség és pontatlan AI-válaszok csökkentése</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="focus-reputation" name="auditFocus" value="Reputációs tisztítás és támadhatóság feltárása" /><label for="focus-reputation">Reputációs tisztítás és támadhatóság feltárása</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="focus-export" name="auditFocus" value="Külföldi piacra lépés" /><label for="focus-export">Külföldi piacra lépés előkészítése</label></div>
+              <div class="checkbox-item"><input type="checkbox" id="focus-succession" name="auditFocus" value="Generációváltás, cégérték növelés" /><label for="focus-succession">Generációváltás, cégérték és befektetői megítélés javítása</label></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <div class="section-title">
+        <h2>A. Tulajdonos / ügyvezető / személyes márka</h2>
+        <p>Ez a blokk azt segít megérteni, hogy a személy múltja, szakmai hitelessége, jelenlegi szerepe és jövőképe milyen digitális entitássá építhető.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>A1. Személyes azonosítás és szerep</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Az AI akkor tud valakit pontosan értelmezni, ha egyértelmű a neve, szerepe, szakmai területe, földrajzi kötődése és kapcsolata a céghez vagy márkához.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ownerFullName">Tulajdonos / ügyvezető / személyes márka neve</label>
+              <span class="field-help">A hivatalosan és nyilvánosan használt név, amelyhez az entitásépítés kapcsolódik.</span>
+              <input type="text" id="ownerFullName" name="ownerFullName" autocomplete="name" />
+            </div>
+            <div class="form-group">
+              <label for="ownerRole">Jelenlegi fő szerep vagy pozíció</label>
+              <span class="field-help">Segít meghatározni, hogy az AI vezetőként, szakértőként, alapítóként, művészként, tanácsadóként vagy más szerepben értelmezze a személyt.</span>
+              <input type="text" id="ownerRole" name="ownerRole" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerOneSentence">Egy mondatban hogyan szeretné, hogy a világ és az AI értse Önt?</label>
+            <span class="field-help">Ez nem szlogenverseny. A mondat azt segít tisztázni, milyen képet kell az AI-nak, a piacnak és a leendő ügyfeleknek következetesen látniuk.</span>
+            <textarea id="ownerOneSentence" name="ownerOneSentence"></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="ownerBaseCountry">Földrajzi bázis</label>
+              <span class="field-help">A helyi és nemzetközi keresések miatt fontos, hogy melyik városhoz, országhoz vagy régióhoz kapcsolódik a személy.</span>
+              <input type="text" id="ownerBaseCountry" name="ownerBaseCountry" />
+            </div>
+            <div class="form-group">
+              <label for="ownerLanguages">Beszélt nyelvek</label>
+              <span class="field-help">A nyelvi profil megmutatja, milyen piacokon lehet hitelesen kommunikálni és milyen nyelvű tartalmakat kell építeni.</span>
+              <input type="text" id="ownerLanguages" name="ownerLanguages" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerCompanyRelation">Kapcsolat a céggel vagy márkával</label>
+            <span class="field-help">A személyes entitás és a céges entitás közötti kapcsolat kulcsfontosságú. Ez segít összehangolni az ügyvezetői, tulajdonosi és szakmai szerepet.</span>
+            <textarea id="ownerCompanyRelation" name="ownerCompanyRelation"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>A2. Múlt: szakmai történet és bizonyítékok</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A múlt nem csak életrajz. Az AI számára időrendi bizonyítékrendszer: hol tanult, mit épített, milyen nyilvános nyomok, sikerek, díjak, interjúk és régi információk kapcsolódnak Önhöz.</p>
+
+          <div class="form-group">
+            <label for="ownerOriginStory">Szakmai indulás és fontos fordulópontok</label>
+            <span class="field-help">Az eredettörténet adja a hitelesség gerincét. Az AI szereti az időrendet; ha nem kapja meg, hajlamos sajátot kitalálni, és az ritkán előnyös.</span>
+            <textarea id="ownerOriginStory" name="ownerOriginStory"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerEducation">Tanulmányok, képzések, szakmai jogosultságok</label>
+            <span class="field-help">A végzettségek és tanúsítványok hitelesítő pontok. Nem minden kerül majd kommunikációba, de a kutatás során fontos tudni róluk.</span>
+            <textarea id="ownerEducation" name="ownerEducation"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerCareerMilestones">Legfontosabb szakmai mérföldkövek</label>
+            <span class="field-help">Itt lehet leírni azokat az eredményeket, amelyek bizonyítják a szakmai súlyt: projektek, vezetői szerepek, ügyfelek, díjak, publikációk, közéleti vagy iparági aktivitás.</span>
+            <textarea id="ownerCareerMilestones" name="ownerCareerMilestones"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerAwards">Díjak, elismerések, minősítések</label>
+            <span class="field-help">Az ellenőrizhető elismerések erősítik a Knowledge Graph, sajtó és AI-alapú hitelességet.</span>
+            <textarea id="ownerAwards" name="ownerAwards"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerPressLinks">Sajtómegjelenések linkjei</label>
+            <span class="field-help">A sajtólinkek külső bizonyítékok. Ezek sokkal erősebbek, mint amikor mi mondjuk magunkról, hogy jók vagyunk — ezt minden ügyfél érzi, az AI pedig különösen.</span>
+            <textarea id="ownerPressLinks" name="ownerPressLinks"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerOldNames">Régi névváltozatok, becenevek, korábbi márkanevek</label>
+            <span class="field-help">Az AI sokszor azért zavarodik össze, mert egy személyhez több névforma, régi domain vagy korábbi szerep kapcsolódik. Ezeket azonosítani kell.</span>
+            <textarea id="ownerOldNames" name="ownerOldNames"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>A3. Jelen: online jelenlét, reputáció és AI-kép</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ebben a részben azt nézzük, hogy ma mit lát a kereső, a piac és az AI. A cél feltárni, hol erős az entitás, hol hiányos, és hol van félreérthető vagy támadható pont.</p>
+
+          <div class="form-group">
+            <label for="ownerCurrentExpertise">Jelenlegi fő szakterületek és szolgáltatások</label>
+            <span class="field-help">Ez segít megérteni, milyen témákban kell az AI-nak és a piacnak Önt kompetens, ajánlható szereplőként értelmeznie.</span>
+            <textarea id="ownerCurrentExpertise" name="ownerCurrentExpertise"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerWebsites">Saját vagy kontrollált weboldalak, blogok, profiloldalak</label>
+            <span class="field-help">A kontrollált felületek azok a helyek, ahol a narratíva pontosítható. Ezek az entitásépítés technikai alapjai.</span>
+            <textarea id="ownerWebsites" name="ownerWebsites"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerSocialProfiles">LinkedIn, közösségi média és szakmai profilok</label>
+            <span class="field-help">A közösségi és szakmai profilok segítenek összekötni a személyt a céggel, iparággal, földrajzi piaccal és bizonyítékokkal.</span>
+            <textarea id="ownerSocialProfiles" name="ownerSocialProfiles"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerAiResult">Mit ír ma Önről a Google vagy az AI, és ez mennyire pontos?</label>
+            <span class="field-help">Ez az AI-érthetőség kiindulópontja. Ha az AI pontatlan, hiányos vagy nem talál semmit, az stratégiai beavatkozást igényel.</span>
+            <textarea id="ownerAiResult" name="ownerAiResult"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerReputationRisks">Reputációs kockázatok, régi konfliktusok, félreértések, támadható pontok</label>
+            <span class="field-help">A cél nem a szőnyeg alá söprés. A cél az, hogy értsük, mi támadható, mi félreérthető, és mit kell helyretenni, mielőtt az AI vagy a piac mond rólunk valami kellemetlenül kreatívat.</span>
+            <textarea id="ownerReputationRisks" name="ownerReputationRisks"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerPublicProof">Milyen bizonyítékok támasztják alá ma a szakmai hitelességet?</label>
+            <span class="field-help">Ide tartoznak a referenciák, ügyfelek, publikációk, beszédek, konferenciák, portfóliók, esettanulmányok és ellenőrizhető eredmények.</span>
+            <textarea id="ownerPublicProof" name="ownerPublicProof"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>A4. Jövő: személyes márka célok és AI-pozicionálás</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Az entitásépítés nem csak azt rendezi, ami volt, hanem megtervezi, milyen szerepbe kell eljuttatni a személyt a következő 3–5 évben.</p>
+
+          <div class="form-group">
+            <label for="ownerFuturePosition">Milyen szerepben szeretne láthatóvá válni 3–5 éven belül?</label>
+            <span class="field-help">Ez adja meg a stratégiai végpontot: szakértő, tulajdonos, befektető, tanácsadó, iparági arc, nemzetközi szereplő vagy más pozíció.</span>
+            <textarea id="ownerFuturePosition" name="ownerFuturePosition"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerTargetMarkets">Mely országokban, városokban vagy nyelvi piacokon szeretne erősebb jelenlétet?</label>
+            <span class="field-help">A geo-fókusz meghatározza, milyen nyelvű tartalmakra, sajtóra, domainstruktúrára és lokális hitelesítésre lesz szükség.</span>
+            <textarea id="ownerTargetMarkets" name="ownerTargetMarkets"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerDesiredAiAnswer">Mit szeretne, hogy egy AI válaszoljon, ha Önről kérdezik?</label>
+            <span class="field-help">Ez a kívánt AI-válasz magja. Nem bemondásra építjük, hanem forrásokkal, struktúrával és következetes digitális bizonyítékokkal.</span>
+            <textarea id="ownerDesiredAiAnswer" name="ownerDesiredAiAnswer"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ownerContentCapacity">Milyen tartalmi és szereplési kapacitása van?</label>
+            <span class="field-help">A 6–18 hónapos folyamatban fontos tudni, hogy belefér-e interjú, cikk, szakmai poszt, előadás, videó, podcast vagy esettanulmány.</span>
+            <textarea id="ownerContentCapacity" name="ownerContentCapacity"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <div class="section-title">
+        <h2>B. Cég / márka / szervezet</h2>
+        <p>Ez a blokk a cég vagy márka önálló digitális entitását vizsgálja: jogi azonosítás, történet, piac, termékek, bizonyítékok, reputáció, jövőkép és nemzetközi terjeszkedés.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>B1. Céges vagy márkaazonosítás</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A cég vagy márka akkor válik AI-kompatibilis entitássá, ha pontosan azonosítható: név, jogi forma, domain, piac, tulajdonosi háttér, szolgáltatás és földrajzi jelenlét alapján.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companyName">Cég vagy márka neve</label>
+              <span class="field-help">A fő név, amely alatt a nemzetközi láthatóságot és AI-érthetőséget építeni szeretnék.</span>
+              <input type="text" id="companyName" name="companyName" />
+            </div>
+            <div class="form-group">
+              <label for="legalName">Jogi név és cégforma</label>
+              <span class="field-help">A hivatalos azonosítás miatt fontos, különösen B2B, export, befektetői vagy partneri helyzetben.</span>
+              <input type="text" id="legalName" name="legalName" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="companyWebsite">Fő weboldal</label>
+              <span class="field-help">A weboldal az egyik legerősebb kontrollált bizonyítékpont. Ha itt káosz van, az AI sem fog elegáns rendet varázsolni belőle.</span>
+              <input type="url" id="companyWebsite" name="companyWebsite" />
+            </div>
+            <div class="form-group">
+              <label for="companyBase">Székhely, telephelyek, működési országok</label>
+              <span class="field-help">A földrajzi adatok segítenek a lokális és nemzetközi keresési kontextus kialakításában.</span>
+              <input type="text" id="companyBase" name="companyBase" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="companyOneSentence">Egy mondatban hogyan kellene érteni a céget vagy márkát?</label>
+            <span class="field-help">Ez a céges entitás stratégiai meghatározása. Segít elválasztani a valódi pozicionálást a puszta marketingmondatoktól.</span>
+            <textarea id="companyOneSentence" name="companyOneSentence"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyStakeholders">Tulajdonosok, ügyvezetők, kulcsszereplők</label>
+            <span class="field-help">Az AI akkor érti jól a céget, ha látja, kikhez kapcsolódik, kik építik, és kik hitelesítik a működését.</span>
+            <textarea id="companyStakeholders" name="companyStakeholders"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>B2. Múlt: cégtörténet, fejlődés és régi digitális nyomok</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A cégtörténet időrendje segít az AI-nak megérteni, hogy a vállalkozás hogyan jutott el a jelenlegi állapotáig. A régi nevek, domainváltások, profilok és piaci fordulatok anomáliákat is okozhatnak.</p>
+
+          <div class="form-group">
+            <label for="companyHistory">A cég vagy márka alapításának és fejlődésének története</label>
+            <span class="field-help">Ez adja meg a narratív gerincet: miért jött létre, milyen problémára ad választ, és hogyan fejlődött.</span>
+            <textarea id="companyHistory" name="companyHistory"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyMilestones">Fontos céges mérföldkövek</label>
+            <span class="field-help">Ide kerülhetnek növekedési pontok, új piacok, nagy ügyfelek, termékbevezetések, minősítések, díjak vagy üzleti fordulópontok.</span>
+            <textarea id="companyMilestones" name="companyMilestones"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyOldFootprint">Régi cégnév, márkanév, domain, közösségi profil vagy elavult online adat</label>
+            <span class="field-help">A régi digitális nyomok gyakran zavarják az AI-t. Ezek feltárása segít megszüntetni a rossz vagy pontatlan összekapcsolásokat.</span>
+            <textarea id="companyOldFootprint" name="companyOldFootprint"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyPastIssues">Múltbeli problémák, félreértések, rossz sajtó, partneri vagy piaci konfliktusok</label>
+            <span class="field-help">A cél a kockázatok megértése és kezelhetővé tétele. A tisztázatlan múlt az AI-ban rossz megítélést vagy hallucinációt okozhat.</span>
+            <textarea id="companyPastIssues" name="companyPastIssues"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>B3. Jelen: termékek, szolgáltatások, piac és bizonyítékok</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A jelenlegi állapot mutatja meg, miből él a cég, kiknek ad értéket, milyen bizonyítékai vannak, és mit kell az AI-nak pontosan ajánlani róla.</p>
+
+          <div class="form-group">
+            <label for="companyProducts">Fő termékek, szolgáltatások vagy üzletágak</label>
+            <span class="field-help">Ez alapján építhető fel, hogy az AI milyen helyzetekben ajánlja a céget, és milyen kérdésekre adjon pontos választ.</span>
+            <textarea id="companyProducts" name="companyProducts"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyCustomers">Ideális ügyfelek és jelenlegi célcsoportok</label>
+            <span class="field-help">A célcsoport nélkül az AI nem tudja, kinek ajánlja a céget. Márpedig az a cél, hogy ne mindenkinek ajánlja, hanem pontosan annak, akinek üzletileg értelme van.</span>
+            <textarea id="companyCustomers" name="companyCustomers"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyMarkets">Jelenlegi piacok, országok, nyelvek</label>
+            <span class="field-help">Megmutatja, hol működik ma a cég, és hol van már bizonyítható piaci jelenléte.</span>
+            <textarea id="companyMarkets" name="companyMarkets"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyProofAssets">Hitelesítő bizonyítékok</label>
+            <span class="field-help">Ide tartoznak a tanúsítványok, referenciák, ügyfélvélemények, esettanulmányok, partneri megállapodások, szakmai tagságok és auditálható eredmények.</span>
+            <textarea id="companyProofAssets" name="companyProofAssets"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="brandPressLinks">Céges vagy márka sajtómegjelenések linkjei</label>
+            <span class="field-help">A sajtómegjelenések külső hitelesítő források. Ezek segítenek abban, hogy a cég ne csak saját maga szerint legyen fontos, hanem a digitális világ szerint is.</span>
+            <textarea id="brandPressLinks" name="brandPressLinks"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyOnlineProfiles">Cégprofilok és külső adatlapok</label>
+            <span class="field-help">A Google Business Profile, LinkedIn cégoldal, cégadatbázisok, piactéri profilok és iparági adatlapok összhangja kulcsfontosságú.</span>
+            <textarea id="companyOnlineProfiles" name="companyOnlineProfiles"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyAiResult">Mit ír ma a Google vagy az AI a cégről, és ez mennyire pontos?</label>
+            <span class="field-help">Ez feltárja, hogy a rendszer jól érti-e a céget, összekeveri-e mással, vagy hiányos, túl gyenge, esetleg hibás képet ad róla.</span>
+            <textarea id="companyAiResult" name="companyAiResult"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>B4. Jövő: külföldi piac, generációváltás és cégérték</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A jövőkép megmutatja, milyen piacra, milyen pozícióba és milyen üzleti értékkel kell felépíteni a céges entitást. Ez lehet export, befektetői láthatóság, generációváltás vagy prémium márkapozíció.</p>
+
+          <div class="form-group">
+            <label for="companyFutureMarkets">Mely külföldi piacokra szeretnének belépni vagy erősödni?</label>
+            <span class="field-help">Ez határozza meg a nyelvi, földrajzi, sajtó-, domain- és partnerstratégiát.</span>
+            <textarea id="companyFutureMarkets" name="companyFutureMarkets"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyFuturePositioning">Milyen pozíciót szeretne elfoglalni a cég 3–5 éven belül?</label>
+            <span class="field-help">Az AI-nak és a piacnak is értenie kell, hogy a cég olcsó beszállító, prémium partner, szakértői műhely, exportképes gyártó vagy más stratégiai szereplő.</span>
+            <textarea id="companyFuturePositioning" name="companyFuturePositioning"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companySuccession">Van-e generációváltás, tulajdonosváltás, befektetői vagy cégérték-növelési cél?</label>
+            <span class="field-help">A rendezett digitális entitás növelheti a bizalmat, a cégértéket és az átadhatóságot. Generációváltásnál különösen fontos, hogy ne csak a tulajdonos fejében legyen rend, hanem a digitális világban is.</span>
+            <textarea id="companySuccession" name="companySuccession"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="companyDesiredAiAnswer">Mit szeretnének, hogy egy AI válaszoljon, ha a cégről kérdezik?</label>
+            <span class="field-help">Ez a kívánt céges AI-narratíva. A stratégia azt építi fel, hogy ezt a választ bizonyítékok, források és strukturált adatok támasszák alá.</span>
+            <textarea id="companyDesiredAiAnswer" name="companyDesiredAiAnswer"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <div class="section-title">
+        <h2>C. Deep Search, támadhatóság és entitásépítési stratégia</h2>
+        <p>Ez a rész a kutatás mélységét, a hozzáférhető forrásokat, a kockázatokat és a 6–18 hónapos építési program realitását méri fel.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>C1. Források és kutatási engedélyek</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A 96 órás előzetes elemzés nyilvános forrásokból és az Ön által megadott információkból indul. Minél több hiteles forrás áll rendelkezésre, annál pontosabb lesz a stratégia. A jó input itt tényleg jó outputot jelent — ez nem csak AI-s közhely.</p>
+
+          <div class="form-group">
+            <label for="knownSources">Milyen forrásokat érdemes biztosan átnézni?</label>
+            <span class="field-help">Ide kerülhetnek weboldalak, cégprofilok, interjúk, sajtóanyagok, publikációk, videók, adatlapok, szakmai szervezetek vagy dokumentumok linkjei.</span>
+            <textarea id="knownSources" name="knownSources"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="privateContext">Van-e olyan háttérinformáció, amely nem publikus, de az elemzéshez fontos?</label>
+            <span class="field-help">Ez segít megérteni a valós helyzetet. Nem feltétlenül kerül publikálásra, de a stratégiai döntésekhez fontos lehet.</span>
+            <textarea id="privateContext" name="privateContext"></textarea>
+          </div>
+
+          <div class="form-group">
+            <span class="field-label">Milyen mélységű kutatást engedélyez?</span>
+            <span class="field-help">Ez jelzi, hogy csak a nyilvános jelenlétet vizsgáljuk, vagy a történeti, reputációs, támadhatósági és versenytársi összefüggéseket is.</span>
+            <div class="radio-group">
+              <div class="radio-item"><input type="radio" id="research-basic" name="researchDepth" value="Alap nyilvános kutatás" /><label for="research-basic">Alap nyilvános kutatás</label></div>
+              <div class="radio-item"><input type="radio" id="research-deep" name="researchDepth" value="Komplex deep search és reputációs feltárás" /><label for="research-deep">Komplex deep search és reputációs feltárás</label></div>
+              <div class="radio-item"><input type="radio" id="research-strategic" name="researchDepth" value="Stratégiai, export- és támadhatósági elemzés" /><label for="research-strategic">Stratégiai, export- és támadhatósági elemzés</label></div>
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>C2. AI-érthetőség, anomáliák és rossz megítélés</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Az AI akkor téved, ha kevés, ellentmondásos vagy rosszul strukturált információból dolgozik. Itt azt mérjük fel, hol lehet félreértés, összekeverés, hiány vagy reputációs torzulás.</p>
+
+          <div class="form-group">
+            <label for="aiMisunderstandings">Miben érti félre Önt vagy a céget az AI, a Google vagy a piac?</label>
+            <span class="field-help">A téves értelmezések megmutatják, hol kell új bizonyítékot, pontosítást vagy strukturált adatot építeni.</span>
+            <textarea id="aiMisunderstandings" name="aiMisunderstandings"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="entityConfusions">Van-e összekeverés más személlyel, céggel, márkával vagy régi tevékenységgel?</label>
+            <span class="field-help">Az összekeverés gyakori entitáshiba. Ezt névhasználattal, forrásokkal, strukturált adatokkal és következetes profilépítéssel kell kezelni.</span>
+            <textarea id="entityConfusions" name="entityConfusions"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="sensitiveTopics">Milyen érzékeny témákra, múltbeli ügyekre vagy kérdésekre kell felkészülni?</label>
+            <span class="field-help">Ezek nem feltétlenül negatív dolgok, de ha egy AI vagy újságíró rákérdez, a válasznak pontosnak, arányosnak és ellenőrizhetőnek kell lennie.</span>
+            <textarea id="sensitiveTopics" name="sensitiveTopics"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>C3. Programrealitás, erőforrás és döntési helyzet</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A teljes digitális entitásépítés általában 6–18 hónapos folyamat. A stratégia csak akkor működik, ha van döntési jogkör, együttműködés és némi türelem is — a digitális bizalmat nem lehet mikróban felmelegíteni.</p>
+
+          <div class="form-group">
+            <label for="decisionMakers">Kik hoznak döntést a programról?</label>
+            <span class="field-help">A döntéshozói kör ismerete segít abban, hogy a stratégia üzletileg megvalósítható legyen, ne csak szakmailag jó.</span>
+            <textarea id="decisionMakers" name="decisionMakers"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="availableResources">Milyen erőforrás áll rendelkezésre a következő 6–18 hónapban?</label>
+            <span class="field-help">Ide tartozhat idő, vezetői részvétel, dokumentumok, sajtókapcsolat, fejlesztői kapacitás, marketingbüdzsé és belső koordináció.</span>
+            <textarea id="availableResources" name="availableResources"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="successDefinition">Mit tekintenének sikernek 6, 12 és 18 hónap múlva?</label>
+            <span class="field-help">A sikerdefiníció alapján lehet időrendi, lépésről lépésre haladó stratégiát készíteni.</span>
+            <textarea id="successDefinition" name="successDefinition"></textarea>
+          </div>
+        </div>
+      </details>
+
+
+      <div class="strategy-suite-note" aria-label="Opcionális stratégiai tesztek">
+        <h3>Opcionális stratégiai mélytesztek</h3>
+        <p>Az alábbi blokkok nem kötelezők. Akkor adnak kiemelt értéket, ha a cél nem csak láthatóság, hanem pontosabb üzleti pozicionálás, erősebb márkaélmény, hosszú távú bizalom, skálázhatóság és vezetői tisztaság. Válassza ki azokat a kérdéseket, amelyek valóban fontosak.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>C4. Üzleti valóságteszt — cél, bizonyíték és AI-ajánlhatóság</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a rész a valódi üzleti tétet tisztázza: milyen eredményt vár, mi skálázható, mi bizonyítható, és hol veszíthet pénzt a pontatlan digitális értelmezés. Nem kell minden kérdésre válaszolni: <strong>válasszon ki legalább 3-at</strong>, amelyek a legjobban megmutatják a stratégiai lényeget.</p>
+
+          <div class="form-group">
+            <label for="muskBusinessOutcome">Mi az az egy konkrét üzleti eredmény, amit az entitásépítéstől vár?</label>
+            <span class="field-help">Ez segít leválasztani a szép láthatóságot a valódi üzleti célról: több megkeresés, jobb AI-ajánlás, exportpiaci belépés, befektetői bizalom, generációváltás vagy magasabb cégérték.</span>
+            <textarea id="muskBusinessOutcome" name="muskBusinessOutcome"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskAiRecommendationContext">Kinek kellene Önt vagy a cégét ajánlania az AI-nak, és milyen problémára?</label>
+            <span class="field-help">Nem az a cél, hogy az AI szépen írjon Önről. Az a cél, hogy jó helyzetben, jó ügyfélnek, jó problémára ajánlja.</span>
+            <textarea id="muskAiRecommendationContext" name="muskAiRecommendationContext"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskScalableOffer">Mi az a termék, szolgáltatás vagy tudás, amely valóban skálázható magyar vagy külföldi piacon?</label>
+            <span class="field-help">Ez mutatja meg, hogy mit érdemes nagyobbra építeni. Az entitásépítés akkor erős, ha világos, milyen piaci értéket kell felerősítenie.</span>
+            <textarea id="muskScalableOffer" name="muskScalableOffer"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskHardToCopyAdvantage">Mi az, amit a versenytársai nehezen tudnak lemásolni?</label>
+            <span class="field-help">Technológia, kapcsolatrendszer, tapasztalat, iparági tudás, gyorsaság, minőség, tanúsítvány, történet, tulajdonosi háttér vagy piaci pozíció. Ez az a jel, amit az AI-nak is értenie kell.</span>
+            <textarea id="muskHardToCopyAdvantage" name="muskHardToCopyAdvantage"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskProofOfQuality">Milyen bizonyíték van arra, hogy Ön vagy a cég tényleg jó abban, amit állít?</label>
+            <span class="field-help">Az AI bizonyítékból ért, nem önbizalomból. Referenciák, számok, sajtó, ügyfelek, díjak, tanúsítványok, esettanulmányok és hosszú távú partnerek mind ide tartoznak.</span>
+            <textarea id="muskProofOfQuality" name="muskProofOfQuality"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskCostlyMisunderstanding">Mi az a jelenlegi félreértés, ami pénzbe kerülhet?</label>
+            <span class="field-help">Lehet rossz cégprofil, elavult weboldal, gyenge angol bemutatkozás, nem egyértelmű tulajdonosi szerep, régi tevékenység vagy rossz kategóriába sorolás.</span>
+            <textarea id="muskCostlyMisunderstanding" name="muskCostlyMisunderstanding"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskWorstAiAnswer">Mi lenne a legrosszabb AI-válasz Önről vagy a cégéről?</label>
+            <span class="field-help">Ez feltárja, mitől kell védeni a digitális entitást: pontatlan összefoglalás, összekeverés, rossz kategória, hiányos múlt vagy félrevezető reputációs kép.</span>
+            <textarea id="muskWorstAiAnswer" name="muskWorstAiAnswer"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskFutureAiQuestion">Milyen kérdésre szeretné, hogy az AI 12 hónap múlva már pontosan Önt vagy a cégét ajánlja?</label>
+            <span class="field-help">Ez a kívánt jövőbeli AI-pozicionálás. Innen lehet visszatervezni, milyen források, tartalmak, sajtó, adatok és bizonyítékok kellenek.</span>
+            <textarea id="muskFutureAiQuestion" name="muskFutureAiQuestion"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskGrowthBottleneck">Mi lassítja ma legjobban a növekedést?</label>
+            <span class="field-help">Nem elég láthatóság, kevés bizalom, gyenge weboldal, nincs nemzetközi anyag, nincs sajtó, nincs döntési kapacitás, nincs csapat vagy nincs egységes stratégia.</span>
+            <textarea id="muskGrowthBottleneck" name="muskGrowthBottleneck"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskOneSixMonthWin">Ha 6 hónap múlva csak egy dolog javulhatna, mi legyen az?</label>
+            <span class="field-help">Ez kiveszi a ködöt a projektből. Kiderül, hogy az ügyfélnek valójában lead, reputáció, árpozíció, export, AI-jelenlét vagy befektetői bizalom kell.</span>
+            <textarea id="muskOneSixMonthWin" name="muskOneSixMonthWin"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskInternalOwner">Ki az a belső ember, aki a programot napi szinten végig tudja vinni?</label>
+            <span class="field-help">Stratégia végrehajtás nélkül csak szép dokumentum. A gyors haladáshoz kell egy kijelölt ember, akivel rendszeresen lehet dolgozni.</span>
+            <textarea id="muskInternalOwner" name="muskInternalOwner"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="muskCostOfInaction">Mi történik, ha semmit nem változtatnak a következő 12 hónapban?</label>
+            <span class="field-help">Ez mutatja meg a valódi tétet: elvesző piac, rossz AI-kép, gyenge exportpozíció, generációváltási kockázat, alacsonyabb cégérték vagy elszalasztott lehetőség.</span>
+            <textarea id="muskCostOfInaction" name="muskCostOfInaction"></textarea>
+          </div>
+        </div>
+      </details>
+
+
+      <details class="accordion">
+        <summary>C5. Márkatisztasági teszt — első benyomás, élmény és egyszerűség</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a rész az első benyomás, a márkaélmény és az üzenet tisztaságát vizsgálja. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 3-at</strong>, amelyek a legjobban megmutatják, mit kell egyszerűbbé, szebbé és egyértelműbbé tenni.</p>
+
+          <div class="form-group">
+            <label for="jobsTenSecondUnderstanding">Ha valaki 10 másodperc alatt találkozik Önnel vagy a márkájával online, mit kellene azonnal megértenie?</label>
+            <span class="field-help">Ez segít kiszedni a zajt. Az AI-nak, a keresőnek és az embernek is gyorsan kell értenie a lényeget.</span>
+            <textarea id="jobsTenSecondUnderstanding" name="jobsTenSecondUnderstanding"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsForwardableSentence">Mi az az egy mondat, amit szeretne, hogy az ügyfél továbbmondjon Önről vagy a cégről?</label>
+            <span class="field-help">Nem szlogen, hanem a tiszta emlékkép. Az a mondat, amely egy döntéshozó fejében megmarad a találkozás után is.</span>
+            <textarea id="jobsForwardableSentence" name="jobsForwardableSentence"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsOvercomplicatedMessage">Mi az, amit ma túl bonyolultan magyaráz a cég vagy a személyes márka?</label>
+            <span class="field-help">Ami túl van magyarázva, az gyakran még nincs eléggé letisztítva. Ezt kell egyszerű, erős üzenetté alakítani.</span>
+            <textarea id="jobsOvercomplicatedMessage" name="jobsOvercomplicatedMessage"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsBrandFeeling">Milyen érzést kell keltenie a márkának?</label>
+            <span class="field-help">Bizalom, prémium minőség, biztonság, gyorsaság, kreativitás, stabilitás, diszkréció vagy nemzetközi szint — ezt nem lehet a végén ráragasztani. Ebből kell indulni.</span>
+            <textarea id="jobsBrandFeeling" name="jobsBrandFeeling"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsDesiredAftertouch">Mit kellene éreznie az ügyfélnek a weboldal, LinkedIn, Google-találat vagy AI-válasz után?</label>
+            <span class="field-help">A jó digitális entitás nem csak informál. Megnyugtat, pozicionál és döntésre készít elő.</span>
+            <textarea id="jobsDesiredAftertouch" name="jobsDesiredAftertouch"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsRemoveWeakness">Mi az, amit azonnal ki kellene venni a kommunikációból, mert gyengíti a prémium hatást?</label>
+            <span class="field-help">Régi szövegek, gyenge képek, túl sok magyarázat, amatőr grafika, kusza cégleírás vagy túl általános állítások. Néha a legerősebb fejlesztés a törlés.</span>
+            <textarea id="jobsRemoveWeakness" name="jobsRemoveWeakness"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsUnworthyElement">Mi az a vizuális vagy tartalmi elem, ami ma nem méltó a cég vagy személyes márka valódi értékéhez?</label>
+            <span class="field-help">Ha az offline érték erős, de a digitális megjelenés gyenge, akkor a piac és az AI is alulértékelheti a márkát.</span>
+            <textarea id="jobsUnworthyElement" name="jobsUnworthyElement"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsShelfChoice">Ha a márka egyetlen termékként lenne a polcon, miért választaná valaki azonnal?</label>
+            <span class="field-help">Ez segít megtalálni a valódi különbséget. Nem azt, hogy „jók vagyunk”, hanem azt, hogy miért egyértelmű választás.</span>
+            <textarea id="jobsShelfChoice" name="jobsShelfChoice"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsNotSimpleBeautifulClear">Mi az a rész, ahol a cég vagy személyes márka ma nem elég egyszerű, nem elég szép vagy nem elég egyértelmű?</label>
+            <span class="field-help">Ez a tisztítási pont. A cél nem a díszítés, hanem az, hogy minden felesleges zaj eltűnjön az érték útjából.</span>
+            <textarea id="jobsNotSimpleBeautifulClear" name="jobsNotSimpleBeautifulClear"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="jobsPerfectFirstImpression">Milyen lenne a tökéletes első benyomás, ha holnap egy külföldi döntéshozó vagy AI-rendszer találkozik Önnel?</label>
+            <span class="field-help">Ez köti össze a dizájnt, a szöveget, a hitelességet, a bizonyítékokat és a nemzetközi piaci célt.</span>
+            <textarea id="jobsPerfectFirstImpression" name="jobsPerfectFirstImpression"></textarea>
+          </div>
+        </div>
+      </details>
+
+
+      <details class="accordion">
+        <summary>C6. Hosszú távú értékteszt — bizalom, előny és cégérték</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a blokk azt vizsgálja, hogy a személy, cég vagy márka mögött van-e tartós érték, bizalom és nehezen lemásolható előny. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 2–3-at</strong>, amelyek legjobban megmutatják, miért értékes hosszú távon az entitás.</p>
+
+          <div class="form-group">
+            <label for="buffettEnduringValue">Mi az a tartós érték, amit Ön vagy a cége 10 év múlva is képviselni fog?</label>
+            <span class="field-help">Ez segít kiszűrni, hogy a márka csak aktuális kampányra épül-e, vagy olyan értékre, amely hosszú távon is bizalmat és üzletet teremt.</span>
+            <textarea id="buffettEnduringValue" name="buffettEnduringValue"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettMoat">Mi az a versenyelőny, amit nehéz lemásolni?</label>
+            <span class="field-help">Lehet kapcsolat, szakértelem, gyártási tudás, piacismeret, minőség, márkanév, ügyfélhűség vagy ritka tapasztalat. Ez a digitális „védőárok”, amit az AI-nak is értenie kell.</span>
+            <textarea id="buffettMoat" name="buffettMoat"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettTrustWithoutKnowing">Miért bízzon Önben egy vevő, partner vagy befektető akkor is, ha nem ismeri személyesen?</label>
+            <span class="field-help">A digitális bizalom nem személyes szimpátiából indul, hanem ellenőrizhető jelekből: múltból, forrásokból, referenciákból, következetességből és szakmai bizonyítékból.</span>
+            <textarea id="buffettTrustWithoutKnowing" name="buffettTrustWithoutKnowing"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettLongTermDecisions">Milyen döntések bizonyítják, hogy hosszú távon gondolkodik, nem csak gyors eladásban?</label>
+            <span class="field-help">Ez a cég vagy személyes márka karakterét mutatja meg. A hosszú távú döntések erősítik a vezetői hitelességet és a piaci bizalmat.</span>
+            <textarea id="buffettLongTermDecisions" name="buffettLongTermDecisions"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettUndervaluedAsset">Mi az, amit a piac ma alulértékel Önben vagy a cégében?</label>
+            <span class="field-help">Sok cég és szakember értékesebb, mint amilyennek online látszik. Ez a kérdés segít megtalálni, mit kell a digitális térben végre méltó szintre emelni.</span>
+            <textarea id="buffettUndervaluedAsset" name="buffettUndervaluedAsset"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettTrustDestroyer">Mi rombolná leggyorsabban a bizalmat Önben vagy a márkában?</label>
+            <span class="field-help">Ez elegánsabb módon tárja fel a reputációs kockázatokat. Nem ijesztgetés, hanem előrelátás: amit ismerünk, azt kezelni is lehet.</span>
+            <textarea id="buffettTrustDestroyer" name="buffettTrustDestroyer"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettBestCustomerType">Melyik ügyféltípus hozza a legnagyobb hosszú távú értéket?</label>
+            <span class="field-help">Nem minden ügyfél jó ügyfél. A stratégia akkor pontos, ha nemcsak több érdeklődőt hoz, hanem jobb, hosszabb távon értékesebb ügyfeleket is.</span>
+            <textarea id="buffettBestCustomerType" name="buffettBestCustomerType"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="buffettCompanyValueDriver">Ha a cégét vagy személyes márkáját el kellene adni, mi növelné legjobban az értékét?</label>
+            <span class="field-help">Ez kapcsolódik a cégértékhez, generációváltáshoz és befektetői megítéléshez. A rendezett digitális entitás gyakran nemcsak láthatóságot, hanem értéket is épít.</span>
+            <textarea id="buffettCompanyValueDriver" name="buffettCompanyValueDriver"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>C7. Skálázhatósági teszt — kapcsolatok, terjedés és hálózati hatás</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a blokk azt nézi, hogyan tud a márka terjedni, kapcsolódni és skálázódni. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 2–3-at</strong>, ha szeretné, hogy az audit a hálózati hatást, közösségi bizonyítékokat és platformstratégiát is pontosabban lássa.</p>
+
+          <div class="form-group">
+            <label for="zuckerbergShareableAudience">Ki az a célcsoport, aki ha egyszer megérti a márkát, tovább is adja másoknak?</label>
+            <span class="field-help">A legerősebb márkák nemcsak elérik az embereket, hanem továbbadásra késztetik őket. Ez mutatja meg, hol indulhat valódi organikus terjedés.</span>
+            <textarea id="zuckerbergShareableAudience" name="zuckerbergShareableAudience"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergNetworkCommunity">Milyen közösség, iparág vagy szakmai hálózat köré épülhet az Ön vagy a cég entitása?</label>
+            <span class="field-help">Az AI nemcsak önálló szereplőket ért, hanem kapcsolatokat is: partnereket, ügyfeleket, iparági forrásokat, közösségeket és visszatérő hivatkozásokat.</span>
+            <textarea id="zuckerbergNetworkCommunity" name="zuckerbergNetworkCommunity"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergShareableStory">Mi az a történet vagy üzenet, amit az emberek szívesen megosztanának Önnel kapcsolatban?</label>
+            <span class="field-help">Nem minden jó üzenet terjed. Az erős digitális entitásnak emlékezhetőnek, továbbadhatónak és bizonyíthatónak kell lennie.</span>
+            <textarea id="zuckerbergShareableStory" name="zuckerbergShareableStory"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergMarketSignal">Milyen adat, visszajelzés vagy ügyfélreakció bizonyítja, hogy a piacnak szüksége van erre?</label>
+            <span class="field-help">Ez a product-market fit kérdése: mi mutatja meg, hogy a piac nemcsak érti, hanem kéri is az Ön vagy a cég megoldását?</span>
+            <textarea id="zuckerbergMarketSignal" name="zuckerbergMarketSignal"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergSignalPlatforms">Milyen platformokon kellene Önnek vagy a cégnek erősebb jelet adnia?</label>
+            <span class="field-help">LinkedIn, Google, Wikipedia/Wikidata, szakmai adatbázisok, sajtó, YouTube, podcast, iparági platformok vagy partneroldalak. Nem mindenhol kell jelen lenni, csak ott, ahol az entitás szempontjából számít.</span>
+            <textarea id="zuckerbergSignalPlatforms" name="zuckerbergSignalPlatforms"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergSustainableContent">Mi az a tartalomforma, amit rendszeresen és hitelesen tudna fenntartani?</label>
+            <span class="field-help">Nem az számít, mit lehet egyszer megcsinálni. Az számít, mit lehet 6–18 hónapon át következetesen építeni: cikk, poszt, interjú, videó, szakmai kommentár, esettanulmány vagy podcast.</span>
+            <textarea id="zuckerbergSustainableContent" name="zuckerbergSustainableContent"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergFeedbackToProof">Hogyan lehetne az ügyfelek, partnerek vagy követők visszajelzéseit digitális bizonyítékká alakítani?</label>
+            <span class="field-help">Vélemények, esettanulmányok, ajánlások, interjúk, közös projektek és partneroldalak segítenek abban, hogy a bizalom ne csak elhangozzon, hanem látható forrássá váljon.</span>
+            <textarea id="zuckerbergFeedbackToProof" name="zuckerbergFeedbackToProof"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="zuckerbergNetworkEffect">Mi lenne az a hálózati hatás, ami miatt a márka idővel magától is erősödik?</label>
+            <span class="field-help">Például minél több partner, ügyfél, sajtóforrás, szakmai oldal és közösségi bizonyíték hivatkozik a márkára, annál pontosabban érti és ajánlja az AI.</span>
+            <textarea id="zuckerbergNetworkEffect" name="zuckerbergNetworkEffect"></textarea>
+          </div>
+        </div>
+      </details>
+
+
+      <details class="accordion">
+        <summary>C8. Narratív mélységteszt — rejtett mintázatok, történet és átalakulás</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a blokk a márka mélyebb történetét keresi: azt, amit a piac ma még nem lát, de amitől a személy, cég vagy márka emlékezhetővé és hitelessé válhat. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 2–3-at</strong>, ha szeretné, hogy az audit ne csak technikai, hanem narratív és átalakulási szinten is pontosabb legyen.</p>
+
+          <div class="form-group">
+            <label for="merlinHiddenStory">Mi az a mélyebb történet Ön vagy a cége mögött, amit a piac ma még nem lát?</label>
+            <span class="field-help">Ez feltárja a márka valódi karakterét. Nem a felszíni bemutatkozást keressük, hanem azt a történetet, amelyből érthetővé válik, miért létezik és miért fontos az entitás.</span>
+            <textarea id="merlinHiddenStory" name="merlinHiddenStory"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinOldStoryHoldingBack">Milyen régi történet, szerep vagy piaci kép tartja vissza ma az előrelépést?</label>
+            <span class="field-help">Sok cég és személyes márka már túlnőtt a régi önképén, de az internet még mindig azt mutatja. Ezt a régi képet kell felismerni és tudatosan átépíteni.</span>
+            <textarea id="merlinOldStoryHoldingBack" name="merlinOldStoryHoldingBack"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinMisunderstoodStrength">Mi az a félreértett erősség, amit át kellene fordítani üzleti előnnyé?</label>
+            <span class="field-help">Ami ma rejtett, félreérthető vagy alulkommunikált, abból lehet stratégiai erő. Ez a kérdés segít megtalálni azokat az értékeket, amelyeket a piacnak és az AI-nak is látnia kell.</span>
+            <textarea id="merlinMisunderstoodStrength" name="merlinMisunderstoodStrength"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinRecurringPattern">Milyen mintázat ismétlődik újra és újra a cég vagy személyes márka történetében?</label>
+            <span class="field-help">Lehet visszatérő ügyféltípus, probléma, konfliktus, siker vagy piaci helyzet. Az ismétlődő mintázatok gyakran megmutatják, mi a márka valódi működési logikája.</span>
+            <textarea id="merlinRecurringPattern" name="merlinRecurringPattern"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinKnownButNotDigital">Mi az, amit Ön már tud magáról vagy a cégéről, de a digitális világ még nem tud?</label>
+            <span class="field-help">Ez az entitásépítés egyik legerősebb kérdése. A stratégia gyakran nem új identitást talál ki, hanem láthatóvá teszi azt, ami valójában már létezik.</span>
+            <textarea id="merlinKnownButNotDigital" name="merlinKnownButNotDigital"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinTransformation">Milyen átalakuláson kell átmennie a márkának a következő 6–18 hónapban?</label>
+            <span class="field-help">A digitális entitásépítés fejlődési ív: honnan hova tart a személy, cég vagy márka, és milyen állapotból milyen piaci pozícióba kell eljutnia.</span>
+            <textarea id="merlinTransformation" name="merlinTransformation"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinInnerTruth">Mi az a belső igazság, amit nem lehet hamis marketinggel pótolni?</label>
+            <span class="field-help">Ez tisztítja a stratégiát. Ami nem igaz, azt a piac és az AI előbb-utóbb szétszedi. Az erős entitás a valódi erősségekre épül.</span>
+            <textarea id="merlinInnerTruth" name="merlinInnerTruth"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="merlinLegendMessage">Ha a márka története legendává válna, mi lenne benne a fő üzenet?</label>
+            <span class="field-help">Ez kreatív kérdés, de stratégiailag hasznos: segít megtalálni azt a nagy narratívát, amelyet az emberek megjegyeznek, a piac megért, az AI pedig következetesen vissza tud adni.</span>
+            <textarea id="merlinLegendMessage" name="merlinLegendMessage"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>C9. Vezetői küldetésteszt — küldetés, döntés és kerekasztal</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a blokk a vezetői hitelességet, a küldetést és a stratégia mögötti embereket vizsgálja. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 2–3-at</strong>, ha szeretné, hogy az audit a bizalom, döntési helyzet, kerekasztal és hosszú távú örökség szintjén is pontosabb legyen.</p>
+
+          <div class="form-group">
+            <label for="arthurMission">Mi az a küldetés, amiért a cég vagy személyes márka létezik?</label>
+            <span class="field-help">Ez nem reklámszöveg. A küldetés azt mutatja meg, miért érdemes követni ezt az irányt, és miért van értelme a márkának a piacon.</span>
+            <textarea id="arthurMission" name="arthurMission"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurResponsibility">Kiért vállal felelősséget a márka?</label>
+            <span class="field-help">Lehet ügyfél, munkatárs, család, iparág, közösség, következő generáció vagy piac. A felelősségvállalás adja a márka vezetői súlyát.</span>
+            <textarea id="arthurResponsibility" name="arthurResponsibility"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurNonNegotiableValues">Milyen értékekből nem engedne akkor sem, ha gyorsabb pénzt lehetne keresni máshogy?</label>
+            <span class="field-help">Ez mutatja meg a márka gerincét. A bizalom ott kezdődik, ahol látszik, miből nem enged a vezető vagy a cég.</span>
+            <textarea id="arthurNonNegotiableValues" name="arthurNonNegotiableValues"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurRoundTable">Kik ülnek a kerekasztalnál?</label>
+            <span class="field-help">Vagyis kik azok a kulcsemberek, partnerek, tanácsadók, ügyfelek vagy belső szereplők, akik nélkül a stratégia nem működik.</span>
+            <textarea id="arthurRoundTable" name="arthurRoundTable"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurKeyTrustAudience">Ki az, akinek a bizalmát mindenképp meg kell nyerni?</label>
+            <span class="field-help">Lehet vevő, befektető, generációváltó családtag, külföldi partner, szakmai szervezet vagy az a piac, amelynek az AI-válaszok is szólnak.</span>
+            <textarea id="arthurKeyTrustAudience" name="arthurKeyTrustAudience"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurDecisionNeeded">Milyen döntést kellene a vezetőnek végre meghoznia, hogy a márka tisztábban épülhessen?</label>
+            <span class="field-help">A stratégia sokszor nem információhiányon bukik el, hanem halogatott döntéseken. Ez a kérdés megmutatja, hol kell vezetői tisztázás.</span>
+            <textarea id="arthurDecisionNeeded" name="arthurDecisionNeeded"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurConflictToResolve">Mi az a belső vagy külső konfliktus, amit rendezni kell a hiteles növekedéshez?</label>
+            <span class="field-help">Ez lehet tulajdonosi kérdés, generációváltás, márkanév, piaci pozíció, régi weboldal, szerepkonfliktus vagy reputációs ügy.</span>
+            <textarea id="arthurConflictToResolve" name="arthurConflictToResolve"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="arthurLegacy">Milyen örökséget szeretne hagyni a cég vagy személyes márka maga után?</label>
+            <span class="field-help">Ez összeköti a cégértéket, generációváltást, hosszú távú reputációt és személyes vezetői hitelességet.</span>
+            <textarea id="arthurLegacy" name="arthurLegacy"></textarea>
+          </div>
+        </div>
+      </details>
+
+
+
+      <details class="accordion">
+        <summary>C10. Transzformációs teszt — tudás, tanulság és stratégiai újjáépítés</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a rész a mély átalakulást vizsgálja: milyen tudás, tapasztalat, hiba, tanulság vagy rejtett erő alakítható át erősebb márkaidentitássá. Nem kötelező minden kérdésre válaszolni: <strong>válasszon ki legalább 2–3-at</strong>, ha szeretné, hogy az audit transzformációs szinten is pontosabb legyen.</p>
+
+          <div class="form-group">
+            <label for="ceridwenHiddenKnowledge">Milyen tudás vagy tapasztalat van Önben vagy a cégben, amit a piac még nem ért igazán?</label>
+            <span class="field-help">Ez segít feltárni azokat a belső értékeket, amelyek ma még nem látszanak elég tisztán a digitális térben.</span>
+            <textarea id="ceridwenHiddenKnowledge" name="ceridwenHiddenKnowledge"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenPainToPower">Melyik múltbeli nehézségből, hibából vagy válságból lett később erő?</label>
+            <span class="field-help">A hiteles márkák nem makulátlanok, hanem tanulóképesek. Ez a kérdés megmutatja, milyen történetből lehet bizalmat és emberi erőt építeni.</span>
+            <textarea id="ceridwenPainToPower" name="ceridwenPainToPower"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenShadowRisk">Mi az az árnyék vagy félreérthető rész, amit nem elrejteni, hanem jól keretezni kellene?</label>
+            <span class="field-help">A cél nem a varázsköpeny, hanem a jó stratégiai keretezés: mi az, amit tisztázni kell, hogy ne mások vagy az AI magyarázza el helyettünk rosszul.</span>
+            <textarea id="ceridwenShadowRisk" name="ceridwenShadowRisk"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenTransformationMoment">Mi az a fordulópont, amely után már nem ugyanaz a személy, cég vagy márka volt?</label>
+            <span class="field-help">A fordulópontok segítenek időrendet, tanulságot és hiteles fejlődési ívet építeni.</span>
+            <textarea id="ceridwenTransformationMoment" name="ceridwenTransformationMoment"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenIngredientMissing">Mi az az egy összetevő, ami ma hiányzik ahhoz, hogy a márka teljesebb képet mutasson?</label>
+            <span class="field-help">Lehet bizonyíték, weboldal, sajtó, adatstruktúra, vezetői narratíva, vizuális minőség vagy egyetlen tiszta mondat.</span>
+            <textarea id="ceridwenIngredientMissing" name="ceridwenIngredientMissing"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenOldIdentity">Milyen régi identitást kell kinőni, hogy a következő szint hiteles legyen?</label>
+            <span class="field-help">Sok márka azért nem tud nagyobbra nőni, mert a digitális képe még egy korábbi korszakban ragadt.</span>
+            <textarea id="ceridwenOldIdentity" name="ceridwenOldIdentity"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenTruthNotReady">Mi az az igazság, amit a márka már tud, de még nem mer elég tisztán kimondani?</label>
+            <span class="field-help">Ez gyakran a pozicionálás kulcsa: amikor a cég vagy személy végre nevén nevezi, miben más, erős vagy éppen bátor.</span>
+            <textarea id="ceridwenTruthNotReady" name="ceridwenTruthNotReady"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="ceridwenNewForm">Milyen új formában kellene megjelennie a márkának 6–18 hónap múlva?</label>
+            <span class="field-help">Ez összeköti a jelenlegi helyzetet a kívánt digitális entitással: mit kell látnia az ügyfélnek, partnernek, piacnak és AI-nak.</span>
+            <textarea id="ceridwenNewForm" name="ceridwenNewForm"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <details class="accordion">
+        <summary>C11. Etikai bizalmi teszt — felelősség, méltóság és hosszú távú bizalom</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">Ez a rész azt vizsgálja, hogy a márka milyen emberi, etikai és társadalmi bizalmi alapra épül. Nem vallási blokk, hanem vezetői tisztasági teszt: hogyan lehet úgy növekedni, hogy közben a bizalom, felelősség és emberi méltóság is erősödjön. <strong>Válaszoljon legalább 2–3 kérdésre</strong>, ha szeretné, hogy az audit hosszú távú bizalmi szinten is pontosabb legyen.</p>
+
+          <div class="form-group">
+            <label for="dalaiLamaHumanBenefit">Kinek lesz jobb az élete, munkája vagy döntési helyzete attól, hogy Ön vagy a cége sikeresebb lesz?</label>
+            <span class="field-help">Ez megmutatja, hogy a márka nem csak eladni akar, hanem valódi hasznot teremt valakinek.</span>
+            <textarea id="dalaiLamaHumanBenefit" name="dalaiLamaHumanBenefit"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaCompassionInBusiness">Hol jelenik meg az együttérzés vagy emberi figyelem az üzleti működésben?</label>
+            <span class="field-help">Nem puhaságot keresünk, hanem bizalmat: azt, hogy a cég hogyan bánik ügyfelekkel, munkatársakkal, partnerekkel és érzékeny helyzetekkel.</span>
+            <textarea id="dalaiLamaCompassionInBusiness" name="dalaiLamaCompassionInBusiness"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaHarmAvoidance">Milyen kárt vagy félreértést kell elkerülni a kommunikációban és növekedésben?</label>
+            <span class="field-help">Ez segít megelőzni, hogy a márka erősödése közben rossz üzenet, túlzás vagy érzéketlen kommunikáció rontsa a bizalmat.</span>
+            <textarea id="dalaiLamaHarmAvoidance" name="dalaiLamaHarmAvoidance"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaEthicalLine">Mi az az etikai határ, amit a márka soha nem léphet át?</label>
+            <span class="field-help">A tiszta határok erősítik a márkát. Az AI és a piac is jobban érti azt, aki tudja, mire mond nemet.</span>
+            <textarea id="dalaiLamaEthicalLine" name="dalaiLamaEthicalLine"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaTrustRepair">Ha bizalom sérült a múltban, hogyan lehet azt méltósággal helyreállítani?</label>
+            <span class="field-help">A reputációs rendezés nem támadás vagy védekezés: sokszor nyugodt, arányos és következetes bizalomépítés.</span>
+            <textarea id="dalaiLamaTrustRepair" name="dalaiLamaTrustRepair"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaInnerPeaceBrand">Milyen döntés hozna nagyobb tisztaságot és nyugalmat a vezetői működésbe?</label>
+            <span class="field-help">A jó stratégia nem csak kifelé mutat jól. Belül is csökkenti a zajt, a bizonytalanságot és a felesleges konfliktusokat.</span>
+            <textarea id="dalaiLamaInnerPeaceBrand" name="dalaiLamaInnerPeaceBrand"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaResponsibilityFuture">Milyen felelősséget vállal a márka a következő generáció, közösség vagy iparág felé?</label>
+            <span class="field-help">Ez különösen fontos generációváltásnál, cégérték-növelésnél és hosszú távú reputációépítésnél.</span>
+            <textarea id="dalaiLamaResponsibilityFuture" name="dalaiLamaResponsibilityFuture"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="dalaiLamaSimpleTruth">Mi az az egyszerű, békés és igaz mondat, amit szeretne, hogy a világ megértsen Önről vagy a cégről?</label>
+            <span class="field-help">Ez a márka emberi magja. Nem hangosnak kell lennie, hanem igaznak, tisztának és megjegyezhetőnek.</span>
+            <textarea id="dalaiLamaSimpleTruth" name="dalaiLamaSimpleTruth"></textarea>
+          </div>
+        </div>
+      </details>
+
+      <div class="section-title">
+        <h2>D. Kommunikáció, hozzájárulás és jogi nyilatkozatok</h2>
+        <p>Az alábbi hozzájárulások szükségesek az audit elkészítéséhez, a kapcsolattartáshoz és az adatok bizalmas kezeléséhez.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>Kapcsolattartás és jogi hozzájárulás</summary>
+        <div class="accordion-body">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="communicationPreference">Preferált kommunikációs csatorna</label>
+              <span class="field-help">Megmutatja, hogyan érdemes felvenni Önnel a kapcsolatot az audit során.</span>
+              <select id="communicationPreference" name="communicationPreference">
+                <option value="">Kérem válasszon</option>
+                <option value="email">E-mail</option>
+                <option value="phone">Telefonos hívás</option>
+                <option value="video">Videókonferencia</option>
+                <option value="messaging">Üzenetküldő alkalmazás</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="referralSource">Honnan találta meg a szolgáltatást?</label>
+              <span class="field-help">Ez segít érteni, milyen csatornán érkeznek az érdeklődők, és milyen előzetes információval rendelkeznek.</span>
+              <select id="referralSource" name="referralSource">
+                <option value="">Kérem válasszon</option>
+                <option value="google_search">Google keresés</option>
+                <option value="ai_search">AI-válasz vagy AI-keresés</option>
+                <option value="linkedin">LinkedIn</option>
+                <option value="referral">Ajánlás</option>
+                <option value="event">Szakmai esemény</option>
+                <option value="other">Egyéb</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="additionalComments">Egyéb megjegyzés, cél vagy háttérinformáció</label>
+            <span class="field-help">Minden olyan információ ide kerülhet, amely segíthet pontosabban megérteni a helyzetet, a motivációt vagy az időbeli sürgősséget.</span>
+            <textarea id="additionalComments" name="additionalComments"></textarea>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="consent_1" name="agreeDataProcessing" required />
+              <label for="consent_1">Hozzájárulok személyes adataim kezeléséhez az audit elkészítése és az ügyfélkommunikáció céljából, a GDPR és az osztrák DSG szerint. <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="consent_2" name="agreeResearch" required />
+              <label for="consent_2">Tudomásul veszem, hogy az előzetes elemzés nyilvános forrásokra, a megadott adatokra és deep search kutatásra épülhet. <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="consent_3" name="agreeEmail" required />
+              <label for="consent_3">Hozzájárulok az audittal kapcsolatos e-mail kommunikációhoz. <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="consent_4" name="agreeConfidentiality" required />
+              <label for="consent_4">Tudomásul veszem, hogy az audit során megadott információk bizalmasan kezelendők, és az elemzés elkészítéséhez használhatók. <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="consent_5" name="agreeTerms" required />
+              <label for="consent_5">Elfogadom a Bánhalmi Norbert e.U. adatvédelmi tájékoztatóját, és tudomásul veszem, hogy a szakmai tanácsadási feltételek az űrlap végén külön lenyíló blokkban olvashatók. <span class="required">*</span></label>
+            </div>
+          </div>
+
+          <div class="legal-note">
+            Az űrlap beküldésével a 96 órás audit és stratégiai értékelés elindításához szükséges adatok kerülnek továbbításra. A teljes megvalósítási program külön, egyedi ajánlat és megállapodás alapján indulhat el.
+          </div>
+        </div>
+      </details>
+
+
+      <details class="privacy-panel" id="privacyPanel">
+        <summary>Adatvédelmi tájékoztató röviden — mit kezelünk és miért?</summary>
+        <div class="privacy-body">
+          <p><strong>Adatkezelő:</strong> Bánhalmi Norbert e.U., Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria. Kapcsolat: office@vipach.at.</p>
+          <p><strong>Cél:</strong> digitális entitásépítési és deep search audit előkészítése, kapcsolattartás, számlázás, stratégiai elemzés és egyedi ajánlatkészítés.</p>
+          <ul>
+            <li>A beküldött adatok az audit elkészítéséhez, az esetleges szerződéskötéshez, számlázáshoz és az ügyfélkommunikációhoz szükségesek.</li>
+            <li>A kutatás nyilvános forrásokra, a megadott linkekre és az ügyfél által megosztott háttérinformációkra épülhet.</li>
+            <li>A stratégiai, reputációs és üzleti információkat bizalmasan kell kezelni.</li>
+            <li>A beküldés külső űrlapfeldolgozó szolgáltatáson keresztül történik; szigorúbb compliance vagy nagyobb érzékenység esetén saját/EU-s backend javasolt.</li>
+          </ul>
+          <p><strong>Jogok:</strong> hozzáférés, helyesbítés, törlés, korlátozás, tiltakozás és adathordozhatóság az alkalmazandó GDPR/DSG keretek szerint.</p>
+          <p><strong>Verzió:</strong> Privacy-HU-Entity-Audit-2026-06-04.</p>
+        </div>
+      </details>
+
+      <details class="privacy-panel" id="impressumPanel">
+        <summary>Impresszum és szolgáltatói adatok</summary>
+        <div class="privacy-body">
+          <p><strong>Szolgáltató:</strong> Bánhalmi Norbert e.U.</p>
+          <p><strong>Tulajdonos:</strong> Norbert Bánhalmi.</p>
+          <p><strong>Jogi forma:</strong> Bejegyzett egyéni vállalkozás (e.U.).</p>
+          <p><strong>Cím:</strong> Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria.</p>
+          <p><strong>Web:</strong> form.vipach.at · <strong>E-mail:</strong> office@vipach.at.</p>
+          <p><strong>Telefon:</strong> Tel (AT): +43 677 616 55592 · Tel (HU): +36 70 469 83 97.</p>
+          <p><strong>GISA:</strong> 36592951 · <strong>EU adószám:</strong> ATU80445314.</p>
+          <p>A szolgáltatás üzleti, stratégiai és technológiai tanácsadási jellegű. Nem minősül jogi, adózási, befektetési vagy hatósági tanácsadásnak.</p>
+        </div>
+      </details>
+
+      <div class="section-title">
+        <h2>E. Számlázási adatok</h2>
+        <p>Az alábbi adatok az esetleges későbbi szerződéskötéshez, díjbekérőhöz vagy számlázáshoz szükségesek. A jelen felmérés az előzetes egyeztetés alapján díjmentes, de ha később megvalósítási munka indul, ezek az adatok segítenek a pontos adminisztrációban.</p>
+      </div>
+
+      <details class="accordion">
+        <summary>Számlázási és EU adószám adatok</summary>
+        <div class="accordion-body">
+          <p class="micro-intro">A szakmai tanácsadási audit elfogadásához és számlázásához pontos számlázási adatok szükségesek. Az EU-s adószám külön mezőben szerepel, mert osztrák szolgáltatóval kötött B2B megbízásnál ez az adózási és számlázási besorolás egyik fontos adata.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="billingName">Számlázási név <span class="required">*</span></label>
+              <span class="field-help">Az a cégnév, egyéni vállalkozói név vagy szervezeti név, amelyre az auditdíj számlázása történik.</span>
+              <input type="text" id="billingName" name="billingName" autocomplete="organization" required />
+            </div>
+            <div class="form-group">
+              <label for="billingContact">Számlázási kapcsolattartó</label>
+              <span class="field-help">Az a személy, aki a számlázással, díjbekérővel vagy adminisztratív pontosítással kapcsolatban elérhető.</span>
+              <input type="text" id="billingContact" name="billingContact" autocomplete="name" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="billingEmail">Számlázási e-mail-cím <span class="required">*</span></label>
+              <span class="field-help">Ide érkezhet a számla, díjbekérő vagy a számlázással kapcsolatos pontosítás.</span>
+              <input type="email" id="billingEmail" name="billingEmail" autocomplete="email" required />
+            </div>
+            <div class="form-group">
+              <label for="billingCountry">Számlázási ország <span class="required">*</span></label>
+              <span class="field-help">Az ország alapján lehet helyesen értelmezni az ÁFA/VAT-kezelést és az esetleges EU-s B2B számlázást.</span>
+              <input type="text" id="billingCountry" name="billingCountry" autocomplete="country-name" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="billingAddress">Számlázási cím <span class="required">*</span></label>
+            <span class="field-help">A hivatalos számlázási cím: irányítószám, település, utca, házszám és szükség esetén emelet/ajtó.</span>
+            <textarea id="billingAddress" name="billingAddress" autocomplete="billing street-address" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="billingTaxNumber">Belföldi adószám / adóazonosító <span class="required">*</span></label>
+              <span class="field-help">A megrendelő országában használt adószám vagy vállalkozói adóazonosító. Ha nincs külön adószám, ezt itt jelezni kell.</span>
+              <input type="text" id="billingTaxNumber" name="billingTaxNumber" required />
+            </div>
+            <div class="form-group">
+              <label for="billingEuVatId">EU-s adószám / közösségi adószám <span class="required">*</span></label>
+              <span class="field-help">Külön mező, mert EU-n belüli B2B szolgáltatásnál ez döntő lehet. Ha a megrendelő nem rendelkezik EU-s adószámmal, ezt a mezőben külön jelezni kell.</span>
+              <input type="text" id="billingEuVatId" name="billingEuVatId" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="purchaseOrderNumber">Megrendelésszám / PO szám</label>
+              <span class="field-help">Nagyobb cégeknél ez segíthet abban, hogy a számla ne kallódjon el a pénzügy és a beszerzés Bermuda-háromszögében.</span>
+              <input type="text" id="purchaseOrderNumber" name="purchaseOrderNumber" />
+            </div>
+            <div class="form-group">
+              <label for="billingReference">Számlán feltüntetendő referencia</label>
+              <span class="field-help">Itt adható meg projektkód, kapcsolattartó neve vagy belső hivatkozás, amely segíti a könyvelést.</span>
+              <input type="text" id="billingReference" name="billingReference" />
+            </div>
+          </div>
+
+          <div class="billing-summary">
+            <h3>Mit fogad el ezzel a számlázási résszel?</h3>
+            <p>A megrendelő tudomásul veszi, hogy a beküldött űrlap a 96 órás digitális entitásdiagnózis és deep search stratégiai anyag előkészítéséhez szükséges adatokat tartalmazza. A díj adózási kezelése, az esetleges ÁFA/VAT vagy fordított adózási besorolás a megadott számlázási adatok, a megrendelő státusza és az alkalmazandó jogszabályok alapján kerül meghatározásra.</p>
+          </div>
+        </div>
+      </details>
+
+      <section class="commercial-section" aria-label="Díjazás, árajánlat és megvalósítási feltételek">
+        <div class="commercial-header">
+          <div>
+            <h2>Díjazás, árajánlat és megvalósítási keretek</h2>
+            <p>Először diagnózis készül. Utána döntés. Az audit megmutatja, mit kell felépíteni, milyen sorrendben, milyen csapattal és milyen üzleti céllal. A teljes megvalósítás csak ezután kap egyedi árajánlatot.</p>
+          </div>
+        </div>
+
+        <div class="commercial-grid">
+          <div class="commercial-card">
+            <h3>Mit kap az ügyfél?</h3>
+            <p>Nem véleményt. Nem sablonriportot. Egy kutatáson és üzleti logikán alapuló stratégiai térképet, amely megmutatja, mit ért ma a piac és az AI, hol vannak a vakfoltok, és milyen sorrendben érdemes építkezni.</p>
+            <ul>
+              <li>múltbeli és jelenlegi digitális lábnyom feltérképezése,</li>
+              <li>AI-érthetőség, félreértési és hallucinációs kockázatok vizsgálata,</li>
+              <li>támadhatósági, reputációs és strukturális anomáliák azonosítása,</li>
+              <li>magyar és külföldi piaci értelmezhetőség vizsgálata,</li>
+              <li>időrendi, lépésről lépésre követhető entitásépítési stratégia,</li>
+              <li>komplett, egyedi megvalósítási árajánlat az audit végén.</li>
+            </ul>
+          </div>
+
+          <div class="commercial-card">
+            <h3>Miért hasznos akkor is, ha saját csapata van?</h3>
+            <p>Ha az ügyfélnek saját marketing-, IT-, PR- vagy vezetői csapata van, az audit professzionális tanácsadói és márkastratégiai alapanyagként használható. Röviden: nem kell sötétben szerelni a motort, miközben az autó már a külföldi piac felé gurulna.</p>
+          </div>
+
+          <div class="commercial-card">
+            <h3>Miért egyedi minden ajánlat?</h3>
+            <p>Minden entitás más. Van, ahol programozás, strukturált adat, technikai SEO és webarchitektúra a legfontosabb. Máshol sajtó, reputáció, személyes márka, exportpozicionálás, generációváltás vagy cégérték-növelés kerül előtérbe.</p>
+            <p>Ezért nem csomagáras „doboztermékről” van szó. A stratégia, a csapatösszetétel, az ütemezés és az ajánlat minden esetben az ügyfél valós céljaihoz, kockázataihoz és erőforrásaihoz igazítva készül.</p>
+          </div>
+
+          <div class="commercial-card">
+            <h3>Mi történik a 6–18 hónapos építés alatt?</h3>
+            <p>A világ, a keresők és az AI-rendszerek napi szinten változnak. A csapat mérnökei, stratégái és tartalmi szakemberei ezeket a változásokat figyelik, és ha egy módosulás befolyásolja a cél elérését, a tervet nem védjük makacsul — újratervezzük.</p>
+            <p>A megvalósítás során rendszeres, sok esetben szinte napi kapcsolatban vagyunk az ügyfél által kijelölt kapcsolattartóval. Ez nem azért van, mert szeretünk sokat e-mailezni, hanem mert a jó entitásépítés gyors döntéseket, jóváhagyásokat és pontos üzleti irányt igényel.</p>
+          </div>
+        </div>
+
+        <div class="process-strip" aria-label="Folyamat áttekintése">
+          <div class="process-step"><strong>1. Beküldés</strong><span>Az ügyfél megadja a kutatáshoz szükséges kiinduló adatokat.</span></div>
+          <div class="process-step"><strong>2. 96 órás audit</strong><span>Elkészül a deep search alapú feltérképezés és a stratégiai kiindulópont.</span></div>
+          <div class="process-step"><strong>3. Egyedi ajánlat</strong><span>Az audit végén teljes megvalósítási árajánlat készül, nem sablon alapján.</span></div>
+          <div class="process-step"><strong>4. 6–18 hónap</strong><span>A kiválasztott elemek alapján elindulhat az entitásépítési program.</span></div>
+        </div>
+
+        <details class="terms-panel">
+          <summary>Általános szakmai tanácsadási feltételek — Bánhalmi Norbert e.U.</summary>
+          <div class="terms-body">
+            <div class="terms-meta">
+              <strong>Szerződő szolgáltató:</strong> Bánhalmi Norbert e.U. / Norbert Bánhalmi, Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria. E-mail: office@vipach.at. GISA: 36592951. EU adószám: ATU80445314.
+            </div>
+
+            <h3>1. A feltételek hatálya</h3>
+            <p>Ezek a feltételek a digitális entitásépítési, deep search, márka-audit, piacérthetőségi, reputációs és stratégiai tanácsadási szolgáltatásokra vonatkoznak, amelyeket az ügyfél Bánhalmi Norbert e.U.-val kötött egyedi megbízás vagy írásos visszaigazolás alapján rendel meg. A szolgáltatás első szakasza a 2 000 EUR értékű audit és stratégiai terv, amely az előzetes egyeztetés alapján jelen esetben díjmentesen készül.</p>
+            <p>A szolgáltatás elsősorban vállalkozásoknak, cégvezetőknek, márkatulajdonosoknak, szakmai szereplőknek és B2B ügyfeleknek készül. Fogyasztói megrendelés csak külön írásos megállapodás alapján értelmezhető.</p>
+
+            <h3>2. Szerződés létrejötte</h3>
+            <p>Az űrlap beküldése ajánlatkérésnek és auditindítási adatközlésnek minősül. A konkrét megbízás a szolgáltató írásos visszaigazolásával, díjbekérő/számla kiállításával, külön megrendelő dokumentummal vagy az audit tényleges megkezdésével jön létre.</p>
+            <p>A 6–18 hónapos megvalósítási program nem indul el automatikusan az űrlap beküldésével. Ahhoz külön ajánlat, elfogadás és megállapodás szükséges.</p>
+
+            <h3>3. A 2 000 EUR értékű audit tartalma</h3>
+            <ul>
+              <li>deep search alapú előzetes kutatás nyilvános és az ügyfél által megadott források alapján,</li>
+              <li>AI-érthetőség, keresőbeni jelenlét és digitális lábnyom vizsgálata,</li>
+              <li>reputációs, strukturális, tartalmi és támadhatósági kockázatok feltérképezése,</li>
+              <li>magyar piaci és nemzetközi piaci értelmezhetőség vizsgálata,</li>
+              <li>időrendi, lépésről lépésre követhető stratégiai javaslat,</li>
+              <li>egyedi megvalósítási ajánlat előkészítése az audit végén.</li>
+            </ul>
+            <p>Az audit nem garantál automatikus Google-helyezést, AI-ajánlást, sajtómegjelenést vagy üzletszerzést. A cél az, hogy a személy, cég vagy márka digitális entitása tisztábban, pontosabban és ellenőrizhetőbben legyen felépíthető.</p>
+
+            <h3>4. Díjazás, beszámítás és minimális megrendelési érték</h3>
+            <p>Az audit és stratégiai terv szakmai értéke 2 000 EUR. Az előzetes egyeztetés alapján jelen felmérés és stratégiai előkészítés díjmentesen készül. Amennyiben az ügyfél később megvalósítási munkát rendel meg, annak tartalma, ütemezése és díjazása külön egyedi ajánlatban és külön megállapodásban kerül rögzítésre.</p>
+            <p>A díjak adózási és ÁFA/VAT-kezelése a számlázási adatok, az ügyfél státusza, országa és az alkalmazandó jogszabályok szerint kerül meghatározásra. A számlázási adatok pontosságáért a megrendelő felel.</p>
+
+            <h3>5. Egyedi stratégia és változó technológiai környezet</h3>
+            <p>Minden entitásépítési projekt egyedi. A szükséges csapat, eszközök, technológiai lépések, sajtó-, tartalom-, fejlesztési és reputációs elemek az audit eredménye alapján kerülnek meghatározásra. A keresők, AI-rendszerek és digitális platformok napi szinten változnak, ezért a stratégia a megvalósítás során folyamatosan auditálható és szükség esetén újratervezhető.</p>
+
+            <h3>6. Ügyfélkötelezettségek</h3>
+            <p>Az ügyfél köteles a szolgáltatás elvégzéséhez szükséges adatokat, hozzáférhető forrásokat, dokumentumokat, jóváhagyásokat és döntéseket ésszerű időben biztosítani. Az ügyfél felel azért, hogy az általa megadott információk valósak, jogszerűen felhasználhatók és nem sértik harmadik személy jogait.</p>
+
+            <h3>7. Titoktartás és adatvédelem</h3>
+            <p>A felek a projekt során megismert üzleti, személyes, pénzügyi, reputációs és stratégiai információkat bizalmasan kezelik. A személyes adatok kezelése a GDPR, az osztrák Datenschutzgesetz és a szolgáltató adatvédelmi tájékoztatója szerint történik. A formküldés külső technikai szolgáltatón keresztül történhet, amelyről az adatvédelmi tájékoztató ad részletesebb információt.</p>
+
+            <h3>8. Felelősségi korlátok</h3>
+            <p>A szolgáltató a szakmai gondosság szabályai szerint jár el, de nem vállal felelősséget harmadik fél platformjai, keresők, AI-rendszerek, sajtótermékek, közösségi oldalak vagy hatósági adatbázisok működéséért, változásaiért vagy döntéseiért. A stratégia üzleti és technológiai tanácsadási anyag, nem minősül jogi, adózási, pénzügyi, befektetési, biztosítási vagy hatósági tanácsadásnak.</p>
+
+            <h3>9. Alkalmazandó jog és illetékesség</h3>
+            <p>A szolgáltatásra és a kapcsolódó megállapodásokra — eltérő írásos megállapodás hiányában — az osztrák jog irányadó. Jogvita esetén a szolgáltató székhelyéhez igazodó, jogszabály szerint illetékes bécsi fórum lehet irányadó, amennyiben ezt kötelező jogszabály nem zárja ki.</p>
+
+          </div>
+        </details>
+
+        <div class="acknowledgement-panel">
+          <div class="checkbox-item">
+            <input type="checkbox" id="terms_acknowledgement" name="agreeConsultingTerms" required />
+            <label for="terms_acknowledgement">Elolvastam és elfogadom a fenti általános szakmai tanácsadási feltételeket, és tudomásul veszem, hogy a felmérés 2 000 EUR szakmai értékű auditnak minősül, amely az előzetes egyeztetés alapján jelen esetben díjmentesen készül. <span class="required">*</span></label>
+          </div>
+        </div>
+
+        <div class="acknowledgement-panel">
+          <div class="checkbox-item">
+            <input type="checkbox" id="commercial_acknowledgement" name="agreeCommercialTerms" required />
+            <label for="commercial_acknowledgement">Megértettem, hogy a 96 órás digitális entitásdiagnózis és stratégiai terv szakmai értéke 2 000 EUR, de az előzetes egyeztetés alapján jelen felmérés díjmentes. Tudomásul veszem, hogy az audit végén esetleges megvalósítási javaslat és egyedi ajánlat készülhet, amely csak külön elfogadás esetén válik megrendeléssé. <span class="required">*</span></label>
+          </div>
+          <p class="fineprint">Az űrlap beküldése nem jelenti automatikusan a 6–18 hónapos megvalósítási program megrendelését. A pontos szerződéses, számlázási és teljesítési feltételeket az auditot követő egyedi ajánlat és megállapodás tartalmazza. Az audit viszont már önmagában is használható stratégiai iránytű: megmutatja, merre van észak, mielőtt a teljes csapat elindulna délnek.</p>
+        </div>
+      </section>
+
+
+
+      <div class="utility-panel" aria-label="Mentés és PDF export">
+        <h3>Mentés és PDF letöltés</h3>
+        <p>Az űrlap a válaszokat csak ebben a böngészőben menti automatikusan, hogy egy hosszabb kitöltés közben ne vesszen el a munka. Megosztott vagy céges gépen a beküldés után használja a „Helyi mentés törlése” gombot. A válaszokból bármikor letölthető egy belső PDF-vázlat is.</p>
+        <div class="utility-actions">
+          <button type="button" id="downloadPdfButton" class="button-tertiary">VÁLASZOK LETÖLTÉSE PDF-BE</button>
+          <button type="button" id="clearDraftButton" class="button-tertiary">HELYI MENTÉS TÖRLÉSE</button>
+          <span class="utility-status" id="autosaveStatus">Automatikus mentés aktív ebben a böngészőben.</span>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="button" id="resetButton" class="button-secondary">
+          ŰRLAP TÖRLÉSE
+        </button>
+        <button type="submit" id="submitButton">
+          AUDIT ELINDÍTÁSA
+        </button>
+      </div>
+      <p class="submit-note">Beküldés után az űrlap zárolja a gombot, hogy ne menjen el véletlenül kétszer. Egy stratégiai auditból egy is elég — abból viszont legyen nagyon jó.</p>
+    </form>
+
+    <footer>
+      <div class="footer-section">
+        <h4>Bánhalmi Norbert e.U.</h4>
+        <p>Wien, Österreich</p>
+        <p>Digitális Stratégia, Deep Search és Entitásépítési Audit</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="https://form.vipach.at" target="_blank" rel="noopener noreferrer">form.vipach.at</a>
+        <a href="mailto:office@vipach.at">office@vipach.at</a>
+        <a href="#" id="privacyLink">Adatvédelmi Nyilatkozat</a>
+        <a href="#" id="impressumLink">Impresszum</a>
+      </div>
+
+      <div class="footer-section">
+        <p>© 2026 Bánhalmi Norbert e.U. Minden jog fenntartva.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">GDPR-kompatibilis | Osztrák Adatvédelmi Törvény (DSG) szerint</p>
+        <p style="font-size: 0.8rem;">Form Version 3.6 | Premium strategic audit · autosave/PDF verzió | Utolsó frissítés: 2026-06-04</p>
+      </div>
+    </footer>
+  </div>
+
+  </main>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    (() => {
+
+    const PASSWORD_HASH = 'df3abc05e3e7aa976d8d6f63c6da5caf23307fbbc1e5bd5feec5f7433a90ef8a';
+    const AUTH_KEY = 'entity_deep_search_unlocked_v1';
+    const passwordGate = document.getElementById('passwordGate');
+    const protectedContent = document.getElementById('protectedContent');
+    const passwordForm = document.getElementById('passwordForm');
+    const gatePassword = document.getElementById('gatePassword');
+    const passwordError = document.getElementById('passwordError');
+
+    const showProtectedContent = () => {
+      document.body.classList.remove('locked');
+      document.body.classList.add('unlocked');
+      if (passwordGate) passwordGate.hidden = true;
+      if (protectedContent) protectedContent.hidden = false;
+    };
+
+    const sha256 = async (value) => {
+      const data = new TextEncoder().encode(value);
+      const digest = await crypto.subtle.digest('SHA-256', data);
+      return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
+    };
+
+    if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+      showProtectedContent();
+    }
+
+    if (passwordForm && gatePassword) {
+      passwordForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        if (passwordError) passwordError.textContent = '';
+        const typedPassword = gatePassword.value || '';
+        if (!typedPassword.trim()) {
+          if (passwordError) passwordError.textContent = 'Kérem, adja meg a jelszót.';
+          gatePassword.focus();
+          return;
+        }
+        try {
+          const typedHash = await sha256(typedPassword);
+          if (typedHash === PASSWORD_HASH) {
+            sessionStorage.setItem(AUTH_KEY, 'true');
+            showProtectedContent();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          } else {
+            if (passwordError) passwordError.textContent = 'A jelszó nem megfelelő.';
+            gatePassword.select();
+          }
+        } catch (error) {
+          if (passwordError) passwordError.textContent = 'A böngésző nem tudta ellenőrizni a jelszót. Próbálja újra modern böngészőben.';
+        }
+      });
+    }
+
+      const form = document.getElementById('assessmentForm');
+      const nextUrl = document.getElementById('nextUrl');
+      const sourceUrl = document.getElementById('formSourceUrl');
+      const clientPageUrl = document.getElementById('clientPageUrl');
+      const clientUserAgent = document.getElementById('clientUserAgent');
+      const clientSubmissionTimestamp = document.getElementById('clientSubmissionTimestamp');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const progressHint = document.getElementById('progressHint');
+      const formAlert = document.getElementById('formAlert');
+      const submitButton = document.getElementById('submitButton');
+      const resetButton = document.getElementById('resetButton');
+      const clearDraftButton = document.getElementById('clearDraftButton');
+      const downloadPdfButton = document.getElementById('downloadPdfButton');
+      const autosaveStatus = document.getElementById('autosaveStatus');
+      const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v35';
+
+      const setRuntimeMeta = () => {
+        const currentUrl = window.location.href.split('?')[0];
+        if (nextUrl && window.location.protocol.startsWith('http')) {
+          nextUrl.value = currentUrl + '?sent=1';
+        }
+        if (sourceUrl) sourceUrl.value = window.location.href;
+        if (clientPageUrl) clientPageUrl.value = window.location.href;
+        if (clientUserAgent) clientUserAgent.value = navigator.userAgent || '';
+        if (clientSubmissionTimestamp) clientSubmissionTimestamp.value = new Date().toISOString();
+      };
+
+      const openAndFocus = (field) => {
+        if (!field) return;
+        const parentDetails = field.closest('details');
+        if (parentDetails) parentDetails.open = true;
+        field.focus({ preventScroll: true });
+        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+
+      const showAlert = (message) => {
+        if (!formAlert) return;
+        formAlert.textContent = message;
+        formAlert.classList.add('show');
+        formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      };
+
+      const clearAlert = () => {
+        if (!formAlert) return;
+        formAlert.textContent = '';
+        formAlert.classList.remove('show');
+      };
+
+      const setAutosaveStatus = (message) => {
+        if (!autosaveStatus) return;
+        autosaveStatus.textContent = message;
+      };
+
+      const getFieldLabel = (field) => {
+        if (!field) return field?.name || '';
+        const directLabel = field.id ? form.querySelector(`label[for="${CSS.escape(field.id)}"]`) : null;
+        if (directLabel) return directLabel.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+        const parentLabel = field.closest('label');
+        if (parentLabel) return parentLabel.textContent.replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+        const group = field.closest('.form-group');
+        const groupLabel = group?.querySelector('.field-label, label');
+        return (groupLabel?.textContent || field.name || '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+      };
+
+      const getSerializableFields = () => {
+        if (!form) return [];
+        return Array.from(form.elements).filter((field) => {
+          if (!field.name) return false;
+          if (field.type === 'hidden' || field.type === 'submit' || field.type === 'button') return false;
+          if (field.name === '_honey') return false;
+          return true;
+        });
+      };
+
+      const collectFormState = () => {
+        const data = {};
+        getSerializableFields().forEach((field) => {
+          if (field.type === 'checkbox') {
+            if (!Array.isArray(data[field.name])) data[field.name] = [];
+            if (field.checked) data[field.name].push(field.value || 'on');
+          } else if (field.type === 'radio') {
+            if (field.checked) data[field.name] = field.value;
+            else if (!(field.name in data)) data[field.name] = '';
+          } else {
+            data[field.name] = field.value || '';
+          }
+        });
+        return data;
+      };
+
+      const restoreFormState = () => {
+        if (!form) return;
+        const raw = localStorage.getItem(AUTOSAVE_KEY);
+        if (!raw) return;
+        try {
+          const data = JSON.parse(raw);
+          getSerializableFields().forEach((field) => {
+            if (!(field.name in data)) return;
+            if (field.type === 'checkbox') {
+              const values = Array.isArray(data[field.name]) ? data[field.name] : [];
+              field.checked = values.includes(field.value || 'on');
+            } else if (field.type === 'radio') {
+              field.checked = data[field.name] === field.value;
+            } else {
+              field.value = data[field.name] || '';
+            }
+          });
+          setAutosaveStatus('Korábbi helyi mentés visszatöltve ebben a böngészőben.');
+        } catch (error) {
+          console.warn('Autosave restore failed', error);
+          localStorage.removeItem(AUTOSAVE_KEY);
+        }
+      };
+
+      let autosaveTimer = null;
+      const saveDraft = () => {
+        if (!form) return;
+        window.clearTimeout(autosaveTimer);
+        autosaveTimer = window.setTimeout(() => {
+          try {
+            localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectFormState()));
+            setAutosaveStatus('Automatikusan mentve: ' + new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }));
+          } catch (error) {
+            console.warn('Autosave failed', error);
+            setAutosaveStatus('A helyi mentés nem sikerült. A böngésző tárhelye lehet, hogy megtelt vagy tiltva van.');
+          }
+        }, 450);
+      };
+
+      const escapeHtml = (value) => String(value || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+
+      const collectAnsweredFields = () => {
+        const rows = [];
+        const groupedChecks = new Map();
+        getSerializableFields().forEach((field) => {
+          if (field.type === 'checkbox') {
+            if (!field.checked) return;
+            const label = getFieldLabel(field);
+            const existing = groupedChecks.get(field.name) || { question: label, values: [] };
+            existing.values.push(label);
+            groupedChecks.set(field.name, existing);
+            return;
+          }
+          if (field.type === 'radio') {
+            if (!field.checked) return;
+            rows.push({ question: getFieldLabel(field), value: getFieldLabel(field) });
+            return;
+          }
+          const value = field.tagName === 'SELECT'
+            ? (field.selectedOptions?.[0]?.textContent || '').trim()
+            : (field.value || '').trim();
+          if (!value || value === 'Kérem válasszon') return;
+          rows.push({ question: getFieldLabel(field), value });
+        });
+        groupedChecks.forEach((item) => {
+          rows.push({ question: item.question, value: item.values.join('\n') });
+        });
+        return rows;
+      };
+
+      const buildPdfMarkup = () => {
+        const rows = collectAnsweredFields();
+        const title = 'Digitális Entitásépítési Audit — kitöltött válaszok';
+        const meta = `Generálva: ${new Date().toLocaleString('hu-HU')} · Forrás: ${window.location.href}`;
+        const content = rows.length
+          ? rows.map((row) => `<div class="pdf-answer"><span class="pdf-question">${escapeHtml(row.question)}</span><div class="pdf-value">${escapeHtml(row.value)}</div></div>`).join('')
+          : '<p>Nincs még kitöltött válasz.</p>';
+        return `<div class="pdf-export-document"><h1>${escapeHtml(title)}</h1><div class="pdf-meta">${escapeHtml(meta)}</div>${content}</div>`;
+      };
+
+      const downloadAnswersAsPdf = async () => {
+        const rows = collectAnsweredFields();
+        if (!rows.length) {
+          showAlert('Még nincs kitöltött válasz, amit PDF-be lehetne menteni.');
+          return;
+        }
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = buildPdfMarkup();
+        const fileName = 'digitalis-entitas-audit-valaszok-' + new Date().toISOString().slice(0, 10) + '.pdf';
+        if (window.html2pdf) {
+          await window.html2pdf().set({
+            margin: 10,
+            filename: fileName,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+          }).from(wrapper.firstElementChild).save();
+        } else {
+          const printWindow = window.open('', '_blank');
+          if (!printWindow) {
+            showAlert('A PDF exporthoz engedélyezni kell az új ablak megnyitását, vagy próbálja újra később.');
+            return;
+          }
+          printWindow.document.write('<!doctype html><html><head><title>Audit válaszok</title></head><body>' + buildPdfMarkup() + '</body></html>');
+          printWindow.document.close();
+          printWindow.focus();
+          printWindow.print();
+        }
+      };
+
+
+      const fieldHasValue = (field) => {
+        if (!field) return false;
+        if (field.type === 'checkbox' || field.type === 'radio') return field.checked;
+        return Boolean((field.value || '').trim());
+      };
+
+      const updateProgress = () => {
+        if (!form || !progressBar || !progressText) return;
+
+        const requiredFields = Array.from(form.querySelectorAll('[required]')).filter((field) => field.type !== 'hidden');
+        const requiredComplete = requiredFields.filter(fieldHasValue).length;
+
+        const focusSelected = form.querySelectorAll('input[name="auditFocus"]:checked').length > 0;
+        const ownerNeeded = document.getElementById('focus-owner')?.checked === true;
+        const companyNeeded = document.getElementById('focus-company')?.checked === true;
+
+        const conditionalRequirements = [];
+        conditionalRequirements.push({
+          required: true,
+          complete: focusSelected
+        });
+        if (ownerNeeded) {
+          conditionalRequirements.push({
+            required: true,
+            complete: fieldHasValue(document.getElementById('ownerFullName'))
+          });
+        }
+        if (companyNeeded) {
+          conditionalRequirements.push({
+            required: true,
+            complete: fieldHasValue(document.getElementById('companyName')) || fieldHasValue(document.getElementById('companyWebsite'))
+          });
+        }
+
+        const total = requiredFields.length + conditionalRequirements.length;
+        const conditionalComplete = conditionalRequirements.filter((item) => item.complete).length;
+        const complete = requiredComplete + conditionalComplete;
+        const percent = total > 0 ? Math.max(0, Math.min(100, Math.round((complete / total) * 100))) : 0;
+
+        progressBar.style.width = percent + '%';
+        progressText.textContent = percent + '% kész';
+        progressBar.setAttribute('aria-valuenow', String(percent));
+        if (progressHint) {
+          if (percent === 0) progressHint.textContent = 'Kezdje az alapadatokkal. A kitöltési állapot most 0%, mert az űrlap még tiszta lappal indul.';
+          else if (percent < 35) progressHint.textContent = 'Kezdje az alapadatokkal és az audit fókuszával. A többi blokk zárva marad, hogy ne legyen ijesztő a folyamat.';
+          else if (percent < 70) progressHint.textContent = 'Jó úton halad. A legértékesebb válaszok általában ott születnek, ahol a múlt, a jelen és a cél végre egy mondatba kerül.';
+          else if (percent < 100) progressHint.textContent = 'Már csak a kötelező jogi, számlázási és elfogadási pontok hiányozhatnak. A 96 órás audit innen tud tisztán elindulni.';
+          else progressHint.textContent = 'Minden kötelező pont kész. Beküldés után indulhat a 96 órás deep search alapú előkészítés.';
+        }
+      };
+
+      const validateCustomRules = () => {
+        clearAlert();
+        const fieldsToClear = [
+          'contactName','ownerFullName','companyName','companyWebsite','billingName','billingEmail','billingCountry','billingAddress','billingTaxNumber','billingEuVatId','terms_acknowledgement','commercial_acknowledgement'
+        ].map(id => document.getElementById(id)).filter(Boolean);
+        fieldsToClear.forEach(field => field.setCustomValidity(''));
+
+        const contactName = document.getElementById('contactName');
+        const selectedFocus = form.querySelectorAll('input[name="auditFocus"]:checked');
+        if (selectedFocus.length === 0) {
+          const msg = 'Kérjük, válasszon legalább egy audit fókuszt: személyes márka, cég/márka, AI-érthetőség vagy piaci cél.';
+          if (contactName) contactName.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(contactName || form.querySelector('input[name="auditFocus"]'));
+          return false;
+        }
+
+        const ownerFocus = document.getElementById('focus-owner');
+        const ownerFullName = document.getElementById('ownerFullName');
+        if (ownerFocus?.checked && ownerFullName && !ownerFullName.value.trim()) {
+          const msg = 'Személyes márka fókusz esetén kérjük, adja meg a tulajdonos / ügyvezető nevét.';
+          ownerFullName.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(ownerFullName);
+          return false;
+        }
+
+        const companyFocus = document.getElementById('focus-company');
+        const companyName = document.getElementById('companyName');
+        const companyWebsite = document.getElementById('companyWebsite');
+        if (companyFocus?.checked && companyName && companyWebsite && !companyName.value.trim() && !companyWebsite.value.trim()) {
+          const msg = 'Cég vagy márka fókusz esetén kérjük, adja meg legalább a cég/márka nevét vagy weboldalát.';
+          companyName.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(companyName);
+          return false;
+        }
+
+        const requiredBillingFields = [
+          [document.getElementById('billingName'), 'Kérjük, adja meg a számlázási nevet az esetleges szerződéskötéshez és számlázáshoz.'],
+          [document.getElementById('billingEmail'), 'Kérjük, adja meg a számlázási e-mail-címet.'],
+          [document.getElementById('billingCountry'), 'Kérjük, adja meg a számlázási országot.'],
+          [document.getElementById('billingAddress'), 'Kérjük, adja meg a számlázási címet.'],
+          [document.getElementById('billingTaxNumber'), 'Kérjük, adja meg a belföldi adószámot vagy írja be, hogy nincs.'],
+          [document.getElementById('billingEuVatId'), 'Kérjük, adja meg az EU-s adószámot, vagy írja be, hogy nincs / nem releváns.']
+        ];
+
+        for (const [field, message] of requiredBillingFields) {
+          if (field && !field.value.trim()) {
+            field.setCustomValidity(message);
+            showAlert(message);
+            openAndFocus(field);
+            return false;
+          }
+        }
+
+        const termsAcknowledgement = document.getElementById('terms_acknowledgement');
+        if (termsAcknowledgement && !termsAcknowledgement.checked) {
+          const msg = 'Kérjük, erősítse meg, hogy elfogadta az általános szakmai tanácsadási feltételeket.';
+          termsAcknowledgement.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(termsAcknowledgement);
+          return false;
+        }
+
+        const commercialAcknowledgement = document.getElementById('commercial_acknowledgement');
+        if (commercialAcknowledgement && !commercialAcknowledgement.checked) {
+          const msg = 'Kérjük, erősítse meg, hogy megértette: ez a felmérés 2 000 EUR szakmai értékű, de az előzetes egyeztetés alapján díjmentes; az esetleges későbbi megvalósítás külön ajánlat alapján történik.';
+          commercialAcknowledgement.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(commercialAcknowledgement);
+          return false;
+        }
+
+        return true;
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('sent') === '1') {
+        localStorage.removeItem(AUTOSAVE_KEY);
+        const message = document.getElementById('successMessage');
+        if (message) {
+          message.classList.add('show');
+          message.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+
+      if (form) {
+        setRuntimeMeta();
+        restoreFormState();
+        updateProgress();
+        form.addEventListener('input', () => { updateProgress(); saveDraft(); });
+        form.addEventListener('change', () => { updateProgress(); saveDraft(); });
+
+        form.addEventListener('submit', (event) => {
+          setRuntimeMeta();
+          if (!validateCustomRules() || !form.checkValidity()) {
+            event.preventDefault();
+            form.reportValidity();
+            updateProgress();
+            return;
+          }
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.dataset.originalText = submitButton.textContent;
+            submitButton.textContent = 'KÜLDÉS FOLYAMATBAN...';
+          }
+        });
+      }
+
+      if (resetButton && form) {
+        resetButton.addEventListener('click', () => {
+          form.reset();
+          localStorage.removeItem(AUTOSAVE_KEY);
+          clearAlert();
+          setAutosaveStatus('A helyi mentés törölve. Az űrlap tiszta lappal indul.');
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = submitButton.dataset.originalText || 'AUDIT ELINDÍTÁSA';
+          }
+          setRuntimeMeta();
+          updateProgress();
+        });
+      }
+
+
+      if (clearDraftButton) {
+        clearDraftButton.addEventListener('click', () => {
+          localStorage.removeItem(AUTOSAVE_KEY);
+          setAutosaveStatus('A helyi mentés törölve ebben a böngészőben.');
+        });
+      }
+
+      if (downloadPdfButton) {
+        downloadPdfButton.addEventListener('click', () => {
+          downloadAnswersAsPdf().catch((error) => {
+            console.error('PDF export failed', error);
+            showAlert('A PDF generálás nem sikerült. Próbálja meg újra, vagy használja a böngésző nyomtatás / mentés PDF-be funkcióját.');
+          });
+        });
+      }
+
+      const openPanel = (id) => {
+        const panel = document.getElementById(id);
+        if (!panel) return;
+        panel.open = true;
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      const privacyLink = document.getElementById('privacyLink');
+      if (privacyLink) {
+        privacyLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          openPanel('privacyPanel');
+        });
+      }
+
+      const impressumLink = document.getElementById('impressumLink');
+      if (impressumLink) {
+        impressumLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          openPanel('impressumPanel');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
