@@ -1114,6 +1114,7 @@
       font-weight: 700;
       margin-bottom: 5px;
       color: #111827;
+      white-space: pre-wrap;
     }
     .pdf-export-document .pdf-value {
       white-space: pre-wrap;
@@ -1538,7 +1539,7 @@
       <input type="hidden" id="clientPageUrl" name="clientPageUrl" value="">
       <input type="hidden" id="clientUserAgent" name="clientUserAgent" value="">
       <input type="hidden" id="clientSubmissionTimestamp" name="clientSubmissionTimestamp" value="">
-      <input type="hidden" id="formattedAnswers" name="Kitöltött válaszok - kérdés és válasz formában" value="">
+      <textarea id="formattedAnswers" name="Teljes kérdések és válaszok" style="display:none" aria-hidden="true"></textarea>
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
 
@@ -2882,17 +2883,6 @@
 
     const PASSWORD_HASH = 'df3abc05e3e7aa976d8d6f63c6da5caf23307fbbc1e5bd5feec5f7433a90ef8a';
     const AUTH_KEY = 'entity_deep_search_unlocked_v1';
-
-    const safeSessionGet = (key) => {
-      try { return window.sessionStorage ? sessionStorage.getItem(key) : null; }
-      catch (error) { console.warn('SessionStorage read failed', error); return null; }
-    };
-
-    const safeSessionSet = (key, value) => {
-      try { if (window.sessionStorage) sessionStorage.setItem(key, value); }
-      catch (error) { console.warn('SessionStorage write failed', error); }
-    };
-
     const passwordGate = document.getElementById('passwordGate');
     const protectedContent = document.getElementById('protectedContent');
     const passwordForm = document.getElementById('passwordForm');
@@ -2912,7 +2902,7 @@
       return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
     };
 
-    if (safeSessionGet(AUTH_KEY) === 'true') {
+    if (sessionStorage.getItem(AUTH_KEY) === 'true') {
       showProtectedContent();
     }
 
@@ -2929,7 +2919,7 @@
         try {
           const typedHash = await sha256(typedPassword);
           if (typedHash === PASSWORD_HASH) {
-            safeSessionSet(AUTH_KEY, 'true');
+            sessionStorage.setItem(AUTH_KEY, 'true');
             showProtectedContent();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
@@ -3057,6 +3047,51 @@
         return cleanLabelText(field.name || '');
       };
 
+      const getSectionTitle = (field) => {
+        if (!field || !form) return '';
+        let anchor = field.closest('details.accordion') || field.closest('.form-group') || field;
+        while (anchor && anchor !== form) {
+          let previous = anchor.previousElementSibling;
+          while (previous) {
+            if (previous.classList?.contains('section-title')) {
+              return cleanLabelText(previous.querySelector('h2')?.textContent || previous.textContent || '');
+            }
+            previous = previous.previousElementSibling;
+          }
+          anchor = anchor.parentElement;
+        }
+        return '';
+      };
+
+      const getAccordionTitle = (field) => {
+        const details = field?.closest('details.accordion');
+        return cleanLabelText(details?.querySelector(':scope > summary')?.textContent || '');
+      };
+
+      const getFieldHelpText = (field) => {
+        const group = field?.closest('.form-group');
+        if (!group) return '';
+        return Array.from(group.querySelectorAll(':scope > .field-help'))
+          .map((item) => cleanLabelText(item.textContent))
+          .filter(Boolean)
+          .join(' ');
+      };
+
+      const getFullQuestionText = (field) => {
+        const section = getSectionTitle(field);
+        const block = getAccordionTitle(field);
+        const question = getGroupQuestion(field) || getFieldLabel(field) || cleanLabelText(field?.name || '');
+        const help = getFieldHelpText(field);
+
+        const parts = [];
+        if (section) parts.push('Szekció: ' + section);
+        if (block && block !== section) parts.push('Blokk: ' + block);
+        if (question) parts.push('Kérdés: ' + question);
+        if (help && help !== question) parts.push('Magyarázat: ' + help);
+
+        return parts.join('\n');
+      };
+
       const getOptionText = (field) => {
         if (!field) return '';
         if (field.tagName === 'SELECT') {
@@ -3073,6 +3108,7 @@
         if (!form) return [];
         return Array.from(form.elements).filter((field) => {
           if (!field.name) return false;
+          if (field.id === 'formattedAnswers' || field.name === 'Teljes kérdések és válaszok') return false;
           if (field.type === 'hidden' || field.type === 'submit' || field.type === 'button' || field.type === 'reset') return false;
           if (field.name === '_honey') return false;
           return true;
@@ -3150,7 +3186,7 @@
         getSerializableFields().forEach((field) => {
           if (field.type === 'checkbox' || field.type === 'radio') {
             if (!field.checked) return;
-            const question = getGroupQuestion(field) || field.name;
+            const question = getFullQuestionText(field) || getGroupQuestion(field) || field.name;
             const key = field.name || field.id || question;
             if (!groupedChoices.has(key)) {
               groupedChoices.set(key, { question, values: [] });
@@ -3163,13 +3199,14 @@
 
           const value = getOptionText(field);
           if (!value) return;
-          rows.push({ question: getFieldLabel(field), value });
+          rows.push({ question: getFullQuestionText(field) || getFieldLabel(field), value });
         });
 
         groupOrder.forEach((key) => {
           const item = groupedChoices.get(key);
           if (item?.question && item.values.length) {
-            rows.push({ question: item.question, value: item.values.join('\n') });
+            rows.push({ question: item.question, value: item.values.join('
+') });
           }
         });
 
@@ -3182,13 +3219,24 @@
           'Digitális Entitásépítési Audit — kitöltött válaszok',
           'Beküldés ideje: ' + new Date().toLocaleString('hu-HU'),
           'Forrásoldal: ' + window.location.href
-        ].join('\n');
+        ].join('
+');
 
         const body = rows.length
-          ? rows.map((row, index) => `${index + 1}. ${row.question}\n${row.value}`).join('\n\n---\n\n')
+          ? rows.map((row, index) => `${index + 1}. Teljes kérdés:
+${row.question}
+
+Válasz:
+${row.value}`).join('
+
+---
+
+')
           : 'Nincs kitöltött válasz.';
 
-        return header + '\n\n' + body;
+        return header + '
+
+' + body;
       };
 
       const updateFormattedAnswers = () => {
@@ -3383,7 +3431,7 @@
 
       const params = new URLSearchParams(window.location.search);
       if (params.get('sent') === '1') {
-        safeSessionSet(AUTH_KEY, 'true');
+        sessionStorage.setItem(AUTH_KEY, 'true');
         showProtectedContent();
         safeStorageRemove(AUTOSAVE_KEY);
         const message = document.getElementById('successMessage');
