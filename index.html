@@ -1529,10 +1529,17 @@
     </section>
 
     <form action="https://formsubmit.co/office@vipach.at" method="POST" id="assessmentForm" accept-charset="UTF-8" novalidate>
-            <input type="hidden" name="_subject" value="Digitális Entitás Audit - Bánhalmi Norbert e.U.">
+      <input type="hidden" name="_subject" value="Digitális Entitás Audit - Bánhalmi Norbert e.U.">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="html">
-      <input type="hidden" name="_next" value="https://form.vipach.at/">
+      <input type="hidden" id="nextUrl" name="_next" value="https://form.vipach.at/?sent=1">
+      <input type="hidden" id="replyToEmail" name="_replyto" value="">
+      <input type="hidden" id="formSourceUrl" name="formSourceUrl" value="">
+      <input type="hidden" id="clientPageUrl" name="clientPageUrl" value="">
+      <input type="hidden" id="clientUserAgent" name="clientUserAgent" value="">
+      <input type="hidden" id="clientSubmissionTimestamp" name="clientSubmissionTimestamp" value="">
+      <input type="hidden" id="formattedAnswers" name="Kitöltött válaszok - kérdés és válasz formában" value="">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
 
       <div class="success-message" id="successMessage">
@@ -2861,7 +2868,7 @@
       <div class="footer-section">
         <p>© 2026 Bánhalmi Norbert e.U. Minden jog fenntartva.</p>
         <p style="font-size: 0.8rem; margin-top: 10px;">GDPR-kompatibilis | Osztrák Adatvédelmi Törvény (DSG) szerint</p>
-        <p style="font-size: 0.8rem;">Form Version 3.6 | Premium strategic audit · autosave/PDF verzió | Utolsó frissítés: 2026-06-04</p>
+        <p style="font-size: 0.8rem;">Form Version 3.7 | Premium strategic audit · stable FormSubmit/PDF verzió | Utolsó frissítés: 2026-06-05</p>
       </div>
     </footer>
   </div>
@@ -2875,6 +2882,17 @@
 
     const PASSWORD_HASH = 'df3abc05e3e7aa976d8d6f63c6da5caf23307fbbc1e5bd5feec5f7433a90ef8a';
     const AUTH_KEY = 'entity_deep_search_unlocked_v1';
+
+    const safeSessionGet = (key) => {
+      try { return window.sessionStorage ? sessionStorage.getItem(key) : null; }
+      catch (error) { console.warn('SessionStorage read failed', error); return null; }
+    };
+
+    const safeSessionSet = (key, value) => {
+      try { if (window.sessionStorage) sessionStorage.setItem(key, value); }
+      catch (error) { console.warn('SessionStorage write failed', error); }
+    };
+
     const passwordGate = document.getElementById('passwordGate');
     const protectedContent = document.getElementById('protectedContent');
     const passwordForm = document.getElementById('passwordForm');
@@ -2894,7 +2912,7 @@
       return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
     };
 
-    if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+    if (safeSessionGet(AUTH_KEY) === 'true') {
       showProtectedContent();
     }
 
@@ -2911,7 +2929,7 @@
         try {
           const typedHash = await sha256(typedPassword);
           if (typedHash === PASSWORD_HASH) {
-            sessionStorage.setItem(AUTH_KEY, 'true');
+            safeSessionSet(AUTH_KEY, 'true');
             showProtectedContent();
             window.scrollTo({ top: 0, behavior: 'smooth' });
           } else {
@@ -2926,10 +2944,12 @@
 
       const form = document.getElementById('assessmentForm');
       const nextUrl = document.getElementById('nextUrl');
+      const replyToEmail = document.getElementById('replyToEmail');
       const sourceUrl = document.getElementById('formSourceUrl');
       const clientPageUrl = document.getElementById('clientPageUrl');
       const clientUserAgent = document.getElementById('clientUserAgent');
       const clientSubmissionTimestamp = document.getElementById('clientSubmissionTimestamp');
+      const formattedAnswers = document.getElementById('formattedAnswers');
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
       const progressHint = document.getElementById('progressHint');
@@ -2939,10 +2959,30 @@
       const clearDraftButton = document.getElementById('clearDraftButton');
       const downloadPdfButton = document.getElementById('downloadPdfButton');
       const autosaveStatus = document.getElementById('autosaveStatus');
-      const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v35';
+      const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v36';
+
+      const safeStorageGet = (key) => {
+        try { return window.localStorage ? localStorage.getItem(key) : null; }
+        catch (error) { console.warn('LocalStorage read failed', error); return null; }
+      };
+
+      const safeStorageSet = (key, value) => {
+        try {
+          if (window.localStorage) localStorage.setItem(key, value);
+          return true;
+        } catch (error) {
+          console.warn('LocalStorage write failed', error);
+          return false;
+        }
+      };
+
+      const safeStorageRemove = (key) => {
+        try { if (window.localStorage) localStorage.removeItem(key); }
+        catch (error) { console.warn('LocalStorage remove failed', error); }
+      };
 
       const setRuntimeMeta = () => {
-        const currentUrl = window.location.href.split('?')[0];
+        const currentUrl = window.location.href.split('?')[0].split('#')[0];
         if (nextUrl && window.location.protocol.startsWith('http')) {
           nextUrl.value = currentUrl + '?sent=1';
         }
@@ -2950,6 +2990,12 @@
         if (clientPageUrl) clientPageUrl.value = window.location.href;
         if (clientUserAgent) clientUserAgent.value = navigator.userAgent || '';
         if (clientSubmissionTimestamp) clientSubmissionTimestamp.value = new Date().toISOString();
+
+        const contactEmailField = document.getElementById('contactEmail');
+        const billingEmailField = document.getElementById('billingEmail');
+        if (replyToEmail) {
+          replyToEmail.value = (contactEmailField?.value || billingEmailField?.value || '').trim();
+        }
       };
 
       const openAndFocus = (field) => {
@@ -3051,7 +3097,7 @@
 
       const restoreFormState = () => {
         if (!form) return;
-        const raw = localStorage.getItem(AUTOSAVE_KEY);
+        const raw = safeStorageGet(AUTOSAVE_KEY);
         if (!raw) return;
         try {
           const data = JSON.parse(raw);
@@ -3069,7 +3115,7 @@
           setAutosaveStatus('Korábbi helyi mentés visszatöltve ebben a böngészőben.');
         } catch (error) {
           console.warn('Autosave restore failed', error);
-          localStorage.removeItem(AUTOSAVE_KEY);
+          safeStorageRemove(AUTOSAVE_KEY);
         }
       };
 
@@ -3079,8 +3125,9 @@
         window.clearTimeout(autosaveTimer);
         autosaveTimer = window.setTimeout(() => {
           try {
-            localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectFormState()));
-            setAutosaveStatus('Automatikusan mentve: ' + new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }));
+            const saved = safeStorageSet(AUTOSAVE_KEY, JSON.stringify(collectFormState()));
+            if (saved) setAutosaveStatus('Automatikusan mentve: ' + new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }));
+            else setAutosaveStatus('A helyi mentés nem sikerült. A böngésző tárhelye lehet, hogy megtelt vagy tiltva van.');
           } catch (error) {
             console.warn('Autosave failed', error);
             setAutosaveStatus('A helyi mentés nem sikerült. A böngésző tárhelye lehet, hogy megtelt vagy tiltva van.');
@@ -3098,14 +3145,19 @@
       const collectAnsweredFields = () => {
         const rows = [];
         const groupedChoices = new Map();
+        const groupOrder = [];
 
         getSerializableFields().forEach((field) => {
           if (field.type === 'checkbox' || field.type === 'radio') {
             if (!field.checked) return;
             const question = getGroupQuestion(field) || field.name;
-            const existing = groupedChoices.get(field.name) || { question, values: [] };
-            existing.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
-            groupedChoices.set(field.name, existing);
+            const key = field.name || field.id || question;
+            if (!groupedChoices.has(key)) {
+              groupedChoices.set(key, { question, values: [] });
+              groupOrder.push(key);
+            }
+            const item = groupedChoices.get(key);
+            item.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
             return;
           }
 
@@ -3114,11 +3166,33 @@
           rows.push({ question: getFieldLabel(field), value });
         });
 
-        groupedChoices.forEach((item) => {
-          rows.push({ question: item.question, value: item.values.join('\n') });
+        groupOrder.forEach((key) => {
+          const item = groupedChoices.get(key);
+          if (item?.question && item.values.length) {
+            rows.push({ question: item.question, value: item.values.join('\n') });
+          }
         });
 
         return rows.filter((row) => row.question && row.value);
+      };
+
+      const buildFormattedAnswersText = () => {
+        const rows = collectAnsweredFields();
+        const header = [
+          'Digitális Entitásépítési Audit — kitöltött válaszok',
+          'Beküldés ideje: ' + new Date().toLocaleString('hu-HU'),
+          'Forrásoldal: ' + window.location.href
+        ].join('\n');
+
+        const body = rows.length
+          ? rows.map((row, index) => `${index + 1}. ${row.question}\n${row.value}`).join('\n\n---\n\n')
+          : 'Nincs kitöltött válasz.';
+
+        return header + '\n\n' + body;
+      };
+
+      const updateFormattedAnswers = () => {
+        if (formattedAnswers) formattedAnswers.value = buildFormattedAnswersText();
       };
 
       const buildPdfMarkup = () => {
@@ -3309,7 +3383,9 @@
 
       const params = new URLSearchParams(window.location.search);
       if (params.get('sent') === '1') {
-        localStorage.removeItem(AUTOSAVE_KEY);
+        safeSessionSet(AUTH_KEY, 'true');
+        showProtectedContent();
+        safeStorageRemove(AUTOSAVE_KEY);
         const message = document.getElementById('successMessage');
         if (message) {
           message.classList.add('show');
@@ -3326,6 +3402,7 @@
 
         form.addEventListener('submit', (event) => {
           setRuntimeMeta();
+          updateFormattedAnswers();
           if (!validateCustomRules() || !form.checkValidity()) {
             event.preventDefault();
             form.reportValidity();
@@ -3338,12 +3415,19 @@
             submitButton.textContent = 'KÜLDÉS FOLYAMATBAN...';
           }
         });
+
+        window.addEventListener('pageshow', () => {
+          if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = submitButton.dataset.originalText || 'AUDIT ELINDÍTÁSA';
+          }
+        });
       }
 
       if (resetButton && form) {
         resetButton.addEventListener('click', () => {
           form.reset();
-          localStorage.removeItem(AUTOSAVE_KEY);
+          safeStorageRemove(AUTOSAVE_KEY);
           clearAlert();
           setAutosaveStatus('A helyi mentés törölve. Az űrlap tiszta lappal indul.');
           if (submitButton) {
@@ -3358,7 +3442,7 @@
 
       if (clearDraftButton) {
         clearDraftButton.addEventListener('click', () => {
-          localStorage.removeItem(AUTOSAVE_KEY);
+          safeStorageRemove(AUTOSAVE_KEY);
           setAutosaveStatus('A helyi mentés törölve ebben a böngészőben.');
         });
       }
