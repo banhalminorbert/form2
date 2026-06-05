@@ -1114,7 +1114,6 @@
       font-weight: 700;
       margin-bottom: 5px;
       color: #111827;
-      white-space: pre-wrap;
     }
     .pdf-export-document .pdf-value {
       white-space: pre-wrap;
@@ -1530,7 +1529,7 @@
     </section>
 
     <form action="https://formsubmit.co/office@vipach.at" method="POST" id="assessmentForm" accept-charset="UTF-8" novalidate>
-      <input type="hidden" name="_subject" value="Digitális Entitás Audit - Bánhalmi Norbert e.U.">
+            <input type="hidden" name="_subject" value="Digitális Entitás Audit - Bánhalmi Norbert e.U.">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_template" value="html">
       <input type="hidden" id="nextUrl" name="_next" value="https://form.vipach.at/?sent=1">
@@ -2869,7 +2868,6 @@
       <div class="footer-section">
         <p>© 2026 Bánhalmi Norbert e.U. Minden jog fenntartva.</p>
         <p style="font-size: 0.8rem; margin-top: 10px;">GDPR-kompatibilis | Osztrák Adatvédelmi Törvény (DSG) szerint</p>
-        <p style="font-size: 0.8rem;">Form Version 3.7 | Premium strategic audit · stable FormSubmit/PDF verzió | Utolsó frissítés: 2026-06-05</p>
       </div>
     </footer>
   </div>
@@ -2934,12 +2932,10 @@
 
       const form = document.getElementById('assessmentForm');
       const nextUrl = document.getElementById('nextUrl');
-      const replyToEmail = document.getElementById('replyToEmail');
       const sourceUrl = document.getElementById('formSourceUrl');
       const clientPageUrl = document.getElementById('clientPageUrl');
       const clientUserAgent = document.getElementById('clientUserAgent');
       const clientSubmissionTimestamp = document.getElementById('clientSubmissionTimestamp');
-      const formattedAnswers = document.getElementById('formattedAnswers');
       const progressBar = document.getElementById('progressBar');
       const progressText = document.getElementById('progressText');
       const progressHint = document.getElementById('progressHint');
@@ -2949,30 +2945,10 @@
       const clearDraftButton = document.getElementById('clearDraftButton');
       const downloadPdfButton = document.getElementById('downloadPdfButton');
       const autosaveStatus = document.getElementById('autosaveStatus');
-      const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v36';
-
-      const safeStorageGet = (key) => {
-        try { return window.localStorage ? localStorage.getItem(key) : null; }
-        catch (error) { console.warn('LocalStorage read failed', error); return null; }
-      };
-
-      const safeStorageSet = (key, value) => {
-        try {
-          if (window.localStorage) localStorage.setItem(key, value);
-          return true;
-        } catch (error) {
-          console.warn('LocalStorage write failed', error);
-          return false;
-        }
-      };
-
-      const safeStorageRemove = (key) => {
-        try { if (window.localStorage) localStorage.removeItem(key); }
-        catch (error) { console.warn('LocalStorage remove failed', error); }
-      };
+      const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v35';
 
       const setRuntimeMeta = () => {
-        const currentUrl = window.location.href.split('?')[0].split('#')[0];
+        const currentUrl = window.location.href.split('?')[0];
         if (nextUrl && window.location.protocol.startsWith('http')) {
           nextUrl.value = currentUrl + '?sent=1';
         }
@@ -2980,12 +2956,6 @@
         if (clientPageUrl) clientPageUrl.value = window.location.href;
         if (clientUserAgent) clientUserAgent.value = navigator.userAgent || '';
         if (clientSubmissionTimestamp) clientSubmissionTimestamp.value = new Date().toISOString();
-
-        const contactEmailField = document.getElementById('contactEmail');
-        const billingEmailField = document.getElementById('billingEmail');
-        if (replyToEmail) {
-          replyToEmail.value = (contactEmailField?.value || billingEmailField?.value || '').trim();
-        }
       };
 
       const openAndFocus = (field) => {
@@ -3047,51 +3017,6 @@
         return cleanLabelText(field.name || '');
       };
 
-      const getSectionTitle = (field) => {
-        if (!field || !form) return '';
-        let anchor = field.closest('details.accordion') || field.closest('.form-group') || field;
-        while (anchor && anchor !== form) {
-          let previous = anchor.previousElementSibling;
-          while (previous) {
-            if (previous.classList?.contains('section-title')) {
-              return cleanLabelText(previous.querySelector('h2')?.textContent || previous.textContent || '');
-            }
-            previous = previous.previousElementSibling;
-          }
-          anchor = anchor.parentElement;
-        }
-        return '';
-      };
-
-      const getAccordionTitle = (field) => {
-        const details = field?.closest('details.accordion');
-        return cleanLabelText(details?.querySelector(':scope > summary')?.textContent || '');
-      };
-
-      const getFieldHelpText = (field) => {
-        const group = field?.closest('.form-group');
-        if (!group) return '';
-        return Array.from(group.querySelectorAll(':scope > .field-help'))
-          .map((item) => cleanLabelText(item.textContent))
-          .filter(Boolean)
-          .join(' ');
-      };
-
-      const getFullQuestionText = (field) => {
-        const section = getSectionTitle(field);
-        const block = getAccordionTitle(field);
-        const question = getGroupQuestion(field) || getFieldLabel(field) || cleanLabelText(field?.name || '');
-        const help = getFieldHelpText(field);
-
-        const parts = [];
-        if (section) parts.push('Szekció: ' + section);
-        if (block && block !== section) parts.push('Blokk: ' + block);
-        if (question) parts.push('Kérdés: ' + question);
-        if (help && help !== question) parts.push('Magyarázat: ' + help);
-
-        return parts.join('\n');
-      };
-
       const getOptionText = (field) => {
         if (!field) return '';
         if (field.tagName === 'SELECT') {
@@ -3108,7 +3033,6 @@
         if (!form) return [];
         return Array.from(form.elements).filter((field) => {
           if (!field.name) return false;
-          if (field.id === 'formattedAnswers' || field.name === 'Teljes kérdések és válaszok') return false;
           if (field.type === 'hidden' || field.type === 'submit' || field.type === 'button' || field.type === 'reset') return false;
           if (field.name === '_honey') return false;
           return true;
@@ -3133,7 +3057,7 @@
 
       const restoreFormState = () => {
         if (!form) return;
-        const raw = safeStorageGet(AUTOSAVE_KEY);
+        const raw = localStorage.getItem(AUTOSAVE_KEY);
         if (!raw) return;
         try {
           const data = JSON.parse(raw);
@@ -3151,7 +3075,7 @@
           setAutosaveStatus('Korábbi helyi mentés visszatöltve ebben a böngészőben.');
         } catch (error) {
           console.warn('Autosave restore failed', error);
-          safeStorageRemove(AUTOSAVE_KEY);
+          localStorage.removeItem(AUTOSAVE_KEY);
         }
       };
 
@@ -3161,9 +3085,8 @@
         window.clearTimeout(autosaveTimer);
         autosaveTimer = window.setTimeout(() => {
           try {
-            const saved = safeStorageSet(AUTOSAVE_KEY, JSON.stringify(collectFormState()));
-            if (saved) setAutosaveStatus('Automatikusan mentve: ' + new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }));
-            else setAutosaveStatus('A helyi mentés nem sikerült. A böngésző tárhelye lehet, hogy megtelt vagy tiltva van.');
+            localStorage.setItem(AUTOSAVE_KEY, JSON.stringify(collectFormState()));
+            setAutosaveStatus('Automatikusan mentve: ' + new Date().toLocaleTimeString('hu-HU', { hour: '2-digit', minute: '2-digit' }));
           } catch (error) {
             console.warn('Autosave failed', error);
             setAutosaveStatus('A helyi mentés nem sikerült. A böngésző tárhelye lehet, hogy megtelt vagy tiltva van.');
@@ -3181,66 +3104,27 @@
       const collectAnsweredFields = () => {
         const rows = [];
         const groupedChoices = new Map();
-        const groupOrder = [];
 
         getSerializableFields().forEach((field) => {
           if (field.type === 'checkbox' || field.type === 'radio') {
             if (!field.checked) return;
-            const question = getFullQuestionText(field) || getGroupQuestion(field) || field.name;
-            const key = field.name || field.id || question;
-            if (!groupedChoices.has(key)) {
-              groupedChoices.set(key, { question, values: [] });
-              groupOrder.push(key);
-            }
-            const item = groupedChoices.get(key);
-            item.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
+            const question = getGroupQuestion(field) || field.name;
+            const existing = groupedChoices.get(field.name) || { question, values: [] };
+            existing.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
+            groupedChoices.set(field.name, existing);
             return;
           }
 
           const value = getOptionText(field);
           if (!value) return;
-          rows.push({ question: getFullQuestionText(field) || getFieldLabel(field), value });
+          rows.push({ question: getFieldLabel(field), value });
         });
 
-        groupOrder.forEach((key) => {
-          const item = groupedChoices.get(key);
-          if (item?.question && item.values.length) {
-            rows.push({ question: item.question, value: item.values.join('
-') });
-          }
+        groupedChoices.forEach((item) => {
+          rows.push({ question: item.question, value: item.values.join('\n') });
         });
 
         return rows.filter((row) => row.question && row.value);
-      };
-
-      const buildFormattedAnswersText = () => {
-        const rows = collectAnsweredFields();
-        const header = [
-          'Digitális Entitásépítési Audit — kitöltött válaszok',
-          'Beküldés ideje: ' + new Date().toLocaleString('hu-HU'),
-          'Forrásoldal: ' + window.location.href
-        ].join('
-');
-
-        const body = rows.length
-          ? rows.map((row, index) => `${index + 1}. Teljes kérdés:
-${row.question}
-
-Válasz:
-${row.value}`).join('
-
----
-
-')
-          : 'Nincs kitöltött válasz.';
-
-        return header + '
-
-' + body;
-      };
-
-      const updateFormattedAnswers = () => {
-        if (formattedAnswers) formattedAnswers.value = buildFormattedAnswersText();
       };
 
       const buildPdfMarkup = () => {
@@ -3251,6 +3135,25 @@ ${row.value}`).join('
           ? rows.map((row) => `<div class="pdf-answer"><span class="pdf-question">${escapeHtml(row.question)}</span><div class="pdf-value">${escapeHtml(row.value)}</div></div>`).join('')
           : '<p>Nincs még kitöltött válasz.</p>';
         return `<div class="pdf-export-document"><h1>${escapeHtml(title)}</h1><div class="pdf-meta">${escapeHtml(meta)}</div>${content}</div>`;
+      };
+
+      const buildFormattedAnswersText = () => {
+        const rows = collectAnsweredFields();
+        const header = [
+          'Digitális Entitásépítési Audit — kitöltött válaszok',
+          'Beküldés ideje: ' + new Date().toLocaleString('hu-HU'),
+          'Forrásoldal: ' + window.location.href
+        ].join('\n');
+
+        const body = rows.length
+          ? rows.map((row, index) => `${index + 1}. Kérdés:\n${row.question}\n\nVálasz:\n${row.value}`).join('\n\n---\n\n')
+          : 'Nincs kitöltött válasz.';
+
+        return header + '\n\n' + body;
+      };
+
+      const updateFormattedAnswers = () => {
+        if (formattedAnswers) formattedAnswers.value = buildFormattedAnswersText();
       };
 
       const downloadAnswersAsPdf = async () => {
@@ -3431,9 +3334,7 @@ ${row.value}`).join('
 
       const params = new URLSearchParams(window.location.search);
       if (params.get('sent') === '1') {
-        sessionStorage.setItem(AUTH_KEY, 'true');
-        showProtectedContent();
-        safeStorageRemove(AUTOSAVE_KEY);
+        localStorage.removeItem(AUTOSAVE_KEY);
         const message = document.getElementById('successMessage');
         if (message) {
           message.classList.add('show');
@@ -3463,19 +3364,12 @@ ${row.value}`).join('
             submitButton.textContent = 'KÜLDÉS FOLYAMATBAN...';
           }
         });
-
-        window.addEventListener('pageshow', () => {
-          if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = submitButton.dataset.originalText || 'AUDIT ELINDÍTÁSA';
-          }
-        });
       }
 
       if (resetButton && form) {
         resetButton.addEventListener('click', () => {
           form.reset();
-          safeStorageRemove(AUTOSAVE_KEY);
+          localStorage.removeItem(AUTOSAVE_KEY);
           clearAlert();
           setAutosaveStatus('A helyi mentés törölve. Az űrlap tiszta lappal indul.');
           if (submitButton) {
@@ -3490,7 +3384,7 @@ ${row.value}`).join('
 
       if (clearDraftButton) {
         clearDraftButton.addEventListener('click', () => {
-          safeStorageRemove(AUTOSAVE_KEY);
+          localStorage.removeItem(AUTOSAVE_KEY);
           setAutosaveStatus('A helyi mentés törölve ebben a böngészőben.');
         });
       }
