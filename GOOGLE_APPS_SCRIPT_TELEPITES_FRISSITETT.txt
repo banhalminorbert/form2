@@ -1,0 +1,34 @@
+GOOGLE WORKSPACE / GOOGLE APPS SCRIPT TELEPÍTÉS
+
+1) Nyisd meg: https://script.google.com
+2) New project / Új projekt
+3) Töröld a meglévő kódot, majd illeszd be a google-apps-script-Code.gs tartalmát.
+4) Ellenőrizd a CONFIG.RECIPIENT_EMAIL sort:
+   RECIPIENT_EMAIL: 'office@vipach.at'
+5) Futtasd egyszer a testSetup() függvényt.
+   - Engedélyezd a jogosultságokat.
+   - Nézd meg, hogy megérkezik-e a teszt email az office@vipach.at címre.
+   - A script létrehoz egy Google Sheet archívumot is.
+6) Deploy / Telepítés -> New deployment / Új telepítés
+   - Type: Web app
+   - Execute as: Me / Én
+   - Who has access: Anyone / Bárki
+7) Másold ki a Web app URL-t. Ilyen formátumú lesz:
+   https://script.google.com/macros/s/.../exec
+8) Nyisd meg az index-google-apps-script.html fájlt, és keresd ezt:
+   https://script.google.com/macros/s/IDE_ILESZD_BE_A_GOOGLE_APPS_SCRIPT_WEB_APP_URLT/exec
+   Cseréld le a saját Web app URL-edre.
+9) Töltsd fel az index-google-apps-script.html fájlt a form.vipach.at oldalra index.html néven.
+10) Teszteld egy rövid beküldéssel.
+
+Fontos:
+- A válaszok a Google Sheetben is megmaradnak, ezért nem csak emailre támaszkodik a rendszer.
+- Ha átírod a scriptet, a Deploy -> Manage deployments alatt új verziót kell publikálni.
+- Élesítés után a Code.gs-ben a STRICT_SOURCE_CHECK átállítható true-ra.
+
+
+ÉLES WEB APP URL BEÁLLÍTVA AZ HTML-BEN:
+https://script.google.com/macros/s/AKfycbzBg2mqGap0S3vJpyEeHx_awSHYsCBMY_elTMq0HOlTJ7yOypdpuAfny88H0r3YaV1ILg/exec
+
+GDPR megjegyzés:
+Az HTML adatvédelmi tájékoztatója frissítve lett: a beküldés Google Workspace / Google Apps Script / Google Sheets technikai feldolgozáson keresztül történik, FormSubmit nélkül.
