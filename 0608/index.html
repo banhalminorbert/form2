@@ -336,6 +336,46 @@ footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
 @media(max-width:640px){.dgrid{grid-template-columns:1fr}.rgrid{grid-template-columns:1fr}.ogrid{grid-template-columns:1fr}}
 @media(max-width:560px){.hfinds{grid-template-columns:1fr}.hmeta{gap:1rem}.nacts{display:none}}
 @media print{#lock,nav,#wizard,#expsec,.hcta,.expb{display:none!important}#main{display:block!important}#gsum{display:block!important}.orb{display:none}body{background:white}.riscard,.decc,.dc,.ablock{break-inside:avoid;box-shadow:none}footer{background:white}footer *{color:#444!important}.salt,.sblush,.sameth{background:white}}
+
+/* V5 strategic execution additions */
+.exec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.25rem;margin-top:2rem}
+.exec-card{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.5rem;box-shadow:var(--sh-xs)}
+.exec-card h4{margin-bottom:.75rem}
+.exec-card p,.exec-card li{font-size:.82rem;line-height:1.62}
+.exec-list{list-style:none;margin:0;padding:0}
+.exec-list li{padding:.55rem 0 .55rem 1.1rem;border-bottom:1px solid var(--bd);position:relative;color:var(--t2)}
+.exec-list li:last-child{border-bottom:none}
+.exec-list li::before{content:'→';position:absolute;left:0;color:var(--rose)}
+.status-dot{display:inline-flex;align-items:center;gap:.35rem;font-family:'Josefin Sans',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:100px;padding:.22rem .55rem;border:1px solid var(--bd);white-space:nowrap}
+.status-high{background:var(--bad-bg);color:var(--bad)}
+.status-mid{background:var(--warn-bg);color:var(--warn)}
+.status-good{background:var(--ok-bg);color:var(--ok)}
+.status-info{background:var(--info-bg);color:var(--info)}
+.compact-table td,.compact-table th{font-size:.78rem;vertical-align:top}
+.print-focus{background:linear-gradient(135deg,rgba(184,84,112,.06),rgba(124,82,191,.06));border:1px solid var(--bd2);border-radius:18px;padding:2rem;margin:2.5rem 0}
+@media print{.exec-card{break-inside:avoid;box-shadow:none}.print-focus{break-inside:avoid}}
+
+
+/* V6 international research additions */
+.country-head{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;margin:2.4rem 0 1rem;padding-bottom:.7rem;border-bottom:1px solid var(--bd2)}
+.country-head h3{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.4rem);margin:0}
+.country-head span{font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--t3);white-space:nowrap;margin-top:.4rem}
+.company-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1rem;margin-top:1rem}
+.company-card{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.35rem;box-shadow:var(--sh-xs);break-inside:avoid}
+.company-card h4{margin:0 0 .35rem;font-size:1rem}
+.company-card a{font-size:.78rem;word-break:break-word}
+.company-meta{display:flex;flex-wrap:wrap;gap:.35rem;margin:.65rem 0}
+.company-card p{font-size:.82rem;line-height:1.6;margin:.5rem 0;color:var(--t2)}
+.company-card .offer{font-size:.8rem;background:rgba(184,84,112,.06);border:1px solid var(--bd);border-radius:12px;padding:.65rem;margin-top:.7rem;color:var(--t1)}
+.lead-score{font-size:2.4rem;font-family:'Cormorant Garamond',serif;font-weight:700;color:var(--rose)}
+.lead-box{background:var(--white);border:1px solid var(--bd);border-radius:18px;padding:1.6rem;box-shadow:var(--sh-xs)}
+.source-note{font-size:.74rem;color:var(--t3);line-height:1.55;margin-top:.6rem}
+.priority-a{background:var(--ok-bg);color:var(--ok);border-color:rgba(36,134,95,.25)}
+.priority-b{background:var(--warn-bg);color:var(--warn);border-color:rgba(181,126,45,.25)}
+.priority-c{background:var(--info-bg);color:var(--info);border-color:rgba(54,111,164,.25)}
+.priority-risk{background:var(--bad-bg);color:var(--bad);border-color:rgba(173,58,76,.25)}
+@media print{.company-card,.lead-box{box-shadow:none;break-inside:avoid}.country-head{break-after:avoid}}
+
 </style>
 </head>
 <body>
@@ -407,7 +447,7 @@ footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
     <li><a href="#hero">Összefoglaló</a></li><li><a href="#method">Módszertan</a></li><li><a href="#dash">Dashboard</a></li>
     <li><a href="#audit">Audit</a></li><li><a href="#wizard">Stratégia</a></li>
     <li><a href="#routes">Útvonalak</a></li><li><a href="#timeline">Ütemterv</a></li>
-    <li><a href="#dec">Döntések</a></li>
+    <li><a href="#dec">Döntések</a></li><li><a href="#execution-layer">V5</a></li><li><a href="#international-research">Kutatás</a></li>
   </ul>
   <div class="nacts">
     <button class="nbtn nbtn-o" onclick="saveLoc()">
@@ -423,7 +463,7 @@ footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
   <a href="#hero" onclick="clsMenu()">Összefoglaló</a><a href="#method" onclick="clsMenu()">Módszertan</a><a href="#dash" onclick="clsMenu()">Dashboard</a>
   <a href="#audit" onclick="clsMenu()">Audit</a><a href="#wizard" onclick="clsMenu()">Stratégia</a>
   <a href="#routes" onclick="clsMenu()">Útvonalak</a><a href="#timeline" onclick="clsMenu()">Ütemterv</a>
-  <a href="#dec" onclick="clsMenu()">Döntések</a>
+  <a href="#dec" onclick="clsMenu()">Döntések</a><a href="#execution-layer" onclick="clsMenu()">V5 végrehajtás</a><a href="#international-research" onclick="clsMenu()">Nemzetközi kutatás</a>
   <a href="#" onclick="window.print();clsMenu()">PDF mentés</a>
 </div>
 
@@ -907,6 +947,916 @@ footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
 </div>
 <div class="divhr"></div>
 
+
+
+<!-- V6 INTERNATIONAL MARKET RESEARCH -->
+<div id="international-research" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">V6 nemzetközi célpiaci kutatás</div>
+    <h2>Kiknek lehet érdekes a weboldalon szereplő anyagportfólió?</h2>
+    <p class="lead">A feltöltött weboldal termékstruktúrája alapján a Raw Materials Trade portfóliójában 126 termékrekord szerepel. A hangsúly az ipari vegyi anyagokon, food és feed alapanyagokon, de-icing termékeken, valamint B2B dokumentációs igényeken van. A kutatás célja nem végleges vevőlista, hanem azonnal indítható, országonként priorizált célvállalati térkép.</p>
+
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Legerősebb terméklogika</h4><ul class="exec-list"><li>Ipari vegyi anyagok: savak, lúgok, sók, oldószerek, foszfátok, cink- és mangánvegyületek.</li><li>Food alapanyagok: savak, foszfátok, sók, glicerin, glikolok, aszkorbinsav.</li><li>Feed anyagok: ásványi komponensek, nyomelemek, propionsav, glycerin, MPG.</li><li>De-icing: kalcium-klorid, magnézium-klorid, útszóró só, zeolit.</li></ul></div>
+      <div class="exec-card"><h4>Legjobb céliparágak</h4><ul class="exec-list"><li>Home care és tisztítószer-gyártók</li><li>Flux, galvanizálás, brazing és fémkezelés</li><li>Élelmiszeripari és takarmányipari gyártók</li><li>Építőipari vegyi anyagok, ragasztók, tömítők</li><li>Water treatment és ipari szolgáltatók</li><li>Kémiai disztribútorok / channel partnerek</li></ul></div>
+      <div class="exec-card"><h4>Legjobb első ajánlat</h4><ul class="exec-list"><li>Nem általános katalógus, hanem 1–3 fókusztermék.</li><li>CoA / TDS / SDS dokumentációs fegyelem kiemelése.</li><li>Rugalmas közép-európai sourcing és gyors válaszidő.</li><li>Éves supply opció, ha van mennyiségi igény.</li><li>KYC és fizetési kontroll minden új külföldi leadnél.</li></ul></div>
+    </div>
+
+    <div class="call call-r" style="margin-top:2rem">
+      <div class="ctit">Szigorú megállapítás</div>
+      <p>A weboldal nemzetközi leadeket hozhat, de a siker nem a cégek számán múlik. Az első 90 napban az a cél, hogy 30–50 jól kiválasztott célpontból kiderüljön, melyik termékkategória és üzenet hoz valós, fizetőképes érdeklődést.</p>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V6 INBOUND LEAD ANALYSIS -->
+<div id="inbound-lead-analysis" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">A két beérkezett webes megkeresés elemzése</div>
+    <h2>Mit tanítanak az első inbound leadek?</h2>
+
+    <div class="exec-grid" style="margin-top:2rem">
+      <div class="lead-box">
+        <h3>Lead 1 — Franciaország / STTS-profil</h3>
+        <div class="lead-score">8/10</div>
+        <p><strong>Lead-minőség:</strong> erős. Konkrét termék, CAS-szám, éves mennyiség, iparág és dokumentumigény szerepel. Az ammonium chloride anti-caking agent nélkül közvetlenül releváns lehet brazing / soldering / flux alkalmazásokhoz.</p>
+        <p><strong>Stratégiai jelentés:</strong> a weboldal már képes olyan konkrét ipari igényt generálni, amely nem katalóguskérés, hanem potenciális termékszintű beszerzési folyamat.</p>
+        <p><strong>Következő lépés:</strong> 24 órán belüli angol válasz, technikai visszakérdezés: grade, packaging, purity, anti-caking elvárás, annual delivery schedule, Incoterms, fizetési feltétel, CoA minta.</p>
+        <div class="offer"><strong>Ajánlott válaszpozíció:</strong> „We can check availability for anti-caking-free ammonium chloride and confirm documentation, packaging and annual supply options after specification confirmation.”</div>
+      </div>
+
+      <div class="lead-box">
+        <h3>Lead 2 — UAE / Daccko Trading néven érkezett megkeresés</h3>
+        <div class="lead-score">3/10</div>
+        <p><strong>Lead-minőség:</strong> gyenge-közepes. A megkeresés általános, termék nincs konkrétan megadva, katalógust, MOQ-t, fizetési feltételeket és FOB árat kér. A cég nyilvános ellenőrizhetősége a rendelkezésre álló adatok alapján nem elég erős.</p>
+        <p><strong>Stratégiai jelentés:</strong> nem eldobandó, de nem szabad részletes árakat vagy érzékeny beszállítói információt küldeni előzetes KYC nélkül. MENA channel partnerként csak akkor értékes, ha igazolható a cég, a domain, a kereskedelmi múlt és a konkrét termékkör.</p>
+        <p><strong>Következő lépés:</strong> udvarias válasz általános cégbemutatóval, majd kérni: pontos terméklista, éves volumen, felhasználási iparág, company registration, VAT/TRN, weboldal, end-customer vagy trader szerep tisztázása.</p>
+        <div class="offer"><strong>Ajánlott válaszpozíció:</strong> „Please specify the exact products and annual volumes you are looking for, and share your company registration details so we can evaluate a possible B2B cooperation.”</div>
+      </div>
+    </div>
+
+    <div class="call call-d" style="margin-top:2rem">
+      <div class="ctit">Tanulság</div>
+      <p>Az első lead valódi termékkategória-validációt adhat: ammonium chloride / flux / fémkezelés. A második inkább sales-kontroll teszt: képes-e a cég kiszűrni az általános, esetleg gyenge minőségű nemzetközi megkereséseket anélkül, hogy időt vagy reputációt veszít.</p>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V6 COUNTRY TARGET LIST -->
+<div id="country-targets" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Országonkénti célvállalati lista</div>
+    <h2>Most megkereshető cégek, ajánlati iránnyal</h2>
+    <p class="lead">A lista nem azt jelenti, hogy minden cég biztos vevő. A cél az, hogy legyen egy első, ellenőrizhető, priorizált nemzetközi outreach-lista, amelyből 30–90 nap alatt mérhető, mely piac és termékkategória reagál.</p>
+    
+    <div class="country-head"><h3>Ausztria</h3><span>3 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Hagleitner Hygiene International GmbH</h4>
+          <a href="https://www.hagleitner.com/" target="_blank" rel="noopener">https://www.hagleitner.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Home care, hygiene, cleaning, disinfectants</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Ausztriai, saját gyártással működő higiéniai és tisztítószeres szereplő. A Raw Materials Trade home care, cleaning raw material, basic/specialty chemical és dokumentációs ajánlata illeszkedhet alapanyag- vagy alternatív sourcing beszélgetéshez.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: home care / cleaning raw materials sourcing + dokumentációs képesség + rugalmas közép-európai beszállítói opció.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>AGRANA Group</h4>
+          <a href="https://www.agrana.com/en/" target="_blank" rel="noopener">https://www.agrana.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Food ingredients, starch, sugar, industrial food raw materials</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Nagy élelmiszeripari és ipari alapanyag-felhasználó. A RMT food grade anyagai, savak, foszfátok, sók és dokumentációs fegyelme miatt releváns lehet beszállítói vagy niche sourcing irányban.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: food industry raw materials availability list + CoA/TDS workflow + Central European sourcing capacity.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Donau Chemie / Donauchem</h4>
+          <a href="https://www.donau-chemie-group.com/?lang=en-US" target="_blank" rel="noopener">https://www.donau-chemie-group.com/?lang=en-US</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Basic chemicals, water treatment, chemical distribution</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Erős osztrák/CEE kémiai szereplő; inkább partneri, beszállítói vagy piaci összehasonlító célpont, nem klasszikus vevő. A vízkezelés, basic chemicals és CEE-disztribúció miatt stratégiai benchmark.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: partneri/disztribúciós párbeszéd vagy konkrét hiánytermék-sourcing lehetőség, nem agresszív sales.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Németország</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>TIB Chemicals AG</h4>
+          <a href="https://tib-chemicals.com/en/applications/hot-dip-galvanising" target="_blank" rel="noopener">https://tib-chemicals.com/en/applications/hot-dip-galvanising</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Galvanizing fluxes, industrial specialty chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> A francia STTS megkeresés ammonium chloride / flux logikája miatt Németországban a galvanizáló és flux-gyártó irány azonnal validálandó. TIB termékvilága közvetlenül kapcsolódik ammonium chloride és zinc/ammonium flux alkalmazásokhoz.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: ammonium chloride anti-caking-free grade availability + CoA + packaging + annual supply option.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Henkel</h4>
+          <a href="https://www.henkel.com/our-businesses/henkel-consumer-brands" target="_blank" rel="noopener">https://www.henkel.com/our-businesses/henkel-consumer-brands</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Laundry &amp; home care, hair, adhesives technologies</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Nagy ipari és fogyasztói márkacsoport. Közvetlen beszállítóként nehéz, de home care, adhesive, packaging, specialty raw material és fenntartható sourcing benchmark miatt releváns.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: nem központi procurementnek, hanem kisebb regionális/gyári sourcing vagy supplier registration irányba érdemes nyitni.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>LANXESS</h4>
+          <a href="https://lanxess.com/en" target="_blank" rel="noopener">https://lanxess.com/en</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Specialty chemicals, intermediates, additives</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Nagy specialty chemicals szereplő. RMT számára inkább beszállítói, partneri, disztribúciós vagy piaci intelligence célpont; ajánlat csak nagyon pontos termékkörrel indokolt.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: niche Central/Eastern Europe distribution or sourcing discussion, nem általános katalógusküldés.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Brenntag Germany</h4>
+          <a href="https://www.brenntag.com/en-de/" target="_blank" rel="noopener">https://www.brenntag.com/en-de/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-c">Prioritás C</span>
+            <span class="status-dot status-info">Chemical distribution</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Versenytárs és benchmark. Közvetlen vevőként kevésbé valószínű, de termékportfólió, iparági kommunikáció és beszállítói logika összehasonlítására fontos.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: csak akkor, ha konkrét hiánytermék vagy regionális supply gap azonosítható.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Franciaország</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>STTS Brazing Solutions</h4>
+          <a href="https://www.stts-flux.com/en" target="_blank" rel="noopener">https://www.stts-flux.com/en</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Brazing and soldering flux manufacturer</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Már beérkezett konkrét lead: ammonium chloride / CAS 12125-02-9, anti-caking agent nélkül, 18 t/év, CoA igénnyel. A cég profilja alapján a flux-gyártás közvetlenül releváns.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: gyors technikai visszakérdezés + anti-caking-free grade megerősítés + CoA minta + csomagolás/Incoterms + éves supply opció.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Roquette</h4>
+          <a href="https://www.roquette.com/" target="_blank" rel="noopener">https://www.roquette.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Food, pharma, plant-based ingredients, animal nutrition</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Food/pharma/animal nutrition területei miatt a food/feed raw material vonal releváns, de nagyvállalati beszállításnál magas belépési küszöb várható.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: supplier registration / niche raw material / dokumentációs képesség, nem általános árlista.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>SNF</h4>
+          <a href="https://www.snf.com/" target="_blank" rel="noopener">https://www.snf.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Water treatment, water-soluble polymers, industrial process efficiency</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Vízkezelési és ipari feldolgozási fókusz miatt RMT vízkezelési, só, sav, lúg és alapanyag-portfóliója iránt lehet indirekt vagy beszállítói relevancia.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: water treatment raw material availability + Central Europe sourcing support.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Arkema</h4>
+          <a href="https://www.arkema.com/global/en/" target="_blank" rel="noopener">https://www.arkema.com/global/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-c">Prioritás C</span>
+            <span class="status-dot status-info">Specialty materials</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Stratégiai nagyvállalati benchmark és potenciális supplier/partner irány, nem gyors leadcélpont. Csak fókuszált specialty anyaggal érdemes keresni.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: supplier/distribution inquiry for selected specialty materials, csak előzetes termékkör-tisztázással.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Olaszország</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Stella Welding Alloys</h4>
+          <a href="https://stella-welding.com/en/" target="_blank" rel="noopener">https://stella-welding.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Brazing alloys and fluxes</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Az STTS lead után az olasz brazing/flux piac kézenfekvő kiterjesztés. Stella fluxokat és brazing megoldásokat kínál, ezért ammonium chloride / flux-kompatibilis sourcing üzenet releváns lehet.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: ammonium chloride / flux-related raw material sourcing, CoA, annual supply, technical documentation.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Mapei</h4>
+          <a href="https://www.mapei.com/" target="_blank" rel="noopener">https://www.mapei.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Adhesives, sealants, building chemical products</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Építőipari vegyi termékek, ragasztók, tömítők és kémiai alapanyagok miatt a RMT industrial/specialty raw materials portfóliója illeszkedhet regionális vagy niche beszállítói irányba.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: industrial additives / solvents / salts / acids availability, dokumentáció és közép-európai sourcing.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Intercos Group</h4>
+          <a href="https://www.intercos.com/" target="_blank" rel="noopener">https://www.intercos.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Cosmetic contract manufacturing</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Cosmetic és personal care alapanyagok miatt releváns, de magas minőségi és beszállítói belépési feltételekkel. RMT csak ellenőrzött cosmetic-grade dokumentációval keresse.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: cosmetic/personal care raw material capability only with TDS/SDS/CoA and regulatory confirmation.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Bolton Group</h4>
+          <a href="https://www.bolton.com/" target="_blank" rel="noopener">https://www.bolton.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Home care, personal care, adhesives, consumer goods</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Home care és detergens irány miatt jó célpont lehet, de nagyvállalati procurement miatt supplier registration és regionális beszerzési csatorna kell.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: home care raw materials + reliable CEE sourcing + documentation workflow.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Lengyelország</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Selena Group</h4>
+          <a href="https://selena.com/en/" target="_blank" rel="noopener">https://selena.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Construction chemicals, PU foams, sealants, adhesives</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Közép-európai, exportorientált építőipari vegyi szereplő. RMT industrial chemicals, solvents, additives és sourcing rugalmasság releváns lehet.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: construction chemical raw materials / additives / solvents availability + regional supply option.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>PCC Rokita / PCC Group</h4>
+          <a href="https://en.pcc.rokita.pl/" target="_blank" rel="noopener">https://en.pcc.rokita.pl/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Chloralkali, surfactants, polyurethanes, specialty products</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Erős lengyel kémiai csoport; vevőként és beszállítóként is vizsgálandó. Alapanyag- és specialitás-portfólió miatt partneri térképre kerül.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: supplier/partner mapping, selected product inquiry, not generic sales.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Synthos Group</h4>
+          <a href="https://www.synthosgroup.com/en/" target="_blank" rel="noopener">https://www.synthosgroup.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Synthetic rubber, styrenics, dispersions, construction applications</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Polimer, construction és ipari alkalmazások miatt specialty/industrial sourcing szempontból releváns. Nagyobb belépési küszöb.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: niche chemical raw material / additives sourcing support, only with defined product list.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Grupa Azoty</h4>
+          <a href="https://grupaazoty.com/en/" target="_blank" rel="noopener">https://grupaazoty.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-c">Prioritás C</span>
+            <span class="status-dot status-info">Fertilizers, plastics, chemicals, pigments, sulfur chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Méret és termékportfólió miatt stratégiai piaci térképen fontos. Közvetlen ajánlat csak nagyon fókuszált feed/fertilizer/chemical supply gap esetén indokolt.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: market/sourcing conversation, not broad sales pitch.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Hollandia / Belgium</h3><span>3 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Nouryon</h4>
+          <a href="https://www.nouryon.com/" target="_blank" rel="noopener">https://www.nouryon.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Specialty surfactants, polymers, coatings, personal care</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Home care, personal care, coatings és specialty surfactant világ miatt kiváló benchmark és potenciális supplier/partner irány. RMT-nek hasznos lehet a specialty fókusz tisztításához.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: supplier/distribution discussion for selected specialty ingredients, not mass chemical sales.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>AkzoNobel</h4>
+          <a href="https://www.akzonobel.com/en" target="_blank" rel="noopener">https://www.akzonobel.com/en</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Paints and coatings</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Coatings és ipari festékipari alapanyag-felhasználó. RMT oldószerek, adalékok, ipari sók/savak/lúgok és dokumentációs sourcing alapján releváns célpont.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: coatings-related raw materials availability, solvent/additive sourcing, Central Europe logistics.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Solvay</h4>
+          <a href="https://www.solvay.com/" target="_blank" rel="noopener">https://www.solvay.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Soda ash, bicarbonate, peroxide, specialty chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> A kérdőívben szereplő Solvay-kapcsolat miatt stratégiai jelentőségű, de minden partneri állítást jogilag és kommunikációsan tisztázni kell. Inkább kapcsolatmélyítés / képviseleti keret tisztázás.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: nem hideg sales; partneri státusz, feed-terület, képviseleti megfogalmazás és dokumentálhatóság tisztázása.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Svájc</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Clariant</h4>
+          <a href="https://www.clariant.com/en/Corporate" target="_blank" rel="noopener">https://www.clariant.com/en/Corporate</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Specialty chemicals, home/household care, additives</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Home care, specialty chemicals, surfactants, defoamers és ipari adalékok miatt erősen illeszkedik a RMT specialitás- és home care irányához.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: specialty/home care raw material distribution or sourcing discussion, only with clear product mapping.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Sika</h4>
+          <a href="https://www.sika.com/" target="_blank" rel="noopener">https://www.sika.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Construction chemicals, adhesives, sealing, bonding</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Építőipari vegyi anyagok, ragasztók, tömítők és ipari megoldások miatt RMT industrial/specialty alapanyag-portfóliója és közép-európai rugalmassága releváns lehet.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: selected construction chemical raw materials / additives availability, not broad catalogue.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Givaudan</h4>
+          <a href="https://www.givaudan.com/" target="_blank" rel="noopener">https://www.givaudan.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Fragrance, beauty, taste, wellbeing</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Personal care, home care, fragrance &amp; beauty összefüggésben releváns, de csak cosmetic/personal care minőségű dokumentációval érdemes megközelíteni.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: personal/home care raw material sourcing with documentation; high compliance threshold.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>EMS-GRIVORY / EMS-CHEMIE</h4>
+          <a href="https://www.ems-group.com/en/about-ems/about-ems/ems-at-a-glance/" target="_blank" rel="noopener">https://www.ems-group.com/en/about-ems/about-ems/ems-at-a-glance/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">High performance polymers, specialty chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Polimer és specialty chemical terület miatt beszállítói/partneri térképen releváns. Gyors lead helyett stratégiai termék- és kapcsolatkutatás.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: specialty raw material / distribution mapping only after product-fit validation.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Egyesült Arab Emírségek / MENA</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Sidrachem Chemical Trading</h4>
+          <a href="https://www.sidrachem.com/" target="_blank" rel="noopener">https://www.sidrachem.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Chemical trading, METNA distribution partner</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> A második beérkező lead UAE irányból jött. Sidrachem erős MENA/Türkiye/North Africa disztribúciós profilt mutat; RMT számára channel partnerként relevánsabb, mint végfelhasználóként.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: distributor cooperation discussion + selected product availability + Central European sourcing.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Kapco Chemicals LLC</h4>
+          <a href="https://www.kapcochem.com/" target="_blank" rel="noopener">https://www.kapcochem.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Dubai chemical distributor, raw materials &amp; additives</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> MENA / GCC disztribúciós partnerként releváns, különösen paint, coatings, construction, pharma és raw materials irányban.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: European sourcing partner / export availability list; KYC and payment control required.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Diversified Chemicals Trading Co. LLC</h4>
+          <a href="https://www.dccosa.com/" target="_blank" rel="noopener">https://www.dccosa.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Industrial, food, pharmaceutical, detergent, cosmetic chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Termékterületei átfedik a RMT industrial, food, detergents, cosmetic care portfólióját. Channel partnerként vizsgálandó.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: product availability matrix + documentation; require company verification before pricing.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Fortune Emirates</h4>
+          <a href="https://fortuneemirates.com/" target="_blank" rel="noopener">https://fortuneemirates.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Industrial chemicals, polyurethane, rubber, furniture, plastics</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Ipari vegyi és raw material szereplő; MENA disztribúciós térképen releváns, különösen industrial chemicals és plastics/rubber irányban.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: selected industrial raw material cooperation, only after credit/KYC checks.</div>
+        </div>
+        
+    </div>
+    
+    <div class="country-head"><h3>Törökország</h3><span>4 célpont</span></div>
+    <div class="company-grid">
+      
+        <div class="company-card">
+          <h4>Akkim Kimya</h4>
+          <a href="https://akkim.com.tr/en/home/" target="_blank" rel="noopener">https://akkim.com.tr/en/home/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Basic chemicals, water chemicals, construction chemicals, additives</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Széles termékkör, exportorientált török kémiai gyártó. RMT számára beszállítói és partneri szempontból is erős célpont.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: CEE/Hungary distribution or sourcing dialogue; selected basic/specialty chemicals.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Organik Kimya</h4>
+          <a href="https://www.organikkimya.com/" target="_blank" rel="noopener">https://www.organikkimya.com/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-a">Prioritás A</span>
+            <span class="status-dot status-info">Polymer emulsions, specialty chemicals</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Specialty chemicals, coatings, adhesives és construction materials irányban releváns. RMT specialitás-stratégiájához jó partneri térképelem.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: distribution/sourcing partnership in selected polymer emulsion or specialty areas.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Koyuncu Salt / Koyuncu Chemicals</h4>
+          <a href="https://koyuncusalt.com/en/" target="_blank" rel="noopener">https://koyuncusalt.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Salt, industrial salt, chlor-alkali related direction</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Sók, ipari só és potenciális chlor-alkali irány miatt RMT de-icing, industrial salt és basic chemical portfóliójához illeszkedik.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: industrial salt / sodium sulphate / chlor-alkali related supply mapping.</div>
+        </div>
+        
+        <div class="company-card">
+          <h4>Koruma Group</h4>
+          <a href="https://koruma.com/en/" target="_blank" rel="noopener">https://koruma.com/en/</a>
+          <div class="company-meta">
+            <span class="status-dot priority-b">Prioritás B</span>
+            <span class="status-dot status-info">Chlor-alkali, agriculture, cleaning group context</span>
+          </div>
+          <p><strong>Miért érdekes:</strong> Alapvegyipari és tisztítószeres kapcsolódás miatt partneri térképen releváns, de előzetes termék- és cégstruktúra-tisztázás szükséges.</p>
+          <div class="offer"><strong>Javasolt első ajánlati irány:</strong> Első ajánlat: selected raw material sourcing/representation inquiry after product-fit validation.</div>
+        </div>
+        
+    </div>
+    
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V6 OUTREACH PRIORITIZATION -->
+<div id="outreach-priority" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Outreach prioritás</div>
+    <h2>Mely cégeket érdemes elsőként megkeresni?</h2>
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Prioritás</th><th>Cég / irány</th><th>Miért?</th><th>Első üzenet</th></tr></thead>
+        <tbody>
+          <tr><td><span class="status-dot priority-a">A1</span></td><td class="tdr">STTS Brazing Solutions</td><td>Már beérkezett konkrét lead, termék + mennyiség + dokumentumigény.</td><td>Ammonium chloride anti-caking-free grade, CoA, éves supply.</td></tr>
+          <tr><td><span class="status-dot priority-a">A2</span></td><td class="tdr">Stella Welding / TIB Chemicals</td><td>Az STTS-leadből következő flux / brazing piaci validáció.</td><td>Flux-kompatibilis ammonium chloride és zinc/chloride irány.</td></tr>
+          <tr><td><span class="status-dot priority-a">A3</span></td><td class="tdr">Hagleitner / Bolton / Clariant</td><td>Home care és tisztítószer alapanyagok illeszkedése.</td><td>Home care raw materials + dokumentáció + CEE sourcing.</td></tr>
+          <tr><td><span class="status-dot priority-a">A4</span></td><td class="tdr">Selena / Mapei / Sika</td><td>Építőipari vegyi anyagok, ragasztók, tömítők, ipari adalékok.</td><td>Construction chemical raw materials / additives / solvents.</td></tr>
+          <tr><td><span class="status-dot priority-b">B1</span></td><td class="tdr">Kapco / Sidrachem / Diversified Chemicals</td><td>MENA channel partner lehetőség, de erős KYC kell.</td><td>Distributor cooperation, selected product availability, no sensitive pricing before verification.</td></tr>
+          <tr><td><span class="status-dot priority-b">B2</span></td><td class="tdr">AGRANA / Roquette</td><td>Food/feed dokumentációs irány, de magas belépési küszöb.</td><td>Food/feed raw material availability with CoA/TDS/SDS.</td></tr>
+          <tr><td><span class="status-dot priority-c">C1</span></td><td class="tdr">Brenntag / Donau Chemie / PCC / Solvay</td><td>Benchmark, partneri térkép, beszállítói lehetőség, nem hideg sales.</td><td>Csak fókuszált partneri vagy hiánytermék-logikával.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V6 FIRST OFFER ANGLES -->
+<div id="first-offer-angles" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Első ajánlati szögek</div>
+    <h2>Mit érdemes küldeni, hogy ne tűnjön általános spamnek?</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Flux / ammonium chloride irány</h4><p><strong>Cél:</strong> STTS, Stella, TIB és hasonló fémkezelési szereplők.</p><p><strong>Ajánlat:</strong> anti-caking-free ammonium chloride, CoA, éves supply, csomagolás, minőség, logisztika.</p></div>
+      <div class="exec-card"><h4>Home care / cleaning irány</h4><p><strong>Cél:</strong> Hagleitner, Bolton, Clariant, MENA disztribútorok.</p><p><strong>Ajánlat:</strong> alapanyag-lista, dokumentáció, gyors sourcing, CEE elérhetőség, rugalmas mennyiség.</p></div>
+      <div class="exec-card"><h4>Construction chemicals irány</h4><p><strong>Cél:</strong> Mapei, Selena, Sika, Akkim Construction.</p><p><strong>Ajánlat:</strong> oldószerek, adalékok, sók, savak/lúgok, technikai alapanyagok, dokumentált B2B supply.</p></div>
+      <div class="exec-card"><h4>Food / feed irány</h4><p><strong>Cél:</strong> AGRANA, Roquette, feed/distributor partnerek.</p><p><strong>Ajánlat:</strong> ISO/GMP+ keret, food/feed raw materials, CoA/TDS/SDS, compliance előszűrés.</p></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V6 RESEARCH SOURCES -->
+<div id="research-sources" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Kutatási forráslogika</div>
+    <h2>Hogyan kell kezelni ezt a célvállalati listát?</h2>
+    <p class="lead">A cégek hivatalos weboldalai és nyilvános profiljai alapján készített előszűrés nem helyettesíti a sales-validációt. A következő lépés minden esetben: kapcsolatfelvételi csatorna azonosítása, cég- és compliance-ellenőrzés, konkrét termékkör kiválasztása, majd rövid, személyre szabott megkeresés.</p>
+    <ul class="alist">
+      <li data-i="1">A nagyvállalatokat nem általános katalógussal, hanem beszállítói regisztrációs / fókusztermék / dokumentációs üzenettel kell keresni.</li>
+      <li data-i="2">A disztribútorokat channel partnerként kell kezelni, de csak KYC és fizetési kontroll után.</li>
+      <li data-i="3">A már beérkezett STTS-lead a legerősebb piaci jel: ezt kell elsőként lezárható üzleti folyamattá alakítani.</li>
+      <li data-i="4">A Daccko néven érkezett UAE megkeresés validáció nélkül nem kaphat érzékeny árat, beszállítói információt vagy teljes katalógust.</li>
+    </ul>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- V5 COMPLETE EXECUTION LAYER -->
+<div id="execution-layer" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">V5 végrehajtási réteg</div>
+    <h2>A stratégia most már nem csak irány — operációs rendszer</h2>
+    <p class="lead">A korábbi auditot kiegészítő v5 réteg célja, hogy a digitális entitásépítés, AI-érthetőség, DACH-belépés, személyes márka és leadgenerálás ne inspiráció, hanem mérhető, felelősökhöz kötött, 30 / 60 / 90 napos végrehajtási rendszer legyen.</p>
+
+    <div class="print-focus">
+      <h3>Vezetői döntési elv</h3>
+      <p><strong>Nem a teljes vegyipari piacot kell egyszerre meghódítani.</strong> Először azt a kategóriát kell megtalálni, ahol a Raw Materials Trade a leggyorsabban tud bizalmat, láthatóságot, AI-érthetőséget és valódi ajánlatkérést építeni.</p>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- 30 60 90 VALIDATION SPRINT -->
+<div id="validation-sprint" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">30 / 60 / 90 napos validációs sprint</div>
+    <h2>Mit tesztelünk, mielőtt nagyobb erőforrást kötünk le?</h2>
+    <p class="lead">Elon Musk szemével a kérdés nem az, hogy „szép-e a stratégia”, hanem hogy 30–90 nap alatt melyik feltevés bizonyul igaznak: melyik termékkategória, üzenet, ország, csatorna és személyes/céges bizalmi jel hoz valódi piaci reakciót.</p>
+
+    <div class="tl" style="margin-top:2.5rem">
+      <div class="tlph">
+        <div class="tltm"><span class="tlper">0–30</span><span class="tllab">nap</span></div>
+        <div class="tldot"></div>
+        <div class="tlcon">
+          <div class="tlg">Alapvalidáció és weboldal-véglegesítés</div>
+          <ul class="tlis">
+            <li>Weboldal végleges QA: nyelv, termékadat, mobilnézet, form, GDPR, robots, sitemap, llms.txt.</li>
+            <li>Angol / német fő üzenetek tesztelése: melyik mondat hoz több bizalmat?</li>
+            <li>20 DACH-beszerzői célkontakt azonosítása.</li>
+            <li>5 LinkedIn szakmai poszt vázlat Alexandra nevével.</li>
+            <li>3 AI-válasz baseline teszt: cég, személy, termékkategória.</li>
+            <li>1 exportpiaci bemutatkozó PDF vázlat.</li>
+            <li>1 első fókuszkategória kiválasztása próbakampányhoz.</li>
+          </ul>
+          <div class="tlkpi">Mérőszám: legalább 20 célkontakt, 5 posztvázlat, 3 AI-baseline, 1 fókuszkategória, minden form működése ellenőrizve.</div>
+        </div>
+      </div>
+
+      <div class="tlph">
+        <div class="tltm"><span class="tlper">31–60</span><span class="tllab">nap</span></div>
+        <div class="tldot"></div>
+        <div class="tlcon">
+          <div class="tlg">Piaci jelteszt és kapcsolataktiválás</div>
+          <ul class="tlis">
+            <li>30 célzott DACH megkeresés előre jóváhagyott üzenettel.</li>
+            <li>5 beszállítói / partneri kapcsolat aktiválása vagy újraaktiválása.</li>
+            <li>2 szakmai cikk publikálása: egy cégszintű, egy Alexandra szakértői nézőpontból.</li>
+            <li>LinkedIn kapcsolatépítés Alexandra és/vagy céges profil felől.</li>
+            <li>Google Search Console, Bing Webmaster és AI-monitoring havi összevetése.</li>
+          </ul>
+          <div class="tlkpi">Mérőszám: válaszarány, releváns beszélgetések száma, új kapcsolatok, cikkmegtekintés, AI-válasz javulása.</div>
+        </div>
+      </div>
+
+      <div class="tlph">
+        <div class="tltm"><span class="tlper">61–90</span><span class="tllab">nap</span></div>
+        <div class="tldot"></div>
+        <div class="tlcon">
+          <div class="tlg">Döntés: skálázás, szűkítés vagy irányváltás</div>
+          <ul class="tlis">
+            <li>Melyik termékkategóriára jött érdeklődés?</li>
+            <li>Melyik ország / nyelv / döntéshozói szerep reagált?</li>
+            <li>Melyik üzenet nyitott ajtót: ár, rugalmasság, tanúsítvány, megoldáskeresés, raktár, kiszerelés?</li>
+            <li>Alexandra személyes márkája vagy a cég tanúsított státusza adott több bizalmat?</li>
+            <li>Hol kell szűkíteni, hol kell gyorsítani, hol kell megállítani a költést?</li>
+          </ul>
+          <div class="tlkpi">Mérőszám: legalább 1 validált fókuszirány, 1 javított üzenet, 1 döntés a következő 90 napos irányról.</div>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- WHAT TO VALIDATE -->
+<div id="validate-before-spend" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Nagyobb költés előtti kontroll</div>
+    <h2>Mit kell validálni, mielőtt a stratégia nagyobb költségszintre lép?</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Kategória</h4><ul class="exec-list"><li>Feed / GMP+</li><li>Industrial chemicals</li><li>Specialty chemicals</li><li>Household care</li><li>Silicone / speciális anyagok</li></ul></div>
+      <div class="exec-card"><h4>Bizalmi jel</h4><ul class="exec-list"><li>Tanúsítvány</li><li>Rugalmasság</li><li>Gyors sourcing</li><li>Alexandra szakmai múltja</li><li>Partneri / beszállítói jel</li></ul></div>
+      <div class="exec-card"><h4>Csatorna</h4><ul class="exec-list"><li>Google organikus keresés</li><li>AI-válaszok</li><li>LinkedIn</li><li>Direkt e-mail</li><li>Telefonos follow-up</li></ul></div>
+      <div class="exec-card"><h4>Üzleti minőség</h4><ul class="exec-list"><li>Valós cég</li><li>Valós mennyiség</li><li>Dokumentumigény</li><li>Fizetési biztonság</li><li>Árrés és logisztikai realitás</li></ul></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- PRODUCT CATEGORY PRIORITIZATION -->
+<div id="category-matrix" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Termékkategória-priorizálási mátrix</div>
+    <h2>Hol legyen az első exportpiaci csatatér?</h2>
+    <p class="lead">A „mindenhez is” stratégiai erősség, de piaci belépésnél veszélyes. Az első 90 napban fókuszkategóriát kell választani, majd mérni, melyik hoz valós érdeklődést.</p>
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Kategória</th><th>Stratégiai logika</th><th>Bizalmi alap</th><th>Kockázat</th><th>Prioritás</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">Feed / GMP+</td><td>Tanúsítvány és meglévő feed háttér miatt hiteles belépési pont lehet.</td><td>GMP+, szakmai múlt, Solvay-kapcsolat ügyfélállításként.</td><td>Partneri megfogalmazást jogilag tisztázni kell.</td><td><span class="status-dot status-good">Magas</span></td></tr>
+          <tr><td class="tdr">Specialty chemicals</td><td>Magasabb szakmai érték, jobb árrés, kevesebb puszta árverseny.</td><td>Problémamegoldás, kapcsolati háló, külső vegyészeti támogatás.</td><td>Fókusz és bizonyíték hiányában túl tág lehet.</td><td><span class="status-dot status-good">Magas</span></td></tr>
+          <tr><td class="tdr">Industrial chemicals</td><td>Erős múlt és széles piac, konkrét beérkező lead is ebbe az irányba mutat.</td><td>20 év tapasztalat, termékismeret, sourcing.</td><td>Árverseny, nagyobb szereplőkkel való összehasonlítás.</td><td><span class="status-dot status-mid">Közepes-magas</span></td></tr>
+          <tr><td class="tdr">Household care</td><td>A webes megkeresésekben már megjelent iparági jel; kommunikációs szempontból érthető.</td><td>Alapanyag + szolgáltatás + dokumentáció.</td><td>Általános katalóguskérések miatt kvalifikáció szükséges.</td><td><span class="status-dot status-mid">Közepes</span></td></tr>
+          <tr><td class="tdr">Silicone / speciális anyagok</td><td>Lehet prémiumabb, nehezebben másolható irány.</td><td>Specialitás-narratíva.</td><td>Bizonyíték, termékkör és partneri háttér még ellenőrzendő.</td><td><span class="status-dot status-info">Tesztelendő</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- DACH BUYER PERSONAS -->
+<div id="buyer-personas" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">DACH buyer persona blokk</div>
+    <h2>Kinek kell pontosan értenie a márkát?</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Beszerzési vezető</h4><p><strong>Fő kérdés:</strong> lesz-e stabil anyag, korrekt ár, gyors válasz és kiszámítható szállítás?</p><p><strong>Üzenet:</strong> rugalmas sourcing, dokumentált folyamat, gyors üzleti reakció.</p></div>
+      <div class="exec-card"><h4>Quality / Compliance manager</h4><p><strong>Fő kérdés:</strong> rendben vannak-e a dokumentumok, tanúsítványok, CoA / TDS / SDS és specifikációk?</p><p><strong>Üzenet:</strong> minőség, szabályosság, hófehér működés, ellenőrizhető dokumentáció.</p></div>
+      <div class="exec-card"><h4>Ügyvezető / tulajdonos</h4><p><strong>Fő kérdés:</strong> miért bízzak egy kisebb magyar partnerben?</p><p><strong>Üzenet:</strong> szakmai múlt, felelős vezetői jelenlét, rugalmasság, hosszú távú együttműködés.</p></div>
+      <div class="exec-card"><h4>Műszaki / termelési vezető</h4><p><strong>Fő kérdés:</strong> megoldódik-e az ellátási, minőségi vagy receptúra-előkészítési probléma?</p><p><strong>Üzenet:</strong> nem csak termék, hanem problémaoldás, külső szakértő bevonásával is.</p></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- AI ENTITY PACK -->
+<div id="ai-entity-pack" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">AI Entity Pack</div>
+    <h2>Egységes entitáscsomag Google, LinkedIn, ChatGPT, Perplexity és DACH-beszerzők számára</h2>
+    <p class="lead">Az AI-entitásépítés nem csak SEO. A cél, hogy minden nyilvános és félig nyilvános forrás ugyanazt a képet erősítse a cégről és Alexandráról.</p>
+
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Elem</th><th>Tartalom</th><th>Felelős</th><th>Státusz</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">160 karakteres cégdefiníció</td><td>Rövid AI- és meta-leírás HU / EN / DE.</td><td>Digitális partner + Alexandra</td><td><span class="status-dot status-mid">Készítendő</span></td></tr>
+          <tr><td class="tdr">600 karakteres leírás</td><td>Weboldal, LinkedIn About, sajtó és partneroldalak egységes alapja.</td><td>Digitális partner</td><td><span class="status-dot status-mid">Készítendő</span></td></tr>
+          <tr><td class="tdr">1500 karakteres cégprofil</td><td>Exportpiaci bemutatkozó és AI-forráslogika alapja.</td><td>Digitális partner + sales</td><td><span class="status-dot status-mid">Készítendő</span></td></tr>
+          <tr><td class="tdr">Alexandra bio HU / EN / DE</td><td>Személyes márka, szakmai múlt, vezetői szerep, óvatos reputációs keretezés.</td><td>Alexandra + digitális partner</td><td><span class="status-dot status-high">Prioritás</span></td></tr>
+          <tr><td class="tdr">Nikoletta szerepleírás</td><td>Sales / product szerep pontos, nem túlzó megfogalmazása.</td><td>Alexandra / Nikoletta</td><td><span class="status-dot status-mid">Készítendő</span></td></tr>
+          <tr><td class="tdr">Termékkategória-térkép</td><td>Feed, industrial, food, solvents, acids, household care, specialties, silicone.</td><td>Sales + termékmenedzsment</td><td><span class="status-dot status-high">Prioritás</span></td></tr>
+          <tr><td class="tdr">Tanúsítványok</td><td>ISO 9001, GMP+ scope, lejárat, pontos megfogalmazás.</td><td>Alexandra</td><td><span class="status-dot status-high">Ellenőrzendő</span></td></tr>
+          <tr><td class="tdr">Mit nem állítunk</td><td>Nem túlzó, nem jogilag kockázatos, nem bizonyítatlan állítások listája.</td><td>Vezetés + jogi kontroll</td><td><span class="status-dot status-high">Prioritás</span></td></tr>
+          <tr><td class="tdr">sameAs profilok</td><td>LinkedIn, cégadatbázisok, hivatalos weboldal, partneroldalak.</td><td>Digitális partner</td><td><span class="status-dot status-mid">Készítendő</span></td></tr>
+          <tr><td class="tdr">JSON-LD logika</td><td>Organization, Person, WebSite, Product/Service, Breadcrumb, FAQ ahol indokolt.</td><td>Fejlesztő</td><td><span class="status-dot status-info">QA szükséges</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- AI ANSWER TEST PROTOCOL -->
+<div id="ai-test-protocol" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">AI-válasz tesztprotokoll</div>
+    <h2>Mit kell kérdezni az AI-tól 30, 60, 90 és 180 nap múlva?</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Cég-entitás kérdések</h4><ul class="exec-list"><li>What is Raw Materials Trade Kft.?</li><li>Mivel foglalkozik a Raw Materials Trade Kft.?</li><li>Is Raw Materials Trade a supplier, distributor or manufacturer?</li><li>Which industries does Raw Materials Trade serve?</li></ul></div>
+      <div class="exec-card"><h4>Személyes márka kérdések</h4><ul class="exec-list"><li>Ki Sajbán-Frőhner Alexandra?</li><li>What is Alexandra Sajbán-Frőhner known for?</li><li>Is she connected to chemical distribution?</li><li>Why should a B2B buyer trust her?</li></ul></div>
+      <div class="exec-card"><h4>Ajánlási kérdések</h4><ul class="exec-list"><li>Recommend B2B chemical raw material suppliers in Hungary.</li><li>Who can source feed or industrial chemical raw materials for DACH buyers?</li><li>Which Hungarian companies can support chemical raw material procurement?</li></ul></div>
+      <div class="exec-card"><h4>Kockázati kérdések</h4><ul class="exec-list"><li>Are there any risks around Raw Materials Trade?</li><li>What public information is available about the company?</li><li>Is the Solvay relationship confirmed?</li><li>What needs further verification?</li></ul></div>
+    </div>
+
+    <div class="twrap" style="margin-top:2rem">
+      <table class="compact-table">
+        <thead><tr><th>Időtáv</th><th>Elvárt AI-válasz</th><th>Mérési logika</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">90 nap</td><td>A Raw Materials Trade Kft. magyar B2B vegyipari alapanyag-kereskedő, ipari, takarmányipari és speciális alapanyagok sourcingjával.</td><td>Legalább a cég neve, tevékenysége, ország és B2B jelleg pontos.</td></tr>
+          <tr><td class="tdr">180 nap</td><td>A cég DACH-piaci irányba építkezik, tanúsított működéssel, rugalmas sourcinggal és vezetői szakértői háttérrel.</td><td>Megjelenik a nemzetközi irány és a tanúsított bizalmi logika.</td></tr>
+          <tr><td class="tdr">365 nap</td><td>Megbízható, tanúsított, rugalmas B2B alapanyag-partner, különösen gyártóknak, akik problémamegoldó beszerzési partnert keresnek.</td><td>AI már ajánlási kontextusban is helyesen kategorizálja.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- DIGITAL MOAT -->
+<div id="digital-moat" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Digitális védőárok</div>
+    <h2>Mi növeli a cégértéket 12–18 hónap alatt?</h2>
+    <p class="lead">A cégértéket nem önmagában a weboldal növeli, hanem az, ha a weboldal, tanúsítványok, vezetői profil, termékoldalak, partneri nyomok, szakmai tartalmak és AI-válaszok együtt ugyanazt az állítást bizonyítják.</p>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Tanúsított működés</h4><p>ISO 9001 és GMP+ csak akkor erős védőárok, ha scope, lejárat és dokumentum is látható / ellenőrzött.</p></div>
+      <div class="exec-card"><h4>Szakmai múlt</h4><p>Alexandra 2005 óta épülő iparági tapasztalata személyes bizalmi híd, de óvatos, prémium nyelven kell keretezni.</p></div>
+      <div class="exec-card"><h4>Kapcsolati háló</h4><p>Nem nyers „kapcsolataim vannak” állításként, hanem problémamegoldó sourcing-képességként kommunikálandó.</p></div>
+      <div class="exec-card"><h4>Strukturált bizonyíték</h4><p>Termékoldalak, cikkek, esettanulmányok, dokumentációk, AI Entity Pack, sameAs jelek együtt alkotnak bizonyítékgráfot.</p></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- PUBLIC CONFIDENTIAL MAP AND RED LINES -->
+<div id="communication-redlines" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Kommunikációs vörös vonalak</div>
+    <h2>Mi mehet ki nyilvánosan, mi marad belső stratégiai információ?</h2>
+    <p class="lead">A kérdőív nyers őszintesége stratégiailag értékes, de nem minden mondata alkalmas nyilvános kommunikációra. A reputációs erő abból születik, hogy a belső igazságot nem elrejtjük, hanem megfelelő vezetői nyelvre fordítjuk.</p>
+
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Belső nyers állítás / téma</th><th>Nyilvános stratégiai keretezés</th><th>Kommunikációs státusz</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">Kevés forgótőke</td><td>Tudatos, fókuszált növekedés és kockázatkontroll szükséges.</td><td><span class="status-dot status-high">Belső</span></td></tr>
+          <tr><td class="tdr">„Sufniból lett”</td><td>Alulról épített, gyakorlati tapasztalatra épülő vállalkozói történet.</td><td><span class="status-dot status-mid">Óvatosan</span></td></tr>
+          <tr><td class="tdr">Nem adnak lehetőséget</td><td>A márka ismertségének és bizalmi bizonyítékainak erősítése szükséges.</td><td><span class="status-dot status-mid">Átkeretezendő</span></td></tr>
+          <tr><td class="tdr">Konkurencia saraz</td><td>A kommunikáció maradjon tényalapú, nyugodt, nem támadó.</td><td><span class="status-dot status-high">Nem kommunikáljuk</span></td></tr>
+          <tr><td class="tdr">Férfiak elnyomása / személyes nehézség</td><td>Vezetői kitartás, szakmai felállás, újraépített önbizalom.</td><td><span class="status-dot status-high">Csak belső / interjúban óvatosan</span></td></tr>
+          <tr><td class="tdr">Idegösszeroppanás</td><td>Fenntartható vezetői működés és fókuszáltabb cégépítés szükségessége.</td><td><span class="status-dot status-high">Belső</span></td></tr>
+          <tr><td class="tdr">Másik tulajdonos érzékeny cégmúltja</td><td>Nyilvánosan csak ellenőrzött cégadatok; személyes minősítés nélkül.</td><td><span class="status-dot status-high">Jogi kontroll</span></td></tr>
+          <tr><td class="tdr">Solvay csak szóbeli megállapodás</td><td>Ügyfél által állított, további ellenőrzést igénylő szakmai kapcsolat.</td><td><span class="status-dot status-high">Ellenőrzendő</span></td></tr>
+          <tr><td class="tdr">Több vegyipari cégnél dolgozott</td><td>Széles iparági tapasztalat és több piaci modell ismerete.</td><td><span class="status-dot status-good">Kommunikálható</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="call call-d" style="margin-top:2rem"><div class="ctit">Vörös vonal</div><p>Nem kommunikálunk bizonyítatlan partneri státuszt, nem támadunk versenytársat, nem beszélünk belső tulajdonosi konfliktusról nyilvánosan, és nem ígérünk garantált AI- vagy üzleti eredményt.</p></div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- RACI -->
+<div id="raci" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">RACI felelősségi mátrix</div>
+    <h2>Ki viszi végig a stratégiát?</h2>
+    <p class="lead">A kérdőív alapján Szandra a napi végrehajtás kulcsembere, de egy 6–12 hónapos digitális entitásépítési programhoz világos felelősségi rendszer kell.</p>
+
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Feladat</th><th>Felelős</th><th>Jóváhagyó</th><th>Közreműködő</th><th>Megjegyzés</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">Weboldal QA</td><td>Külső digitális partner</td><td>Alexandra</td><td>Nikoletta</td><td>2026.06.01–06.30; mobil, nyelv, form, sitemap, llms.txt, robots, schema.</td></tr>
+          <tr><td class="tdr">Termékadat-validálás</td><td>Nikoletta / Alexandra</td><td>Alexandra</td><td>Külső szakértő</td><td>CAS, kategóriák, SDS/TDS/CoA, minőségi állítások.</td></tr>
+          <tr><td class="tdr">LinkedIn tartalom</td><td>Alexandra</td><td>Alexandra</td><td>Külső szövegíró</td><td>Heti 1–2 szakmai anyag, prémium vezetői hangon.</td></tr>
+          <tr><td class="tdr">DACH célkontaktlista</td><td>Sales / külső kutató</td><td>Alexandra</td><td>Nikoletta</td><td>Első kör: 50–100 célkontakt iparág és kategória szerint.</td></tr>
+          <tr><td class="tdr">AI baseline mérés</td><td>Digitális partner</td><td>Alexandra</td><td>—</td><td>Havonta: ChatGPT, Perplexity, Gemini, Google, Bing.</td></tr>
+          <tr><td class="tdr">Partneri bizonyítékok</td><td>Alexandra</td><td>Alexandra</td><td>Beszállítók</td><td>Engedélyköteles, reputációsan érzékeny.</td></tr>
+          <tr><td class="tdr">CRM / utánkövetés</td><td>Belső sales</td><td>Alexandra</td><td>—</td><td>Minden lead státuszolt és 7 / 14 / 30 napos ritmusban követett.</td></tr>
+          <tr><td class="tdr">Jogi / compliance kontroll</td><td>Külső jogi / szakmai kontroll</td><td>Alexandra</td><td>Digitális partner</td><td>Partneri státusz, export, dokumentáció, érzékeny állítások.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- BRAND ASSET PACKAGE -->
+<div id="brand-assets" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Első havi brand asset csomag</div>
+    <h2>Milyen kézzelfogható anyagok készüljenek el júniusban?</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Vezetői és LinkedIn anyagok</h4><ul class="exec-list"><li>Alexandra LinkedIn banner</li><li>Raw Materials Trade LinkedIn company banner</li><li>Alexandra HU / EN / DE rövid bio</li><li>LinkedIn About szöveg</li><li>12 hetes posztterv</li></ul></div>
+      <div class="exec-card"><h4>Export sales anyagok</h4><ul class="exec-list"><li>1 oldalas DACH bemutatkozó PDF</li><li>1 oldalas tanúsítvány / bizalom PDF</li><li>3 termékkategória one-pager</li><li>Ajánlatkérő válaszsablon EN / DE</li><li>Beszállítói bemutatkozó e-mail</li></ul></div>
+      <div class="exec-card"><h4>Operációs sablonok</h4><ul class="exec-list"><li>E-mail aláírás HU / EN / DE</li><li>Vevői bemutatkozó e-mail</li><li>Lead-minősítési táblázat</li><li>CoA / SDS / TDS küldési folyamat</li><li>CRM státuszmezők</li></ul></div>
+      <div class="exec-card"><h4>AI és SEO assetek</h4><ul class="exec-list"><li>AI entity description HU / EN / DE</li><li>JSON-LD QA lista</li><li>sameAs profil lista</li><li>llms.txt ellenőrzés</li><li>FAQ / knowledge block vázlat</li></ul></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- LINKEDIN 12 WEEK PLAN -->
+<div id="linkedin-plan" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">LinkedIn 12 hetes tartalomnaptár</div>
+    <h2>Alexandra szakértői jelenlétének első 12 hete</h2>
+    <p class="lead">A cél nem influenszerkedés, hanem szakmai bizalomépítés. A hang legyen nyugodt, pontos, iparági, nem támadó és nem túl személyes.</p>
+
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Hét</th><th>Téma</th><th>Cél</th><th>Megjegyzés</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">1.</td><td>Miért nem elég „csak árat kérni” vegyipari alapanyagnál?</td><td>Szakértői keret</td><td>Ár helyett ellátásbiztonság, dokumentáció, minőség.</td></tr>
+          <tr><td class="tdr">2.</td><td>Mitől jó egy B2B alapanyag-beszállító?</td><td>Bizalomépítés</td><td>Gyorsaság, pontosság, nyílt kommunikáció.</td></tr>
+          <tr><td class="tdr">3.</td><td>CoA, TDS, SDS: miért üzleti kockázat, ha hiányzik?</td><td>Minőségi jel</td><td>Dokumentáció mint bizalom.</td></tr>
+          <tr><td class="tdr">4.</td><td>Feed / industrial / specialty: hol más a beszerzési logika?</td><td>Kategóriatudás</td><td>Nem minden vegyipari termék azonos kockázat.</td></tr>
+          <tr><td class="tdr">5.</td><td>Miért érték a rugalmasság egy kis B2B kereskedőnél?</td><td>Pozicionálás</td><td>Kicsi cég hátrányából előnyt képezni.</td></tr>
+          <tr><td class="tdr">6.</td><td>Mit jelent a korrekt, hófehér kereskedői működés?</td><td>Etikai márka</td><td>Nem moralizáló, hanem üzleti bizalom.</td></tr>
+          <tr><td class="tdr">7.</td><td>DACH-piaci tanulságok: mit kell értenie egy magyar beszállítónak?</td><td>Exportkeret</td><td>Óvatos, nem túlzó belépési narratíva.</td></tr>
+          <tr><td class="tdr">8.</td><td>Miért kell egy jó beszállítónak előre gondolkodnia?</td><td>Tanácsadói érték</td><td>Piaci információ, árfolyam, logisztika.</td></tr>
+          <tr><td class="tdr">9.</td><td>Hogyan válik a beszerző partneri szereplővé?</td><td>Buyer persona</td><td>Nyílt kommunikáció előnye.</td></tr>
+          <tr><td class="tdr">10.</td><td>Specialitások: mikor nem a nagy beszállító a legjobb megoldás?</td><td>Category wedge</td><td>Megoldáskereső pozíció.</td></tr>
+          <tr><td class="tdr">11.</td><td>Mit tanultam 20 év vegyipari kereskedelemből?</td><td>Személyes márka</td><td>Emberi, de kontrollált.</td></tr>
+          <tr><td class="tdr">12.</td><td>Raw Materials Trade: miért építünk digitális bizonyítékrendszert?</td><td>AI-entitás</td><td>Átláthatóság, bizalom, nemzetközi elérhetőség.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- FIRST 100 CONTACTS -->
+<div id="first-100-contacts" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Első 100 célkontakt logika</div>
+    <h2>Nem tömeges sales — célzott exportpiaci tanulás</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Szűrési alap</h4><ul class="exec-list"><li>DACH gyártócégek</li><li>Feed, industrial, household care, specialty fókusz</li><li>Beszerző / quality / ügyvezető szerepkör</li><li>Valós alapanyagigény jelei</li></ul></div>
+      <div class="exec-card"><h4>Lista felépítése</h4><ul class="exec-list"><li>30 potenciális vevő</li><li>30 potenciális beszállító</li><li>20 iparági / partner platform</li><li>20 strategic wildcard kapcsolat</li></ul></div>
+      <div class="exec-card"><h4>Megkeresési sorrend</h4><ul class="exec-list"><li>Először legkisebb reputációs kockázatú célcsoport</li><li>Majd relevánsabb, de nagyobb értékű célok</li><li>Végül prémium partneri célpontok</li></ul></div>
+      <div class="exec-card"><h4>Mit mérünk?</h4><ul class="exec-list"><li>Megnyitás / válasz / relevancia</li><li>Kért termékkategória</li><li>Dokumentumigény</li><li>Árérzékenység</li><li>Következő lépés</li></ul></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- EXPORT RISK MAP -->
+<div id="export-risk-map" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Exportpiaci kockázati térkép</div>
+    <h2>Milyen kockázatokat kell kezelni, mielőtt a leadből üzlet lesz?</h2>
+    <div class="risgrid">
+      <div class="riscard"><div class="rislv rh">Magas</div><div class="rist">Fizetési kockázat</div><div class="risd">Új külföldi vevőknél előleg, hitelkeret, biztosítás vagy fokozatos próbarendelés nélkül kockázatos szállítani.</div><div class="risa">Kontroll: cégellenőrzés, fizetési feltétel, limit, első rendelés mérete.</div></div>
+      <div class="riscard"><div class="rislv rh">Magas</div><div class="rist">Minőségi / dokumentációs kockázat</div><div class="risd">CoA, TDS, SDS, specifikáció és felhasználási cél tisztázása nélkül reputációs és jogi kockázat nő.</div><div class="risa">Kontroll: dokumentum checklist és írásos visszaigazolás.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes</div><div class="rist">Logisztikai kockázat</div><div class="risd">Veszélyes áru, tárolás, csomagolás, paritás, határidő és fuvarár változása ronthatja az árrést.</div><div class="risa">Kontroll: előzetes fuvar- és csomagolási kalkuláció.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes</div><div class="rist">Compliance kockázat</div><div class="risd">Termékkörönként eltérő import/export, felhasználási és dokumentációs követelmények lehetnek.</div><div class="risa">Kontroll: kategóriánkénti compliance ellenőrzés.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes</div><div class="rist">Árrés-kockázat</div><div class="risd">Túlzott árverseny esetén a lead mennyiség nőhet, de érték nem épül.</div><div class="risa">Kontroll: minimális fedezeti küszöb.</div></div>
+      <div class="riscard"><div class="rislv rl2">Alacsony-közepes</div><div class="rist">Reputációs zaj</div><div class="risd">Túl agresszív vagy túl személyes kommunikáció gyengítheti a prémium, stabil benyomást.</div><div class="risa">Kontroll: előre jóváhagyott üzenetek és vörös vonalak.</div></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- WEB QA CHECKLIST -->
+<div id="web-qa-checklist" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Weboldal QA checklist</div>
+    <h2>Az első hónap technikai és tartalmi záróellenőrzése</h2>
+    <div class="exec-grid">
+      <div class="exec-card"><h4>Technikai QA</h4><ul class="exec-list"><li>robots.txt, sitemap.xml, llms.txt</li><li>canonical URL-ek</li><li>404 / belső linkek</li><li>mobil menü és formok</li><li>betöltési sebesség</li></ul></div>
+      <div class="exec-card"><h4>SEO / GEO / AI QA</h4><ul class="exec-list"><li>title / description minden oldalon</li><li>schema JSON-LD validálás</li><li>termékkategória-konzekvencia</li><li>AI Entity Pack szövegek</li><li>sameAs kapcsolatok</li></ul></div>
+      <div class="exec-card"><h4>GDPR / bizalom</h4><ul class="exec-list"><li>form adatkezelési szöveg</li><li>Google Apps Script / Sheets említése</li><li>impresszum / kapcsolat</li><li>cookie / külső hívások</li><li>ajánlatkérési disclaimer</li></ul></div>
+      <div class="exec-card"><h4>Sales QA</h4><ul class="exec-list"><li>form minden nyelven küld</li><li>e-mail tárgy egyértelmű</li><li>lead táblába kerül</li><li>válaszsablon kész</li><li>utánkövetés rögzíthető</li></ul></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- GSC BING AI DASHBOARD -->
+<div id="measurement-dashboard" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">GSC / Bing / AI baseline dashboard</div>
+    <h2>Mit mérünk havonta?</h2>
+    <div class="twrap">
+      <table class="compact-table">
+        <thead><tr><th>Mérőszám</th><th>Forrás</th><th>Miért fontos?</th><th>90 napos cél</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">Indexelt oldalak száma</td><td>Google Search Console / Bing</td><td>Látják-e a keresők a weboldal struktúráját?</td><td>Folyamatos növekedés, hibák csökkenése.</td></tr>
+          <tr><td class="tdr">Brand keresések</td><td>GSC</td><td>Nő-e a Raw Materials Trade név kereshetősége?</td><td>Brand lekérdezések megjelenése.</td></tr>
+          <tr><td class="tdr">Termékkategória keresések</td><td>GSC / Bing</td><td>Mely kategóriák hozzák az első organikus jeleket?</td><td>Legalább 3 releváns kategóriajel.</td></tr>
+          <tr><td class="tdr">AI-válasz pontosság</td><td>ChatGPT / Perplexity / Gemini</td><td>Helyesen érti-e az AI a céget?</td><td>Alaptevékenység, piac és bizalmi jelek pontosak.</td></tr>
+          <tr><td class="tdr">Formbeküldések</td><td>Google Sheet / e-mail</td><td>Jön-e üzleti szándék?</td><td>Minden lead státuszolt.</td></tr>
+          <tr><td class="tdr">Lead-minőség</td><td>CRM / táblázat</td><td>Nem mennyiség, hanem relevancia számít.</td><td>Legalább 1–3 kvalifikált lead.</td></tr>
+          <tr><td class="tdr">LinkedIn profilmegtekintés</td><td>LinkedIn</td><td>Erősödik-e Alexandra személyes márkája?</td><td>Növekedő releváns megtekintés.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
 <!-- RISKS -->
 <div class="sfull">
   <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
@@ -1015,7 +1965,7 @@ footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
   <div class="fbrand">Raw Materials Trade Kft. · Digitális Entitás Audit</div>
   <div class="fsub">Sajbán-Frőhner Alexandra · 2026. június</div>
   <div class="fdiv"></div>
-  <div class="fcopy">Készítette: Bánhalmi Norbert e.U. · <a href="https://vipach.at">vipach.at</a><br>Az audit a megadott kérdőív-válaszok, nyilvánosan elérhető adatok és stratégiai következtetések alapján készült.<br>Nem tartalmaz garantált eredményeket. Bizalmas dokumentum.<br>Javított verzió: weboldal elkészült indulóalapként kezelve · projektindulás: 2026.06.01. · Frissítés: első inbound megkeresések és lead-kezelési kontroll beépítve.</div>
+  <div class="fcopy">Készítette: Bánhalmi Norbert e.U. · <a href="https://vipach.at">vipach.at</a><br>Az audit a megadott kérdőív-válaszok, nyilvánosan elérhető adatok és stratégiai következtetések alapján készült.<br>Nem tartalmaz garantált eredményeket. Bizalmas dokumentum.<br>Javított verzió: weboldal elkészült indulóalapként kezelve · projektindulás: 2026.06.01. · Frissítés: első inbound megkeresések és lead-kezelési kontroll beépítve. V5 teljes végrehajtási réteg: RACI, 30/60/90 sprint, AI tesztprotokoll, brand asset csomag, buyer persona, kategóriamátrix, LinkedIn terv és exportkockázati térkép. V6: nemzetközi célpiaci kutatás, országonkénti célvállalatlista, inbound lead elemzés és ajánlati irányok.</div>
 </footer>
 </div><!-- /main -->
 <div class="toast" id="toast"></div>
