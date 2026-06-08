@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitális Entitás Audit — Raw Materials Trade Kft.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,300&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ivory:#faf5f0;--cream:#f4ece3;--blush:#fdf0f4;--ampal:#f4f0fa;--white:#ffffff;
+  --plum-deep:#1a0828;--plum:#3d1657;--plum-mid:#6b3490;
+  --rose:#b85470;--rose-dk:#8c3352;--rose-lt:#e8b0c4;--rose-pale:#fdf5f8;
+  --ameth:#7c52bf;--ameth-dk:#5a3499;--ameth-lt:#c0a8e8;
+  --rg:#c47a5a;--rg-lt:#edcab4;--champ:#e8d0b8;
+  --ok:#1f5e48;--ok-bg:#e6f4ee;--warn:#7a5200;--warn-bg:#fdf5e0;
+  --bad:#9a1f40;--bad-bg:#fdedf2;--info:#5a3499;--info-bg:#f0eafa;
+  --t1:#1a0828;--t2:#4a2860;--t3:#8a6aaa;--t4:#c0a8d8;
+  --sh-xs:0 1px 4px rgba(30,8,40,.06);--sh-sm:0 4px 16px rgba(30,8,40,.08);
+  --sh-md:0 8px 32px rgba(30,8,40,.10);--sh-lg:0 16px 48px rgba(30,8,40,.14);
+  --bd:rgba(61,22,87,.12);--bd2:rgba(61,22,87,.18);
+  --gp:linear-gradient(135deg,#b85470 0%,#7c52bf 100%);
+  --gw:linear-gradient(135deg,#c47a5a 0%,#b85470 100%);
+  --gc:linear-gradient(135deg,#7c52bf 0%,#4a2890 100%);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Lato',Georgia,sans-serif;font-weight:300;background:var(--ivory);color:var(--t1);line-height:1.75;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--cream)}::-webkit-scrollbar-thumb{background:var(--rose-lt);border-radius:3px}
+
+/* ICONS */
+.ico{display:inline-block;vertical-align:middle;flex-shrink:0}
+.ico svg{display:block}
+.oi{display:block;width:34px;height:34px;color:var(--rose);margin-bottom:.9rem}
+.oi svg{width:100%;height:100%;display:block}
+.lgem{display:block;width:60px;height:60px;color:rgba(220,180,208,.88);margin:0 auto 1.5rem;animation:gflt 3s ease-in-out infinite}
+.lgem svg{width:100%;height:100%;display:block}
+.bi{width:14px;height:14px;display:inline-block;vertical-align:middle;margin-right:5px;position:relative;top:-1px}
+.bi svg{width:100%;height:100%;display:block}
+
+/* LOCK */
+#lock{position:fixed;inset:0;z-index:10000;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse 60% 50% at 15% 55%,rgba(184,84,112,.45) 0%,transparent 55%),
+  radial-gradient(ellipse 50% 60% at 85% 25%,rgba(124,82,191,.40) 0%,transparent 55%),
+  radial-gradient(ellipse 40% 40% at 50% 85%,rgba(196,122,90,.25) 0%,transparent 50%),#140620;overflow:hidden}
+.lp{position:absolute;border-radius:50%;opacity:0;animation:fup 6s ease-in-out infinite}
+@keyframes fup{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:.7}80%{opacity:.3}100%{opacity:0;transform:translateY(-60vh) scale(1)}}
+.lp:nth-child(1){width:6px;height:6px;background:var(--rose-lt);left:15%;top:80%;animation-delay:0s;animation-duration:7s}
+.lp:nth-child(2){width:4px;height:4px;background:var(--ameth-lt);left:30%;top:70%;animation-delay:1s;animation-duration:9s}
+.lp:nth-child(3){width:8px;height:8px;background:rgba(232,176,196,.6);left:50%;top:85%;animation-delay:2s;animation-duration:6s}
+.lp:nth-child(4){width:5px;height:5px;background:var(--champ);left:65%;top:75%;animation-delay:.5s;animation-duration:8s}
+.lp:nth-child(5){width:3px;height:3px;background:var(--rg-lt);left:80%;top:80%;animation-delay:1.5s;animation-duration:10s}
+.lp:nth-child(6){width:7px;height:7px;background:rgba(192,168,232,.7);left:25%;top:90%;animation-delay:3s;animation-duration:7s}
+.lp:nth-child(7){width:4px;height:4px;background:var(--rose-lt);left:70%;top:60%;animation-delay:2.5s;animation-duration:9s}
+.lp:nth-child(8){width:5px;height:5px;background:var(--ameth-lt);left:90%;top:70%;animation-delay:.8s;animation-duration:8s}
+.lstar{position:absolute;animation:twkl 4s ease-in-out infinite;color:rgba(255,255,255,.55)}
+.lstar svg{display:block}
+@keyframes twkl{0%,100%{opacity:.1;transform:scale(.8)}50%{opacity:.8;transform:scale(1.2)}}
+.lstar:nth-child(9){left:10%;top:15%;animation-delay:0s}
+.lstar:nth-child(10){left:85%;top:20%;animation-delay:1s}
+.lstar:nth-child(11){left:40%;top:10%;animation-delay:2s}
+.lstar:nth-child(12){left:70%;top:50%;animation-delay:.5s}
+.lstar:nth-child(13){left:20%;top:40%;animation-delay:1.5s}
+.lcard{background:rgba(255,255,255,.07);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.15);border-radius:24px;padding:3.5rem 3rem 3rem;
+  width:min(440px,90vw);text-align:center;position:relative;z-index:2;
+  box-shadow:0 24px 64px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.2);animation:crev .8s ease-out}
+@keyframes crev{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes gflt{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.ltitle{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#f5eef8;letter-spacing:.02em;margin-bottom:.35rem;line-height:1.2}
+.lsub{font-family:'Josefin Sans',sans-serif;font-size:.72rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(232,192,216,.8);margin-bottom:2rem}
+.ldiv{height:1px;background:var(--gp);margin:0 auto 2rem;width:60px;border-radius:1px}
+.llabel{font-family:'Josefin Sans',sans-serif;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(220,180,208,.7);margin-bottom:.75rem;display:block}
+.linput{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.2);border-radius:12px;
+  padding:1rem 1.25rem;font-family:'Fira Mono',monospace;font-size:1.4rem;color:#f5eef8;
+  text-align:center;letter-spacing:.3em;outline:none;transition:border-color .3s,background .3s;
+  -webkit-text-security:disc;margin-bottom:1.75rem}
+.linput::placeholder{color:rgba(255,255,255,.25);letter-spacing:.1em;font-size:.9rem}
+.linput:focus{border-color:rgba(184,84,112,.7);background:rgba(255,255,255,.09);box-shadow:0 0 0 3px rgba(184,84,112,.2)}
+.linput.err{border-color:rgba(220,60,80,.8);animation:shk .5s ease}
+@keyframes shk{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
+.lbtn{width:100%;background:var(--gp);border:none;border-radius:12px;padding:1rem;
+  font-family:'Josefin Sans',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.25em;
+  text-transform:uppercase;color:#fff;cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem;
+  box-shadow:0 4px 20px rgba(184,84,112,.4)}
+.lbtn:hover{transform:translateY(-1px);box-shadow:0 8px 28px rgba(184,84,112,.5)}
+.lerr{margin-top:.75rem;font-size:.78rem;color:rgba(255,150,160,.9);display:none;font-family:'Josefin Sans',sans-serif;letter-spacing:.05em}
+.lerr.show{display:block;animation:fdin .3s ease}
+.lfoot{margin-top:2rem;font-family:'Josefin Sans',sans-serif;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+#lock.out{animation:lout .7s ease-out forwards}
+@keyframes lout{to{opacity:0;pointer-events:none}}
+@keyframes fdin{from{opacity:0}to{opacity:1}}
+#main{display:none}
+#main.on{display:block;animation:fdin .8s ease-out}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(250,245,240,.94);
+  backdrop-filter:blur(20px);border-bottom:1px solid var(--bd);height:60px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 2rem;box-shadow:var(--sh-xs)}
+.nbrand{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;color:var(--plum);letter-spacing:.05em;line-height:1.2}
+.nbrand span{display:block;font-family:'Josefin Sans',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--t3)}
+.nlinks{display:flex;gap:1.75rem;list-style:none}
+.nlinks a{font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);text-decoration:none;transition:color .2s;padding-bottom:2px;border-bottom:1px solid transparent}
+.nlinks a:hover{color:var(--rose);border-color:var(--rose-lt)}
+.nacts{display:flex;gap:.75rem;align-items:center}
+.nbtn{font-family:'Josefin Sans',sans-serif;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.45rem 1.1rem;border-radius:100px;cursor:pointer;transition:all .25s;border:none;display:inline-flex;align-items:center;gap:.4rem}
+.nbtn-o{background:transparent;border:1px solid var(--bd2);color:var(--t2)}.nbtn-o:hover{border-color:var(--rose);color:var(--rose)}
+.nbtn-p{background:var(--gp);color:#fff;box-shadow:0 2px 12px rgba(184,84,112,.3)}.nbtn-p:hover{box-shadow:0 4px 20px rgba(184,84,112,.45);transform:translateY(-1px)}
+.ham{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+.ham span{display:block;width:22px;height:1.5px;background:var(--plum);border-radius:2px;transition:all .3s}
+.mmenu{display:none;position:fixed;top:60px;left:0;right:0;background:var(--white);border-bottom:1px solid var(--bd);padding:1.5rem 2rem;z-index:998;box-shadow:var(--sh-md);flex-direction:column;gap:1rem}
+.mmenu.open{display:flex}
+.mmenu a{font-family:'Josefin Sans',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);text-decoration:none;padding:.5rem 0;border-bottom:1px solid var(--bd)}
+
+/* LAYOUT */
+.sec{padding:5.5rem 2rem;max-width:1120px;margin:0 auto}
+.sfull{padding:5.5rem 2rem}.sfull .inn{max-width:1120px;margin:0 auto}
+.salt{background:var(--cream)}.sblush{background:var(--blush)}.sameth{background:var(--ampal)}
+.stag{display:inline-flex;align-items:center;gap:.6rem;font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:1.25rem}
+.stag::before{content:'';display:block;width:24px;height:1.5px;background:var(--gp)}
+h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,2.9rem);font-weight:300;color:var(--plum-deep);line-height:1.15;margin-bottom:.75rem}
+h3{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:300;color:var(--plum-deep);margin-bottom:.75rem;line-height:1.2}
+h4{font-family:'Josefin Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--rose);margin-bottom:.85rem}
+p{margin-bottom:1rem;line-height:1.75;color:var(--t2)}
+.lead{font-size:1.05rem;color:var(--t2);font-weight:300;max-width:680px}
+.divhr{height:1px;background:linear-gradient(90deg,transparent,var(--bd2),transparent)}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-family:'Josefin Sans',sans-serif;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.85rem 2rem;border-radius:100px;cursor:pointer;border:none;text-decoration:none;transition:all .25s}
+.btn-p{background:var(--gp);color:#fff;box-shadow:0 4px 20px rgba(184,84,112,.35)}.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,84,112,.45)}
+.btn-s{background:var(--white);color:var(--plum);border:1px solid var(--bd2);box-shadow:var(--sh-xs)}.btn-s:hover{border-color:var(--rose-lt);color:var(--rose-dk);background:var(--blush)}
+
+/* HERO */
+#hero{padding:9rem 2rem 5rem;position:relative;overflow:hidden;background:var(--ivory)}
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(184,84,112,.14) 0%,transparent 70%);top:-100px;left:-100px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(124,82,191,.10) 0%,transparent 70%);top:50px;right:-80px}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(196,122,90,.09) 0%,transparent 70%);bottom:0;left:40%}
+.hinn{max-width:1120px;margin:0 auto;position:relative;z-index:2}
+.htag{display:inline-flex;align-items:center;gap:.6rem;background:var(--white);border:1px solid var(--bd);border-radius:100px;padding:.45rem 1.1rem;margin-bottom:2.5rem;box-shadow:var(--sh-xs)}
+.hdot{width:7px;height:7px;border-radius:50%;background:var(--gp);animation:pls 2s infinite;flex-shrink:0}
+@keyframes pls{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.8)}}
+.htxt{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--t3)}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.2rem);font-weight:300;color:var(--plum-deep);margin-bottom:1.25rem;letter-spacing:-.01em;line-height:1.1}
+.htitle em{font-style:italic;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsub{font-size:1.05rem;color:var(--t2);max-width:540px;margin-bottom:2.5rem;font-weight:300}
+.hmeta{display:flex;gap:2.5rem;flex-wrap:wrap;margin-bottom:3rem}
+.hml{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--t4);margin-bottom:.3rem}
+.hmv{font-size:.88rem;color:var(--t1);font-weight:400}
+.hfinds{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:16px;overflow:hidden;margin-bottom:3rem;box-shadow:var(--sh-sm)}
+.hfind{background:var(--white);padding:1.75rem 1.5rem;transition:background .2s}.hfind:hover{background:var(--blush)}
+.hfnum{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.5rem}
+.hftxt{font-size:.85rem;color:var(--t2);line-height:1.55}
+.hcta{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* CALLOUTS */
+.call{border-radius:12px;padding:1.5rem 1.75rem;margin:1.5rem 0;border-left:3px solid}
+.call-r{background:var(--blush);border-color:var(--rose)}.call-a{background:var(--ampal);border-color:var(--ameth)}
+.call-w{background:#fdf8f4;border-color:var(--rg)}.call-d{background:var(--bad-bg);border-color:var(--bad)}
+.call-n{background:var(--warn-bg);border-color:#c07800}
+.ctit{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:.6rem}
+.call-r .ctit{color:var(--rose-dk)}.call-a .ctit{color:var(--ameth-dk)}.call-w .ctit{color:var(--rg)}
+.call-d .ctit{color:var(--bad)}.call-n .ctit{color:#8a5800}
+.call p{color:var(--t1);margin:0;font-size:.88rem;line-height:1.7}.call strong{color:var(--t1);font-weight:700}
+
+/* AUDIT */
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.ablock{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.75rem;box-shadow:var(--sh-xs)}
+.alist{list-style:none}
+.alist li{display:flex;align-items:flex-start;gap:.75rem;padding:.6rem 0;border-bottom:1px solid var(--bd);font-size:.86rem;color:var(--t1);line-height:1.55}
+.alist li:last-child{border-bottom:none}
+.alist li::before{content:attr(data-i);flex-shrink:0;font-size:.9rem;margin-top:.1rem}
+.tag{display:inline-block;font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:.15rem .5rem;border-radius:100px;margin-left:auto;flex-shrink:0;white-space:nowrap}
+.tf{background:var(--ok-bg);color:var(--ok)}.tc{background:var(--info-bg);color:var(--info)}
+.tr{background:var(--bad-bg);color:var(--bad)}.ts{background:var(--blush);color:var(--rose-dk)}.tk{background:var(--warn-bg);color:var(--warn)}
+
+/* NARRATIVE */
+.narr{background:linear-gradient(135deg,var(--blush) 0%,var(--ampal) 100%);border:1px solid var(--bd);border-radius:20px;padding:2.5rem 3rem;margin:2.5rem 0;position:relative;overflow:hidden}
+.narr::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:9rem;line-height:1;color:var(--rose-lt);position:absolute;top:-1.5rem;left:1.5rem;opacity:.4;pointer-events:none}
+.nq{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;font-weight:400;color:var(--plum-deep);line-height:1.6;position:relative;z-index:1}
+.na{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--t3);margin-top:1rem;display:block}
+
+/* DASHBOARD */
+.dgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;margin-top:3rem}
+.dc{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.75rem 1.5rem;box-shadow:var(--sh-xs);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+.dc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.dc:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.dlbl{font-family:'Josefin Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:1rem}
+.dsco{font-family:'Cormorant Garamond',serif;font-size:3.2rem;font-weight:600;line-height:1;margin-bottom:.25rem}
+.dmx{font-size:1.2rem;opacity:.35}
+.dtrk{height:3px;background:var(--cream);border-radius:2px;margin:1rem 0 .75rem;overflow:hidden}
+.dfll{height:100%;border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.ddsc{font-size:.79rem;color:var(--t3);line-height:1.55}
+.dc-cr::before{background:linear-gradient(90deg,var(--bad),#d44)}.dc-cr .dsco{color:var(--bad)}.dc-cr .dfll{background:linear-gradient(90deg,var(--bad),#e55)}
+.dc-lw::before{background:linear-gradient(90deg,#c07800,#e09000)}.dc-lw .dsco{color:#8a5800}.dc-lw .dfll{background:linear-gradient(90deg,#c07800,#e09000)}
+.dc-md::before{background:var(--gp)}.dc-md .dsco{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}.dc-md .dfll{background:var(--gp)}
+.dc-gd::before{background:linear-gradient(90deg,var(--ok),#2a8060)}.dc-gd .dsco{color:var(--ok)}.dc-gd .dfll{background:linear-gradient(90deg,var(--ok),#2a8060)}
+
+/* WIZARD */
+#wizard{background:var(--cream)}
+.winn{max-width:1120px;margin:0 auto;padding:5.5rem 2rem}
+.wprog{display:flex;gap:0;margin-bottom:4rem;position:relative}
+.wprog::before{content:'';position:absolute;left:15px;right:15px;top:15px;height:1px;background:var(--bd2);z-index:0}
+.wp{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;cursor:pointer}
+.wpdot{width:30px;height:30px;border-radius:50%;background:var(--white);border:1.5px solid var(--bd2);display:flex;align-items:center;justify-content:center;font-family:'Fira Mono',monospace;font-size:.65rem;font-weight:500;color:var(--t3);margin-bottom:.5rem;transition:all .3s}
+.wp.act .wpdot{background:var(--gp);border-color:transparent;color:#fff;box-shadow:0 3px 12px rgba(184,84,112,.4)}
+.wp.dn .wpdot{background:var(--gc);border-color:transparent;color:#fff}
+.wplbl{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--t4);text-align:center}
+.wp.act .wplbl{color:var(--rose)}.wp.dn .wplbl{color:var(--ameth)}
+.wstep{display:none}.wstep.act{display:block;animation:sup .4s ease}
+@keyframes sup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.wq{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:300;color:var(--plum-deep);margin-bottom:.6rem}
+.wh{font-size:.88rem;color:var(--t3);margin-bottom:2.5rem}
+.ogrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem;margin-bottom:2.5rem}
+.ocard{background:var(--white);border:1.5px solid var(--bd);border-radius:16px;padding:1.5rem;cursor:pointer;transition:all .22s;user-select:none;position:relative}
+.ocard:hover{border-color:var(--rose-lt);box-shadow:var(--sh-sm);transform:translateY(-2px)}
+.ocard.sel{border-color:var(--rose);background:linear-gradient(135deg,rgba(184,84,112,.04) 0%,rgba(124,82,191,.04) 100%);box-shadow:0 0 0 3px rgba(184,84,112,.12)}
+.ocard.sel::after{content:'';position:absolute;top:1rem;right:1rem;width:18px;height:18px;background:var(--gp);border-radius:50%;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-size:11px 11px;background-position:center;background-repeat:no-repeat;box-shadow:0 2px 8px rgba(184,84,112,.35)}
+.ot{font-family:'Josefin Sans',sans-serif;font-size:.82rem;font-weight:700;color:var(--t1);margin-bottom:.4rem;letter-spacing:.04em}
+.od{font-size:.8rem;color:var(--t2);line-height:1.5}
+.on{font-size:.72rem;color:var(--t4);margin-top:.6rem;padding-top:.6rem;border-top:1px solid var(--bd);line-height:1.4}
+.wnav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem;flex-wrap:wrap;gap:1rem}
+
+/* SUMMARY */
+#gsum{display:none;background:var(--white);border:1px solid var(--bd);border-radius:20px;padding:3rem;margin-top:3rem;box-shadow:var(--sh-md);position:relative;overflow:hidden}
+#gsum::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gp)}
+#gsum.on{display:block;animation:sup .5s ease}
+.sco{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:var(--plum-deep)}
+.smeta{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.5rem;margin:2rem 0}
+.sml{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--t4);margin-bottom:.3rem}
+.smv{font-size:.88rem;color:var(--t1)}
+.ssteps{list-style:none;counter-reset:st}
+.ssteps li{display:flex;gap:1.25rem;padding:1.1rem 0;border-bottom:1px solid var(--bd);counter-increment:st}
+.ssteps li:last-child{border-bottom:none}
+.ssteps li::before{content:counter(st,decimal-leading-zero);font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--rose-lt);flex-shrink:0;width:2rem;line-height:1.2}
+.stt{font-family:'Josefin Sans',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.08em;color:var(--t1);margin-bottom:.3rem}
+.std{font-size:.82rem;color:var(--t2);line-height:1.55}
+
+/* ROUTES */
+.rgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.5rem;margin-top:3rem}
+.rcard{background:var(--white);border:1px solid var(--bd);border-radius:20px;padding:2rem;box-shadow:var(--sh-xs);transition:all .25s;position:relative}
+.rcard:hover{transform:translateY(-4px);box-shadow:var(--sh-lg)}
+.rcard.feat{background:linear-gradient(var(--white),var(--white)) padding-box,var(--gp) border-box;border:2px solid transparent;box-shadow:var(--sh-md)}
+.rbadge{position:absolute;top:-12px;left:1.5rem;background:var(--gp);color:#fff;font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:.25rem .85rem;border-radius:100px;box-shadow:0 2px 12px rgba(184,84,112,.4)}
+.rnum{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--t4);margin-bottom:.5rem}
+.rname{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--plum-deep);margin-bottom:.85rem;line-height:1.25}
+.rlog{font-size:.83rem;color:var(--t2);line-height:1.65;margin-bottom:1.25rem}
+.rtags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.rtag{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .65rem;border-radius:100px;background:var(--cream);color:var(--t3);border:1px solid var(--bd)}
+.rnote{font-size:.78rem;color:var(--t3);padding-top:1rem;margin-top:1rem;border-top:1px solid var(--bd);line-height:1.55}
+.rnote strong{color:var(--rose-dk)}.rnote em{color:var(--bad);font-style:normal}
+.rmg{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--bd)}
+.rmi{font-size:.75rem}.rml{color:var(--t4);font-family:'Josefin Sans',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.2rem}
+.rmb{height:2px;background:var(--cream);border-radius:1px;margin-top:.2rem;overflow:hidden}
+.rmf{height:100%;border-radius:1px;background:var(--gp)}.rmv{color:var(--t2);font-size:.75rem;margin-top:.1rem}
+
+/* TABLE */
+.twrap{overflow-x:auto;margin-top:2.5rem;border-radius:16px;box-shadow:var(--sh-sm);border:1px solid var(--bd)}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+thead tr{background:var(--cream)}
+th{padding:1rem 1.1rem;text-align:left;font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--t2);border-bottom:1px solid var(--bd);white-space:nowrap;background:var(--cream)}
+td{padding:.9rem 1.1rem;border-bottom:1px solid var(--bd);color:var(--t2);background:var(--white)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--blush)}
+.tdr{color:var(--t1);font-weight:400;font-size:.86rem}
+.sp{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;font-family:'Fira Mono',monospace;font-size:.78rem;font-weight:500}
+.spl{background:var(--bad-bg);color:var(--bad)}.spm{background:var(--warn-bg);color:var(--warn)}
+.spg{background:var(--info-bg);color:var(--info)}.spb{background:var(--ok-bg);color:var(--ok)}
+
+/* TIMELINE */
+.tl{margin-top:3rem;position:relative}
+.tl::before{content:'';position:absolute;left:130px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--rose-lt),var(--ameth-lt),transparent)}
+.tlph{display:flex;gap:2rem;margin-bottom:2.5rem;position:relative}
+.tltm{flex-shrink:0;width:110px;text-align:right;padding-top:.35rem}
+.tlper{font-family:'Fira Mono',monospace;font-size:.7rem;font-weight:500;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1.3}
+.tllab{font-family:'Josefin Sans',sans-serif;font-size:.58rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--t4);display:block}
+.tldot{flex-shrink:0;padding-top:.4rem}
+.tldot::before{content:'';display:block;width:12px;height:12px;border-radius:50%;background:var(--gp);border:2px solid var(--white);box-shadow:0 0 0 2px rgba(184,84,112,.25)}
+.tlcon{flex:1;background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.5rem 1.75rem;box-shadow:var(--sh-xs);margin-left:1rem}
+.tlg{font-family:'Josefin Sans',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:.75rem}
+.tlis{list-style:none;margin-bottom:1rem}
+.tlis li{font-size:.84rem;color:var(--t1);padding:.3rem 0 .3rem 1rem;position:relative}
+.tlis li::before{content:'—';position:absolute;left:0;color:var(--rose-lt)}
+.tlkpi{font-family:'Fira Mono',monospace;font-size:.72rem;color:var(--t3);border-top:1px solid var(--bd);padding-top:.75rem;margin-top:.75rem;line-height:1.5}
+
+/* RISKS */
+.risgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2.5rem}
+.riscard{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.75rem;box-shadow:var(--sh-xs)}
+.rislv{display:flex;align-items:center;gap:.5rem;font-family:'Josefin Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.75rem}
+.rislv::before{content:'';width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.rh{color:var(--bad)}.rh::before{background:var(--bad)}.rm2{color:#c07800}.rm2::before{background:#c07800}
+.rl2{color:var(--rose-dk)}.rl2::before{background:var(--rose)}
+.rist{font-family:'Josefin Sans',sans-serif;font-size:.82rem;font-weight:700;color:var(--t1);margin-bottom:.5rem;letter-spacing:.04em}
+.risd{font-size:.82rem;color:var(--t2);line-height:1.6;margin-bottom:.85rem}
+.risa{font-size:.78rem;color:var(--ameth);border-top:1px solid var(--bd);padding-top:.75rem;line-height:1.55}
+.risa::before{content:'→ ';font-weight:700}
+
+/* DECISIONS */
+.decgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.5rem;margin-top:2.5rem}
+.decc{background:var(--white);border:1px solid var(--bd);border-radius:16px;padding:1.75rem;box-shadow:var(--sh-xs);transition:all .22s}
+.decc:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.decn{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:600;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:.75rem}
+.dect{font-family:'Josefin Sans',sans-serif;font-size:.8rem;font-weight:700;color:var(--t1);margin-bottom:.5rem;letter-spacing:.06em}
+.decd{font-size:.82rem;color:var(--t2);line-height:1.6}
+.decl{margin-top:.85rem;font-family:'Fira Mono',monospace;font-size:.68rem;color:var(--rose-dk);text-transform:uppercase;letter-spacing:.1em}
+
+/* EXPORT */
+#expsec{background:linear-gradient(135deg,var(--blush) 0%,var(--ampal) 100%);border-top:1px solid var(--bd);padding:4rem 2rem}
+.expinn{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.expt h3{font-size:1.6rem;margin-bottom:.3rem}.expt p{font-size:.85rem;color:var(--t2);margin:0}
+.expb{display:flex;gap:.85rem;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:var(--plum-deep);padding:3rem 2rem 2rem;text-align:center}
+.fbrand{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:rgba(240,220,235,.9);margin-bottom:.5rem}
+.fsub{font-family:'Josefin Sans',sans-serif;font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:rgba(200,170,220,.5);margin-bottom:1.5rem}
+.fdiv{width:40px;height:1px;background:var(--gp);margin:1.5rem auto;border-radius:1px}
+.fcopy{font-size:.75rem;color:rgba(200,170,220,.4);line-height:1.8}
+.fcopy a{color:rgba(200,170,220,.6);text-decoration:none}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;right:2rem;background:var(--plum-deep);color:rgba(240,220,235,.95);padding:.85rem 1.5rem;border-radius:12px;font-family:'Josefin Sans',sans-serif;font-size:.75rem;font-weight:600;letter-spacing:.08em;z-index:9998;box-shadow:var(--sh-lg);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1)}
+.toast.on{transform:translateY(0);opacity:1}
+
+/* RESPONSIVE */
+@media(max-width:1000px){.dgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){.nlinks{display:none}.ham{display:flex}.nacts .nbtn-o{display:none}}
+@media(max-width:768px){.agrid{grid-template-columns:1fr}.tl::before{display:none}.tlph{flex-direction:column;gap:.5rem}.tltm{width:auto;text-align:left}.tldot{display:none}.tlcon{margin-left:0}}
+@media(max-width:640px){.dgrid{grid-template-columns:1fr}.rgrid{grid-template-columns:1fr}.ogrid{grid-template-columns:1fr}}
+@media(max-width:560px){.hfinds{grid-template-columns:1fr}.hmeta{gap:1rem}.nacts{display:none}}
+@media print{#lock,nav,#wizard,#expsec,.hcta,.expb{display:none!important}#main{display:block!important}#gsum{display:block!important}.orb{display:none}body{background:white}.riscard,.decc,.dc,.ablock{break-inside:avoid;box-shadow:none}footer{background:white}footer *{color:#444!important}.salt,.sblush,.sameth{background:white}}
+</style>
+</head>
+<body>
+<!-- SVG ICON LIBRARY -->
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+<defs>
+<symbol id="ic-gem" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 12L2 9z"/><path d="M2 9h20M10 3l2 6M14 3l-2 6M6 3l4 6M18 3l-4 6"/></symbol>
+<symbol id="ic-ai" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="6" height="6" rx="1"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></symbol>
+<symbol id="ic-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2c-3.5 5-3.5 15 0 20M12 2c3.5 5 3.5 15 0 20"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M2.5 7h19M2.5 17h19"/></symbol>
+<symbol id="ic-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></symbol>
+<symbol id="ic-trend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="3" y2="3"/><line x1="3" y1="21" x2="21" y2="21"/><polyline points="3 16 8 11 13 14 18 7"/><polyline points="14 7 18 7 18 11"/></symbol>
+<symbol id="ic-brief" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="2" y1="12" x2="22" y2="12"/></symbol>
+<symbol id="ic-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9z"/></symbol>
+<symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></symbol>
+<symbol id="ic-flask" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M9 3v6L4 16.5A2 2 0 006 19.5h12a2 2 0 002-3L15 9V3"/><line x1="8" y1="14" x2="16" y2="14"/></symbol>
+<symbol id="ic-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+<symbol id="ic-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="20" x2="20" y2="20"/><path d="M16.5 3.5a2.12 2.12 0 013 3L7 19l-4 1 1-4z"/></symbol>
+<symbol id="ic-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></symbol>
+<symbol id="ic-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></symbol>
+<symbol id="ic-news" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="3" x2="9" y2="9"/><line x1="13" y1="14" x2="19" y2="14"/><line x1="13" y1="18" x2="16" y2="18"/></symbol>
+<symbol id="ic-net" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><line x1="7" y1="5" x2="17" y2="5"/><line x1="6" y1="6.5" x2="11" y2="17.5"/><line x1="18" y1="6.5" x2="13" y2="17.5"/></symbol>
+<symbol id="ic-cert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="12" rx="1"/><circle cx="12" cy="19" r="2.5"/><line x1="9.5" y1="21" x2="12" y2="16.5"/><line x1="14.5" y1="21" x2="12" y2="16.5"/><line x1="7" y1="7" x2="17" y2="7"/><line x1="7" y1="11" x2="12" y2="11"/></symbol>
+<symbol id="ic-bar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="12"/><line x1="18" y1="20" x2="18" y2="8"/><line x1="2" y1="20" x2="22" y2="20"/></symbol>
+<symbol id="ic-build" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="9" width="18" height="12" rx="1"/><path d="M3 9l9-6 9 6"/><rect x="9" y="13" width="6" height="8"/></symbol>
+<symbol id="ic-hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="9" x2="20" y2="9"/><line x1="4" y1="15" x2="20" y2="15"/><line x1="10" y1="3" x2="8" y2="21"/><line x1="16" y1="3" x2="14" y2="21"/></symbol>
+<symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="ic-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></symbol>
+<symbol id="ic-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="3" x2="12" y2="21"/><line x1="4" y1="21" x2="20" y2="21"/><path d="M5 8l7-5 7 5"/><path d="M5 8L3 17h4L5 8zM19 8l2 9h-4l2-9z"/></symbol>
+<symbol id="ic-layer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 22 7 12 12 2 7 12 2"/><polyline points="2 12 12 17 22 12"/><polyline points="2 17 12 22 22 17"/></symbol>
+<symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="ic-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></symbol>
+<symbol id="ic-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15"/></symbol>
+<symbol id="ic-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+</defs>
+</svg>
+
+<!-- LOCK -->
+<div id="lock">
+  <div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div><div class="lp"></div>
+  <div class="lp"></div><div class="lp"></div><div class="lp"></div>
+  <div class="lstar" style="width:16px;height:16px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><line x1="19.1" y1="4.9" x2="4.9" y2="19.1"/></svg></div>
+  <div class="lstar" style="width:12px;height:12px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><line x1="19.1" y1="4.9" x2="4.9" y2="19.1"/></svg></div>
+  <div class="lstar" style="width:10px;height:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><line x1="19.1" y1="4.9" x2="4.9" y2="19.1"/></svg></div>
+  <div class="lstar" style="width:8px;height:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/></svg></div>
+  <div class="lstar" style="width:14px;height:14px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="2" x2="12" y2="22"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/><line x1="19.1" y1="4.9" x2="4.9" y2="19.1"/></svg></div>
+  <div class="lcard">
+    <div class="lgem"><svg><use href="#ic-gem"/></svg></div>
+    <div class="ltitle">Digitális Entitás Audit</div>
+    <div class="lsub">Raw Materials Trade Kft. · Bizalmas dokumentum</div>
+    <div class="ldiv"></div>
+    <span class="llabel">Hozzáférési kód</span>
+    <input id="pin" class="linput" type="password" inputmode="numeric" maxlength="10" placeholder="· · · · · · · ·" autocomplete="off" onkeydown="if(event.key==='Enter')chk()">
+    <button class="lbtn" onclick="chk()">
+      <span class="bi"><svg><use href="#ic-arrow"/></svg></span>
+      Belépés
+    </button>
+    <div class="lerr" id="perr">Helytelen kód. Kérlek próbáld újra.</div>
+    <div class="lfoot">© 2026 Bánhalmi Norbert e.U. · Minden jog fenntartva</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<!-- NAV -->
+<nav>
+  <div class="nbrand">Raw Materials Trade<span>Digitális Entitás Audit · 2026</span></div>
+  <ul class="nlinks">
+    <li><a href="#hero">Összefoglaló</a></li><li><a href="#dash">Dashboard</a></li>
+    <li><a href="#audit">Audit</a></li><li><a href="#wizard">Stratégia</a></li>
+    <li><a href="#routes">Útvonalak</a></li><li><a href="#timeline">Ütemterv</a></li>
+    <li><a href="#dec">Döntések</a></li>
+  </ul>
+  <div class="nacts">
+    <button class="nbtn nbtn-o" onclick="saveLoc()">
+      <span class="bi"><svg><use href="#ic-save"/></svg></span>Mentés
+    </button>
+    <button class="nbtn nbtn-p" onclick="window.print()">
+      <span class="bi"><svg><use href="#ic-download"/></svg></span>PDF / Nyomtatás
+    </button>
+  </div>
+  <button class="ham" id="ham" onclick="togMenu()"><span></span><span></span><span></span></button>
+</nav>
+<div class="mmenu" id="mm">
+  <a href="#hero" onclick="clsMenu()">Összefoglaló</a><a href="#dash" onclick="clsMenu()">Dashboard</a>
+  <a href="#audit" onclick="clsMenu()">Audit</a><a href="#wizard" onclick="clsMenu()">Stratégia</a>
+  <a href="#routes" onclick="clsMenu()">Útvonalak</a><a href="#timeline" onclick="clsMenu()">Ütemterv</a>
+  <a href="#dec" onclick="clsMenu()">Döntések</a>
+  <a href="#" onclick="window.print();clsMenu()">PDF mentés</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="hinn">
+    <div class="htag"><span class="hdot"></span><span class="htxt">Digitális Entitásépítési Audit · 2026. június</span></div>
+    <h1 class="htitle">Sajbán-Frőhner Alexandra<br>&amp; <em>Raw Materials Trade Kft.</em></h1>
+    <p class="hsub">20 év vegyipari tudás. Nulla digitális lábnyom. Ez az audit ezt a paradoxont oldja fel — stratégiai útvonalakkal.</p>
+    <div class="hmeta">
+      <div><div class="hml">Cég</div><div class="hmv">Raw Materials Trade Kft.</div></div>
+      <div><div class="hml">Weboldal</div><div class="hmv">rawmaterialstrade.com</div></div>
+      <div><div class="hml">Célpiac</div><div class="hmv">Magyarország + DACH-régió</div></div>
+      <div><div class="hml">Audit fókuszai</div><div class="hmv">AI-érthetőség · Export · Személyes márka</div></div>
+    </div>
+    <div class="hfinds">
+      <div class="hfind"><div class="hfnum">1/10</div><div class="hftxt">Alexandra jelenlegi személyes digitális láthatósága. A változáshoz elsősorban tartalom és fókusz kell — nem tőke.</div></div>
+      <div class="hfind"><div class="hfnum">20 év</div><div class="hftxt">Az AI ma nem látja, nem érti, nem ajánlja ezt a tudást — mert nincs digitálisan dokumentálva.</div></div>
+      <div class="hfind"><div class="hfnum">DACH</div><div class="hftxt">Az ISO 9001 + GMP+ kombinációja már most teljesíti a belépési feltételeket. A láthatóság hiányzik.</div></div>
+    </div>
+    <div class="hcta">
+      <a href="#wizard" class="btn btn-p"><span class="bi"><svg><use href="#ic-arrow"/></svg></span>Stratégiai útvonal kiválasztása</a>
+      <a href="#dash" class="btn btn-s">Audit részletek megtekintése</a>
+    </div>
+  </div>
+</section>
+<div class="divhr"></div>
+
+<!-- EXECUTIVE SUMMARY -->
+<div id="summary" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Vezetői összefoglaló</div>
+    <h2>A helyzet valódi képe</h2>
+    <p class="lead">Alexandra és a Raw Materials Trade Kft. értékes, de láthatatlan piaci szereplő. A tudás valódi, a bizonyítékok léteznek — de a digitális világ és az AI-rendszerek nem látják, nem értik, nem ajánlják.</p>
+    <div class="agrid" style="margin-top:2.5rem">
+      <div class="ablock"><h4>Jelenlegi helyzet</h4><ul class="alist">
+        <li data-i="●">A cégről az AI elsősorban cégjegyzéki adatokat ad (CompanyWall) — szakmai tartalom nélkül.<span class="tag tf">Tény</span></li>
+        <li data-i="●">Alexandra személyéről szinte nulla találat. 20+ éves pályafutás digitálisan láthatatlan.<span class="tag tc">Állított</span></li>
+        <li data-i="●">Árbevétel csökkenő tendenciával: 2022 ~839M → 2023 ~697M → 2024 ~770M Ft, 2024 veszteséges.<span class="tag tf">Tény</span></li>
+        <li data-i="●">Bagdi Zsigmond Zsolt neve nyilvánosan összekapcsolt a céggel, de láthatóságot nem kíván.<span class="tag tr">Kockázat</span></li>
+        <li data-i="●">A Solvay-kapcsolat szóbeli és informális — erős pozicionálási eszköz, de pontosan így kezelendő.<span class="tag ts">Stratégiai</span></li>
+      </ul></div>
+      <div class="ablock"><h4>Legnagyobb lehetőségek</h4><ul class="alist">
+        <li data-i="◆">Alexandra karrierívje (sufniból → 350M-ről 2,5Md-ra → tulajdonos) hiteles, egyedi narratíva.</li>
+        <li data-i="◆">ISO 9001 + GMP+ kombinációja kisebb cégnél Magyarországon rendkívül ritka. DACH-belépési alap.</li>
+        <li data-i="◆">Az 5 tervezett cikk kész tartalmi alap az AI-érthetőség és LinkedIn pozicionálás megindításához.</li>
+        <li data-i="◆">A specialitás-területek (household care, silicones, feed) az igazi differenciátor — az "általános" elrejti.</li>
+      </ul></div>
+      <div class="ablock"><h4>Legnagyobb kockázatok</h4><ul class="alist">
+        <li data-i="▲">Ha semmi nem változik: a cég árérzékeny, ismeretlen szereplő marad.<span class="tag tr">Magas</span></li>
+        <li data-i="▲">Bagdi Zsigmond cégháttere AI-asszociációs kockázatot jelent.<span class="tag tr">Közepes</span></li>
+        <li data-i="▲">Korlátozott forgó tőke — a stratégiának befektetéstudatosnak kell lennie.<span class="tag tr">Közepes</span></li>
+        <li data-i="▲">Belső szerepek tisztázatlansága végrehajtási torlaszt okozhat.<span class="tag tk">Ellenőrzendő</span></li>
+      </ul></div>
+      <div class="ablock"><h4>Ajánlott stratégiai irány</h4>
+        <p style="font-size:.86rem;color:var(--t1);line-height:1.7;margin:0"><strong>Elsődleges prioritás:</strong> Alexandra személyes szakértői márkaépítése, amely a céget is felemeli. A láthatóság az AI-rendszerek és DACH-döntéshozók felé a cikksorozaton és egy optimalizált LinkedIn-stratégián keresztül indul el.<br><br>A DACH-piacra lépés az AI-érthetőségi munka nélkül nem hatékony — először a digitális identitást kell megalapozni.</p>
+      </div>
+    </div>
+    <div class="narr" style="margin-top:3rem"><p class="nq">"Tapasztald meg kik vagyunk, adj lehetőséget — érdemesek vagyunk rá."</p><span class="na">— Sajbán-Frőhner Alexandra · Audit kérdőív, 106. kérdés</span></div>
+    <p style="font-size:.84rem;color:var(--t3);margin-top:.75rem">Ez az üzenet igaz és erős. A stratégia feladata: hogy a piac és az AI ne csak <em>esélyt kapjon</em> megtapasztalni — hanem ezt az üzenetet digitálisan, meggyőzően, folyamatosan meg is kapja.</p>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- DASHBOARD -->
+<div id="dash" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Audit Dashboard</div>
+    <h2>Digitális jelenlét diagnózisa</h2>
+    <p class="lead">Pontszámok a kérdőív adatai, nyilvánosan elérhető információk és stratégiai következtetések alapján. Nem befektetői minősítések — stratégiai kiindulópontok.</p>
+    <div class="dgrid">
+      <div class="dc dc-cr"><div class="dlbl">Személyes márka AI-érthetősége</div><div class="dsco">1<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="10"></div></div><div class="ddsc">Alexandra neve szinte nem létezik digitálisan. Az AI-rendszerek nem azonosítják, nem ajánlják. Azonnali beavatkozás szükséges.</div></div>
+      <div class="dc dc-cr"><div class="dlbl">Cég AI-érthetősége</div><div class="dsco">3<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="30"></div></div><div class="ddsc">Alapadatok léteznek (CompanyWall), de nincs szakmai tartalom, nincs személyes kapcsolódás, nincs narratíva.</div></div>
+      <div class="dc dc-md"><div class="dlbl">Reputáció és bizalom</div><div class="dsco">6<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="60"></div></div><div class="ddsc">A+ bonitás, ISO 9001, GMP+, informális Solvay-kapcsolat — erős alapok. Kezelendő: co-owner cégháttere.</div></div>
+      <div class="dc dc-cr"><div class="dlbl">Digitális bizonyítékok</div><div class="dsco">2<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="20"></div></div><div class="ddsc">A tanúsítványok léteznek, de nem digitálisan amplifikáltak. Nincs esettanulmány, nincs látható referencia.</div></div>
+      <div class="dc dc-lw"><div class="dlbl">Prémium márkahatás</div><div class="dsco">3<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="30"></div></div><div class="ddsc">A weboldal jó alap, de az összképet rombolja az ismeretlenség. A potenciál 7-8/10 — a gap betölthető.</div></div>
+      <div class="dc dc-cr"><div class="dlbl">Piaci pozíció (export)</div><div class="dsco">2<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="20"></div></div><div class="ddsc">DACH-régióban jelenleg nulla digitális jelenlét. A termékek és tanúsítványok belépési feltételeknek megfelelnek.</div></div>
+      <div class="dc dc-gd"><div class="dlbl">Cégérték-potenciál</div><div class="dsco">7<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="70"></div></div><div class="ddsc">20 éves tudás, ISO/GMP+ ritkaság KKV-knál, Solvay-asszociáció, kapcsolatrendszer — dokumentálva értékesebb.</div></div>
+      <div class="dc dc-md"><div class="dlbl">Végrehajtási realitás</div><div class="dsco">5<span class="dmx">/10</span></div><div class="dtrk"><div class="dfll" data-w="50"></div></div><div class="ddsc">Belső végrehajtó: Szandra. Forgó tőke korlátozott. A stratégiát ehhez kell igazítani: minőség > mennyiség.</div></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- DEEP AUDIT -->
+<div id="audit" class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Mély audit megállapítások</div>
+    <h2>Mit lát ma a piac és az AI — és mit kellene látnia</h2>
+    <div style="margin-top:2.5rem">
+      <h3>1. Digitális entitásdiagnózis</h3>
+      <div class="call call-a" style="margin-top:1rem"><div class="ctit">Mit talál ma az AI</div><p>A RAW MATERIALS TRADE Kft. esetén az AI elsősorban cégjegyzéki adatokat talál. A vezető neve megjelenik a tulajdonosi adatoknál, de <strong>szakmai kontextus, karriertörténet, tanúsítványok, AI-érthető tartalom nélkül</strong>. A "Frőhner Alexandra" névváltozat szinte nyomtalan. A 20 éves pályafutásból digitálisan semmi nem látszik.</p></div>
+      <div class="call call-d" style="margin-top:1rem"><div class="ctit">Fő entitáskockázatok</div><p><strong>1.</strong> Bagdi Zsigmond Zsolt neve nyilvánosan összekapcsolt a céggel — az ő egyéb cégei asszociálódhatnak a Raw Materials Trade-hez.<br><strong>2.</strong> A két névvariáns ("Frőhner Alexandra" és "Sajbán-Frőhner Alexandra") nincsenek digitálisan összekötve.<br><strong>3.</strong> A cégnév generikus jellegű — az AI nehezen különíti el hasonló nevű entitásoktól.</p></div>
+    </div>
+    <div style="margin-top:3rem">
+      <h3>2. Narratív audit — A mesélhető történet</h3>
+      <div class="agrid" style="margin-top:1rem">
+        <div class="ablock"><h4>A régi narratíva (kinövendő)</h4><ul class="alist"><li data-i="✗">Általános vegyipari kereskedő — egy a sokból</li><li data-i="✗">Kicsi cég, korlátozott lehetőségekkel</li><li data-i="✗">Árverseny-játékos az árérzékeny piacon</li><li data-i="✗">Láthatatlan vezető, ismeretlen struktúra</li></ul></div>
+        <div class="ablock"><h4>Az új narratíva (építendő)</h4><ul class="alist"><li data-i="◆">20 éves vegyipari pályafutás — teljes ranglétra aljáról a tulajdonosig</li><li data-i="◆">"Sufniból lett" vállalkozói ív: hiteles, emberi, ritka</li><li data-i="◆">ISO 9001 + GMP+ kisebb cégnél — a DACH-piac ezt értékeli</li><li data-i="◆">"Megoldom" — amikor a nagyok feladják, ő megtalálja az utat</li></ul></div>
+      </div>
+      <div class="narr"><p class="nq">A márka igazsága, amelyet nem mer elég tisztán kimondani: "Nem foglak megkopasztani. Korrekt vagyok."</p><span class="na">— Audit kérdőív, 99. kérdés · Stratégiai következtetés</span></div>
+    </div>
+    <div style="margin-top:3rem">
+      <h3>3. Érzékeny témák és árnyékok kezelése</h3>
+      <div class="call call-n" style="margin-top:1rem"><div class="ctit">Bagdi Zsigmond Zsolt — kezelési stratégia</div><p>Az érintett nem kíván nyilvánosan megjelenni. <strong>Ajánlott megközelítés:</strong> Alexandra legyen az egyértelmű, látható arc. Minél erősebb az ő szakmai profilja, annál inkább ő lesz az AI-ban a cég "arca". Ez nem "elrejtés" — hanem valós prioritásrendezés.</p></div>
+      <div class="call call-r" style="margin-top:1rem"><div class="ctit">Solvay-kapcsolat — helyes keretezés</div><p>Szóbeli megállapodás, de valódi piaci legitimáció. Helyes narratíva: <strong>"A Solvay által ajánlott képviselő a feed-piacon Magyarországon."</strong> Ez tény — csak a szerződés hiányzik, nem a kapcsolat.</p></div>
+      <div class="call call-a" style="margin-top:1rem"><div class="ctit">Több munkáltató — erőként keretezve</div><p>Brenntag → CSc Jaeklekemia → Variachem (12 év!) → Raw Materials Trade. Ez nem vándorlás — ez a teljes vegyipari iparág megismerése, belülről. <strong>Narratíva:</strong> "20 évnyi tudás, minden szintről, minden területről."</p></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+<!-- WIZARD -->
+<div id="wizard"><div class="winn">
+  <div class="stag">Interaktív stratégiavezető</div>
+  <h2>Válassz stratégiai útvonalat</h2>
+  <p class="lead" style="margin-bottom:3rem">Válaszd ki az opciók közül, amelyekkel azonosulni tudsz. A rendszer ezek alapján személyre szabott stratégiai tervet épít fel.</p>
+  <div class="wprog">
+    <div class="wp act" data-i="0" onclick="goS(0)"><div class="wpdot">01</div><div class="wplbl">Fő cél</div></div>
+    <div class="wp" data-i="1" onclick="goS(1)"><div class="wpdot">02</div><div class="wplbl">Karakter</div></div>
+    <div class="wp" data-i="2" onclick="goS(2)"><div class="wpdot">03</div><div class="wplbl">Eszközök</div></div>
+    <div class="wp" data-i="3" onclick="goS(3)"><div class="wpdot">04</div><div class="wplbl">Bizonyítékok</div></div>
+    <div class="wp" data-i="4" onclick="goS(4)"><div class="wpdot">05</div><div class="wplbl">Tempó</div></div>
+  </div>
+  <!-- S1 -->
+  <div class="wstep act" id="ws0">
+    <div class="wq">Mi a legfontosabb cél a következő 12 hónapban?</div>
+    <div class="wh">Válassz egy fő prioritást. A stratégia köré épül a többi döntés.</div>
+    <div class="ogrid">
+      <div class="ocard" data-k="goal" data-v="ai" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-ai"/></svg></span><div class="ot">AI-érthetőség és láthatóság</div><div class="od">A Google, ChatGPT, Perplexity pontosan értse és ajánlja a céget és Alexandrát.</div><div class="on">Gyors, mérhető · tartalom nélkül nem elég</div></div>
+      <div class="ocard" data-k="goal" data-v="dach" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-globe"/></svg></span><div class="ot">DACH-piaci belépés</div><div class="od">Új stabil vevők és partnerek Ausztriában, Németországban, Svájcban. Quaker-kapcsolat célba vétele.</div><div class="on">Közvetlen üzleti hatás · AI-alap nélkül lassabb</div></div>
+      <div class="ocard" data-k="goal" data-v="brand" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-person"/></svg></span><div class="ot">Személyes szakértői márka</div><div class="od">Alexandra váljon a vegyipari specialitások elismert hangjává. Cikksorozat, LinkedIn thought leadership.</div><div class="on">Hosszú távon erős védőárok · türelem kell</div></div>
+      <div class="ocard" data-k="goal" data-v="value" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-trend"/></svg></span><div class="ot">Cégérték és stabilitás</div><div class="od">A cég váljon eladható, befektető-barát, dokumentált entitássá. Digitális védőárok kiépítése.</div><div class="on">Komplex, tartós érték · lassabb hatás</div></div>
+      <div class="ocard" data-k="goal" data-v="lead" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-brief"/></svg></span><div class="ot">Több megkeresés, több üzlet</div><div class="od">Azonnali prioritás: több inbound megkeresés, új partnerek, gyors láthatósági push.</div><div class="on">Legdirektebb hatás · pozicionálás nélkül árérzékeny marad</div></div>
+      <div class="ocard" data-k="goal" data-v="all" onclick="pOne(this,'goal')"><span class="oi"><svg><use href="#ic-bolt"/></svg></span><div class="ot">Komplex átalakulás</div><div class="od">Minden front egyszerre: AI, személyes márka, DACH, cégérték. Szinergikus, de fókuszt igényel.</div><div class="on">Legnagyobb hatás · legnagyobb végrehajtási igény</div></div>
+    </div>
+    <div class="wnav"><span></span><button class="btn btn-p" onclick="nxtS()"><span class="bi"><svg><use href="#ic-arrow"/></svg></span>Következő</button></div>
+  </div>
+  <!-- S2 -->
+  <div class="wstep" id="ws1">
+    <div class="wq">Milyen stratégiai karakter illik a helyzethez?</div>
+    <div class="wh">Ez befolyásolja a kommunikáció hangvételét, sebességét és stílusát.</div>
+    <div class="ogrid">
+      <div class="ocard" data-k="char" data-v="safe" onclick="pOne(this,'char')"><span class="oi"><svg><use href="#ic-shield"/></svg></span><div class="ot">Óvatos, biztonságos</div><div class="od">Kevesebb kommunikáció, de amit csinálunk, az kifogástalan. Minimális kockázat, stabil alapozás.</div></div>
+      <div class="ocard" data-k="char" data-v="premium" onclick="pOne(this,'char')"><span class="oi"><svg><use href="#ic-gem"/></svg></span><div class="ot">Prémium, szelektív</div><div class="od">Magas minőség, kevés de erős tartalom. Prémium vevőkre fókuszálás. Vizuálisan kifogástalan.</div></div>
+      <div class="ocard" data-k="char" data-v="expert" onclick="pOne(this,'char')"><span class="oi"><svg><use href="#ic-flask"/></svg></span><div class="ot">Mély szakértői pozíció</div><div class="od">Alexandra a vegyipari specialitások magyarázója. Cikkek, LinkedIn, iparági tartalom. Tudás = hitelesség.</div></div>
+      <div class="ocard" data-k="char" data-v="growth" onclick="pOne(this,'char')"><span class="oi"><svg><use href="#ic-arrow"/></svg></span><div class="ot">Gyors piaci láthatóság</div><div class="od">Több tartalom, gyorsabb push, aktív hálózatépítés. Magasabb erőforrásigény és kontroll szükséges.</div></div>
+      <div class="ocard" data-k="char" data-v="intl" onclick="pOne(this,'char')"><span class="oi"><svg><use href="#ic-globe"/></svg></span><div class="ot">Nemzetközi, kétnyelvű</div><div class="od">Minden tartalom magyar + angol változatban. DACH-döntéshozóknak szóló kommunikáció prioritásban.</div></div>
+    </div>
+    <div class="wnav"><button class="btn btn-s" onclick="prvS()">← Vissza</button><button class="btn btn-p" onclick="nxtS()"><span class="bi"><svg><use href="#ic-arrow"/></svg></span>Következő</button></div>
+  </div>
+  <!-- S3 -->
+  <div class="wstep" id="ws2">
+    <div class="wq">Mely tartalmi eszközöket tudod reálisan fenntartani?</div>
+    <div class="wh">Több opciót is választhatsz. Légy őszinte — csak azt vedd be, amit valóban meg is valósíthatsz.</div>
+    <div class="ogrid">
+      <div class="ocard" data-k="tools" data-v="linkedin" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-brief"/></svg></span><div class="ot">LinkedIn stratégia</div><div class="od">Alexandra profilja optimalizálva, rendszeres posztok, szakmai kapcsolatépítés. Az 5 cikk ideálisan ide kerül.</div></div>
+      <div class="ocard" data-k="tools" data-v="articles" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-pen"/></svg></span><div class="ot">Cikksorozat publikálás</div><div class="od">Az 5+5 tervezett téma megírva, publikálva weboldalon és LinkedIn-en. AI-érthető, keresőoptimalizált tartalom.</div></div>
+      <div class="ocard" data-k="tools" data-v="website" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-monitor"/></svg></span><div class="ot">Weboldal fejlesztés</div><div class="od">Schema markup, About/Team oldal Alexandrával, angolul is, ISO/GMP+ kiemelve, blog szekció.</div></div>
+      <div class="ocard" data-k="tools" data-v="schema" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-link"/></svg></span><div class="ot">Strukturált adatok</div><div class="od">Schema.org Organization + Person markup, Google Business Profile. AI-jel erősítése a megfelelő forrásokkal.</div></div>
+      <div class="ocard" data-k="tools" data-v="press" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-news"/></svg></span><div class="ot">Szakmai megjelenések</div><div class="od">Iparági magazinok, vegyipari szaklapok, DACH-platformok. Egy interjú vagy cikk = hitelességi ugrás.</div></div>
+      <div class="ocard" data-k="tools" data-v="network" onclick="pMany(this,'tools')"><span class="oi"><svg><use href="#ic-net"/></svg></span><div class="ot">Partner és iparági profilok</div><div class="od">Regisztráció vegyipari adatbázisokban, DACH-piacokra belépési platformokon, partneri linkek.</div></div>
+    </div>
+    <div class="wnav"><button class="btn btn-s" onclick="prvS()">← Vissza</button><button class="btn btn-p" onclick="nxtS()"><span class="bi"><svg><use href="#ic-arrow"/></svg></span>Következő</button></div>
+  </div>
+  <!-- S4 -->
+  <div class="wstep" id="ws3">
+    <div class="wq">Milyen bizonyítékokat lehet digitálisan láthatóvá tenni?</div>
+    <div class="wh">A B2B-piac nem adja el a forrásait — de vannak módszerek a bizalomépítésre ügyfélnév nélkül is.</div>
+    <div class="ogrid">
+      <div class="ocard" data-k="proof" data-v="certs" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-cert"/></svg></span><div class="ot">ISO 9001 + GMP+ kiemelés</div><div class="od">Tanúsítványok scannelve, PDF-ben letölthető formában, weboldalon és LinkedIn-en is megjelenve.</div></div>
+      <div class="ocard" data-k="proof" data-v="cases" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-bar"/></svg></span><div class="ot">Anonymizált esettanulmányok</div><div class="od">"Egy magyar élelmiszeripari gyártónak..." — ügyfélnév nélkül, ipar + probléma + megoldás + eredmény.</div></div>
+      <div class="ocard" data-k="proof" data-v="solvay" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-build"/></svg></span><div class="ot">Solvay-kapcsolat keretezve</div><div class="od">"A Solvay által ajánlott feed-piaci képviselő Magyarországon." Tény — és hitelességet épít.</div></div>
+      <div class="ocard" data-k="proof" data-v="numbers" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-hash"/></svg></span><div class="ot">Számadatok és eredmények</div><div class="od">"20+ év, 350M-ről 2,5Md-ra növelt portfólió" — ügyfélnév nélkül is erős bizonyíték.</div></div>
+      <div class="ocard" data-k="proof" data-v="history" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-clock"/></svg></span><div class="ot">Karriertörténet publikálása</div><div class="od">Brenntag → Variachem → tulajdonos. LinkedIn-en, About oldalon. Ez maga a bizonyíték.</div></div>
+      <div class="ocard" data-k="proof" data-v="testim" onclick="pMany(this,'proof')"><span class="oi"><svg><use href="#ic-chat"/></svg></span><div class="ot">Partneri megerősítések</div><div class="od">LinkedIn ajánlás 2-3 volt kolléga/partnertől. Az ügyfél titkos maradhat, a "Kiváló partner" nem.</div></div>
+    </div>
+    <div class="wnav"><button class="btn btn-s" onclick="prvS()">← Vissza</button><button class="btn btn-p" onclick="nxtS()"><span class="bi"><svg><use href="#ic-arrow"/></svg></span>Következő</button></div>
+  </div>
+  <!-- S5 -->
+  <div class="wstep" id="ws4">
+    <div class="wq">Milyen végrehajtási tempó reális?</div>
+    <div class="wh">Légy őszinte a kapacitással. Az egyetlen belső végrehajtó: Szandra, Alexandra aktív részvételével.</div>
+    <div class="ogrid">
+      <div class="ocard" data-k="tempo" data-v="fast" onclick="pOne(this,'tempo')"><span class="oi"><svg><use href="#ic-bolt"/></svg></span><div class="ot">6 hónapos gyors stratégia</div><div class="od">Az összes alapozó lépés az első félévben megtörténik. Intenzív — a cikksorozat már kész, az indulás reális.</div><div class="on">Eredmény: 90 napon belül · Kockázat: minőség vs. sebesség</div></div>
+      <div class="ocard" data-k="tempo" data-v="balanced" onclick="pOne(this,'tempo')"><span class="oi"><svg><use href="#ic-scale"/></svg></span><div class="ot">9 hónapos kiegyensúlyozott</div><div class="od">Havi 2-3 tartalom, heti LinkedIn-aktivitás, negyedéves értékelés. Fenntartható, kontrollált növekedés.</div><div class="on">Eredmény: 60-90 nap · Ajánlott a jelenlegi kapacitáshoz</div></div>
+      <div class="ocard" data-k="tempo" data-v="deep" onclick="pOne(this,'tempo')"><span class="oi"><svg><use href="#ic-layer"/></svg></span><div class="ot">12 hónapos mély stratégia</div><div class="od">Minden elemet alaposan építünk. Kevesebb, de tartósabb. Cégérték-fókusz. Ideális ha a belső struktúra rendezése párhuzamos.</div><div class="on">Eredmény: 4-6 hónap · Legnagyobb türelemigény</div></div>
+    </div>
+    <div class="wnav"><button class="btn btn-s" onclick="prvS()">← Vissza</button><button class="btn btn-p" onclick="bldSum()"><span class="bi"><svg><use href="#ic-star"/></svg></span>Stratégiai terv generálása</button></div>
+  </div>
+  <!-- GENERATED SUMMARY -->
+  <div id="gsum">
+    <div style="border-bottom:1px solid var(--bd);padding-bottom:2rem;margin-bottom:2rem">
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--rose);margin-bottom:.5rem">Személyre szabott stratégiai terv</div>
+      <div class="sco">Raw Materials Trade Kft. &amp; Sajbán-Frőhner Alexandra</div>
+      <div id="sdate" style="font-family:'Fira Mono',monospace;font-size:.72rem;color:var(--t4);margin-top:.5rem"></div>
+    </div>
+    <div class="smeta" id="smeta"></div>
+    <div id="srtit" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--plum-deep);margin-bottom:1rem"></div>
+    <div id="srdesc" style="color:var(--t2);font-size:.88rem;line-height:1.75;margin-bottom:2rem"></div>
+    <h4 style="margin-bottom:1.5rem">Az első 90 nap konkrét lépései</h4>
+    <ol class="ssteps" id="ssteps"></ol>
+    <div style="background:var(--ampal);border:1px solid var(--bd);border-radius:12px;padding:1.5rem;margin-top:2rem"><h4 style="color:var(--ameth-dk);margin-bottom:.75rem">Várható eredmények 12 hónap után</h4><div id="sres" style="font-size:.88rem;color:var(--t1);line-height:1.75"></div></div>
+    <div style="background:var(--bad-bg);border:1px solid rgba(154,31,64,.15);border-radius:12px;padding:1.5rem;margin-top:1rem"><h4 style="color:var(--bad);margin-bottom:.75rem">Kiemelt kockázatok</h4><div id="srisk" style="font-size:.85rem;color:var(--t1);line-height:1.75"></div></div>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
+      <button class="btn btn-p" onclick="window.print()"><span class="bi"><svg><use href="#ic-download"/></svg></span>PDF mentés / Nyomtatás</button>
+      <button class="btn btn-s" onclick="saveLoc()"><span class="bi"><svg><use href="#ic-save"/></svg></span>Mentés böngészőbe</button>
+    </div>
+  </div>
+</div></div>
+<div class="divhr"></div>
+
+<!-- ROUTES -->
+<div id="routes" class="sfull sblush">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Stratégiai útvonalak</div>
+    <h2>Öt lehetséges út — részletesen</h2>
+    <p class="lead">Minden útvonal különböző stratégiai logikát követ. Nem zárják ki egymást — de egyszerre nem indíthatók el az összes hatékonyan.</p>
+    <div class="rgrid">
+      <div class="rcard feat"><div class="rbadge">Ajánlott</div><div class="rnum">Útvonal 01</div><div class="rname">AI-érthetőség és digitális alap</div><div class="rlog">Az AI ma nem találja Alexandrát. Ez az útvonal strukturált tartalom, schema markup, LinkedIn-alap és weboldal About oldal révén változtatja meg ezt. A cikksorozat itt indul el.</div><div class="rtags"><span class="rtag">Azonnali indítás</span><span class="rtag">Alacsony tőkeigény</span><span class="rtag">DACH-alap</span></div><div class="rnote"><strong>Kinek:</strong> AI-ban való megjelenés és alap kiépítése a cél. <em>Mikor nem:</em> Ha azonnali konverzió az elvárás.</div><div class="rmg"><div class="rmi"><div class="rml">AI-hatás</div><div class="rmb"><div class="rmf" data-w="90"></div></div><div class="rmv">9/10</div></div><div class="rmi"><div class="rml">Üzleti hatás</div><div class="rmb"><div class="rmf" data-w="60"></div></div><div class="rmv">6/10</div></div><div class="rmi"><div class="rml">Végrehajtás</div><div class="rmb"><div class="rmf" data-w="80"></div></div><div class="rmv">8/10</div></div><div class="rmi"><div class="rml">Tőkeigény</div><div class="rmb"><div class="rmf" data-w="30"></div></div><div class="rmv">3/10</div></div></div></div>
+      <div class="rcard"><div class="rnum">Útvonal 02</div><div class="rname">Szakértői személyes márka</div><div class="rlog">Alexandra neve legyen a vegyipari specialitások azonosítható hangja. Az 5+5 tervezett cikk ennek az útnak az alapanyaga — LinkedIn thought leadership, iparági platformok.</div><div class="rtags"><span class="rtag">6-12 hónap</span><span class="rtag">Tartalomfókusz</span><span class="rtag">Tartós</span></div><div class="rnote"><strong>Kinek:</strong> Ha az egyedi tudás és személyes hitelesség a cél. <em>Mikor nem:</em> Ha nincs idő rendszeres tartalomgyártásra.</div><div class="rmg"><div class="rmi"><div class="rml">Reputáció</div><div class="rmb"><div class="rmf" data-w="90"></div></div><div class="rmv">9/10</div></div><div class="rmi"><div class="rml">Üzleti hatás</div><div class="rmb"><div class="rmf" data-w="70"></div></div><div class="rmv">7/10</div></div><div class="rmi"><div class="rml">Végrehajtás</div><div class="rmb"><div class="rmf" data-w="60"></div></div><div class="rmv">6/10</div></div><div class="rmi"><div class="rml">Tőkeigény</div><div class="rmb"><div class="rmf" data-w="40"></div></div><div class="rmv">4/10</div></div></div></div>
+      <div class="rcard"><div class="rnum">Útvonal 03</div><div class="rname">DACH exportpiaci belépés</div><div class="rlog">Közvetlen belépési stratégia DACH-ba. Kétnyelvű weboldal, DACH-platformokon való regisztráció, ISO/GMP+ kiemelése, Quaker-megkeresés előkészítése.</div><div class="rtags"><span class="rtag">9-18 hónap</span><span class="rtag">Kétnyelvű</span><span class="rtag">Magas tét</span></div><div class="rnote"><strong>Kinek:</strong> Ha az AI-alap már megvan és az export a következő lépés. <em>Mikor nem:</em> AI-alap nélkül erőforrás-pazarlás.</div><div class="rmg"><div class="rmi"><div class="rml">Export hatás</div><div class="rmb"><div class="rmf" data-w="90"></div></div><div class="rmv">9/10</div></div><div class="rmi"><div class="rml">Kockázat</div><div class="rmb"><div class="rmf" style="background:var(--bad)" data-w="70"></div></div><div class="rmv">7/10</div></div><div class="rmi"><div class="rml">Végrehajtás</div><div class="rmb"><div class="rmf" data-w="50"></div></div><div class="rmv">5/10</div></div><div class="rmi"><div class="rml">Tőkeigény</div><div class="rmb"><div class="rmf" data-w="70"></div></div><div class="rmv">7/10</div></div></div></div>
+      <div class="rcard"><div class="rnum">Útvonal 04</div><div class="rname">Prémium pozicionálás</div><div class="rlog">A cég valóban értékesebb, mint ahogy online látszik. A vizuális és szöveges kommunikáció emelése, az ISO/GMP+ prémium keretezése, Solvay-asszociáció tudatos alkalmazása.</div><div class="rtags"><span class="rtag">6-9 hónap</span><span class="rtag">Minőségfókusz</span><span class="rtag">B2B bizalom</span></div><div class="rnote"><strong>Kinek:</strong> Ha a weboldal "jó alap" és az emelés a cél. <em>Mikor nem:</em> Tartalom nélkül csak vizuális csiszolás.</div><div class="rmg"><div class="rmi"><div class="rml">Prémium érzet</div><div class="rmb"><div class="rmf" data-w="90"></div></div><div class="rmv">9/10</div></div><div class="rmi"><div class="rml">Üzleti hatás</div><div class="rmb"><div class="rmf" data-w="65"></div></div><div class="rmv">6.5/10</div></div><div class="rmi"><div class="rml">Végrehajtás</div><div class="rmb"><div class="rmf" data-w="70"></div></div><div class="rmv">7/10</div></div><div class="rmi"><div class="rml">Tőkeigény</div><div class="rmb"><div class="rmf" data-w="50"></div></div><div class="rmv">5/10</div></div></div></div>
+      <div class="rcard"><div class="rnum">Útvonal 05</div><div class="rname">Cégérték és hosszú távú védőárok</div><div class="rlog">A cég legyen eladható, befektető-barát, dokumentált. Teljes digitális entitás felépítése, tanúsítványok online, strukturált adat, cégmérföldkövek dokumentálása.</div><div class="rtags"><span class="rtag">12-18 hónap</span><span class="rtag">Komplex</span><span class="rtag">Cégérték</span></div><div class="rnote"><strong>Kinek:</strong> Ha 1-2 év múlvai cégérték-emelés a téma. <em>Mikor nem:</em> Ha az azonnali árbevétel-növelés az elsődleges cél.</div><div class="rmg"><div class="rmi"><div class="rml">Cégérték</div><div class="rmb"><div class="rmf" data-w="90"></div></div><div class="rmv">9/10</div></div><div class="rmi"><div class="rml">Üzleti hatás</div><div class="rmb"><div class="rmf" data-w="60"></div></div><div class="rmv">6/10</div></div><div class="rmi"><div class="rml">Végrehajtás</div><div class="rmb"><div class="rmf" data-w="40"></div></div><div class="rmv">4/10</div></div><div class="rmi"><div class="rml">Tőkeigény</div><div class="rmb"><div class="rmf" data-w="70"></div></div><div class="rmv">7/10</div></div></div></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- MATRIX -->
+<div class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Hatásmátrix</div>
+    <h2>Útvonalak összehasonlítása — 1–10 skálán</h2>
+    <p class="lead">Stratégiai következtetések alapján. Nem garantált eredmények — megalapozott becslések.</p>
+    <div class="twrap">
+      <table>
+        <thead><tr><th>Útvonal</th><th>Üzleti</th><th>AI</th><th>Reputáció</th><th>Prémium</th><th>Export</th><th>Cégérték</th><th>Nehézség</th><th>Kockázat</th><th>Eredmény</th></tr></thead>
+        <tbody>
+          <tr><td class="tdr">01 · AI-alap</td><td><span class="sp spg">6</span></td><td><span class="sp spb">9</span></td><td><span class="sp spg">7</span></td><td><span class="sp spg">6</span></td><td><span class="sp spm">5</span></td><td><span class="sp spg">6</span></td><td><span class="sp spl">3</span></td><td><span class="sp spl">3</span></td><td style="font-size:.78rem;color:var(--t3)">60–90 nap</td></tr>
+          <tr><td class="tdr">02 · Személyes márka</td><td><span class="sp spg">7</span></td><td><span class="sp spg">8</span></td><td><span class="sp spb">9</span></td><td><span class="sp spg">8</span></td><td><span class="sp spg">6</span></td><td><span class="sp spg">8</span></td><td><span class="sp spm">5</span></td><td><span class="sp spl">3</span></td><td style="font-size:.78rem;color:var(--t3)">3–6 hónap</td></tr>
+          <tr><td class="tdr">03 · DACH belépés</td><td><span class="sp spb">9</span></td><td><span class="sp spg">7</span></td><td><span class="sp spg">7</span></td><td><span class="sp spg">8</span></td><td><span class="sp spb">10</span></td><td><span class="sp spg">8</span></td><td><span class="sp spg">7</span></td><td><span class="sp spg">6</span></td><td style="font-size:.78rem;color:var(--t3)">6–12 hónap</td></tr>
+          <tr><td class="tdr">04 · Prémium márka</td><td><span class="sp spg">7</span></td><td><span class="sp spg">6</span></td><td><span class="sp spg">8</span></td><td><span class="sp spb">9</span></td><td><span class="sp spg">7</span></td><td><span class="sp spg">7</span></td><td><span class="sp spl">4</span></td><td><span class="sp spl">4</span></td><td style="font-size:.78rem;color:var(--t3)">3–6 hónap</td></tr>
+          <tr><td class="tdr">05 · Cégérték</td><td><span class="sp spg">6</span></td><td><span class="sp spg">8</span></td><td><span class="sp spb">9</span></td><td><span class="sp spb">9</span></td><td><span class="sp spg">7</span></td><td><span class="sp spb">10</span></td><td><span class="sp spg">7</span></td><td><span class="sp spl">3</span></td><td style="font-size:.78rem;color:var(--t3)">9–18 hónap</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:.72rem;color:var(--t4);margin-top:.75rem;font-family:'Fira Mono',monospace">Stratégiai következtetés · Nem garantált eredmények · A kérdőív és nyilvános adatok alapján</p>
+  </div></div>
+</div>
+<div class="divhr"></div>
+<!-- TIMELINE -->
+<div id="timeline" class="sfull sameth">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">6–12 hónapos ütemterv</div>
+    <h2>Kiegyensúlyozott stratégiai terv</h2>
+    <p class="lead">Az Útvonal 01 + 02 kombináció (AI-alap + személyes márka) ütemterve — Szandra + Alexandra kapacitásához igazítva.</p>
+    <div class="tl">
+      <div class="tlph"><div class="tltm"><span class="tlper">0–30 nap</span><span class="tllab">Diagnózis</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: Alapozás és tisztítás</div><ul class="tlis"><li>Jelenlegi Google-találatok és AI-válaszok dokumentálása (baseline rögzítése)</li><li>LinkedIn profil felülvizsgálata: Alexandra neve, pozíció, karriertörténet</li><li>Weboldal About/Team oldal tervezése — Alexandra fotóval, karriertörténettel</li><li>Az 5 cikk strukturálása, formátumterv kidolgozása</li><li>Bagdi / Zsiga fuvar digitális lábnyom nyilvános felmérése</li></ul><div class="tlkpi">KPI: LinkedIn profil completeness ≥80% · Google-kép dokumentálva</div></div></div>
+      <div class="tlph"><div class="tltm"><span class="tlper">31–60 nap</span><span class="tllab">Alapozás</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: Digitális identitás megteremtése</div><ul class="tlis"><li>Weboldal: About oldal + angolul is + ISO/GMP+ kiemelve + blog szekció</li><li>Schema.org Organization + Person markup bevezetése a weboldalon</li><li>Alexandra LinkedIn: első 2 cikk/poszt publikálva (sorozatból)</li><li>Google Business Profile teljes feltöltés és ellenőrzés</li><li>Névvariáns összekapcsolás weboldalon és LinkedIn-en</li></ul><div class="tlkpi">KPI: About oldal él · 2 LinkedIn tartalom megjelent · GBP aktív</div></div></div>
+      <div class="tlph"><div class="tltm"><span class="tlper">61–90 nap</span><span class="tllab">Pozicionálás</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: Szakértői hang kialakítása</div><ul class="tlis"><li>3–5. cikk megjelent (sorozat befejezve), iparági platform megosztja</li><li>LinkedIn: heti rendszeres aktivitás (komment, megosztás, 1 saját poszt/hét)</li><li>Solvay-kapcsolat keretezése — "feed-piaci képviselő" szöveg, pontosan, felelősen</li><li>Karrierszámok láthatóan: "20 év, 350M→2,5Md, teljes ranglétra" — LinkedIn bio + About oldal</li><li>1-2 vegyipari szakmai adatbázisban regisztráció</li></ul><div class="tlkpi">KPI: 5 cikk publikálva · LinkedIn vegyipari keresésekben látható</div></div></div>
+      <div class="tlph"><div class="tltm"><span class="tlper">4–6. hónap</span><span class="tllab">Bizonyítékok</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: Hitelességi jelek erősítése</div><ul class="tlis"><li>Anonymizált esettanulmány(ok) — legalább 1-2 iparáganként (feed, industrial, household)</li><li>LinkedIn ajánlások kérése 2-3 volt kolléga / partner megkeresése</li><li>DACH-hoz: EN és/vagy DE tartalmak előkészítése (1-2 kulcscikk fordítása)</li><li>Quaker-megkeresés előkészítése: digitális névjegy összeállítva (1 oldalas EN/DE PDF)</li></ul><div class="tlkpi">KPI: 2+ esettanulmány él · 2+ LinkedIn ajánlás · DACH-profilok aktívak</div></div></div>
+      <div class="tlph"><div class="tltm"><span class="tlper">7–9. hónap</span><span class="tllab">Piacépítés</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: DACH-megkeresések és AI-jel erősítése</div><ul class="tlis"><li>Aktív DACH-kapcsolatfelvétel — begyártó cégek beszerző menedzserei LinkedIn-en</li><li>AI-teszt: Mit válaszol ChatGPT/Perplexity/Claude "vegyipari alapanyag Magyarország" kérdésre?</li><li>Második cikksorozat (következő 5 téma) indítása a specialitás-területen</li><li>Specialitásszakasz döntése: melyik terület kap fókuszt (household care / silicones / feed)</li></ul><div class="tlkpi">KPI: Első DACH-megkeresések · AI-válaszban Alexandra neve megjelenik</div></div></div>
+      <div class="tlph"><div class="tltm"><span class="tlper">10–12. hónap</span><span class="tllab">Konszolidáció</span></div><div class="tldot"></div><div class="tlcon"><div class="tlg">Cél: Mérés, optimalizálás, következő ciklus tervezése</div><ul class="tlis"><li>Teljes audit ismétlése — AI-válaszok, Google-találatok, LinkedIn metrikák összehasonlítása</li><li>Legalább 1 stabil DACH-kapcsolat / tárgyalás folyamatban</li><li>Quaker vagy más célzott kapcsolat státusza értékelése</li><li>Következő 12 hónap tervezése a mért adatok alapján</li></ul><div class="tlkpi">KPI: AI-érthetőség 1/10→6/10 · DACH üzleti kapcsolat megkezdve</div></div></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- RISKS -->
+<div class="sfull">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Kockázatok és kontrollpontok</div>
+    <h2>Amit figyelni kell — és hogyan</h2>
+    <div class="risgrid">
+      <div class="riscard"><div class="rislv rh">Magas kockázat</div><div class="rist">Inaktivitás kockázata</div><div class="risd">Ha a stratégia elindítása elhalasztódik, a csökkenő árbevétel és szűkülő fedezet tartóssá válik. Alexandra saját szavaival: "beledoglunk a piacba." Valós üzleti veszély.</div><div class="risa">Indíts el valamit az első 30 napon belül. A LinkedIn profil frissítése nulla forint és 2 óra.</div></div>
+      <div class="riscard"><div class="rislv rh">Magas kockázat</div><div class="rist">Co-owner digitális asszociáció</div><div class="risd">Bagdi Zsigmond Zsolt neve nyilvánosan összekapcsolt a céggel. Ha egyéb cégei negatív AI-asszociációt kapnak, az a Raw Materials Trade-re is kihat.</div><div class="risa">Alexandrát kell a látható arccá tenni. Minél erősebb az ő profilja, annál inkább ő lesz az AI-ban a cég "arca" — nem Bagdi.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes kockázat</div><div class="rist">Forgó tőke korlát</div><div class="risd">Az AI-érthetőség és LinkedIn alapozás minimális tőkeigényű. Nagyobb export-kampányra a tőke korlátja lép be.</div><div class="risa">Minden taktikánál jelöld meg a becsült költséget. Kezdd az ingyenes lépésekkel — ezek 80%-os hatást adnak.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes kockázat</div><div class="rist">Belső végrehajtás torlaszai</div><div class="risd">Szandra az egyetlen belső végrehajtó. Ha ő operatív feladatokba merül, a stratégiai munka elmarad.</div><div class="risa">Hetente 2-3 óra dedikált stratégiai idő, csak digitális munkára. Szandrának heti priority lista.</div></div>
+      <div class="riscard"><div class="rislv rm2">Közepes kockázat</div><div class="rist">Solvay-asszociáció félreértése</div><div class="risd">Ha a Solvay "partnerként" jelenik meg az anyagokban, és ezt valaki ellenőrzi, hitelességi veszteséget okozhat.</div><div class="risa">Pontosan fogalmazz: "A Solvay által javasolt feed-piaci képviselő Magyarországon." Semmivel sem több.</div></div>
+      <div class="riscard"><div class="rislv rl2">Alacsony kockázat</div><div class="rist">Iparági visszahúzó erők</div><div class="risd">A konkurencia ismeri Alexandrát. A digitális láthatóság növeli a "lábukra lép" feszültséget is.</div><div class="risa">A szakmai, tényszerű kommunikáció természetes védelmet ad. A minőség önmaga véd.</div></div>
+    </div>
+  </div></div>
+</div>
+<div class="divhr"></div>
+
+<!-- DECISIONS -->
+<div id="dec" class="sfull salt">
+  <div class="inn"><div class="sec" style="padding-top:0;padding-bottom:0">
+    <div class="stag">Következő döntések</div>
+    <h2>Az első 30 nap konkrét döntési pontjai</h2>
+    <p class="lead">Ezek nem kampánytervek — egyértelmű igen/nem döntések, amelyeket Alexandrának kell meghoznia.</p>
+    <div class="decgrid">
+      <div class="decc"><div class="decn">01</div><div class="dect">LinkedIn profil frissítés</div><div class="decd">Megadod-e a zöld jelzést ahhoz, hogy Alexandra LinkedIn-profilja teljes karriertörténettel, fotóval és a cég linkjével frissüljön? Ez az első és legfontosabb lépés.</div><div class="decl">Határidő: 7 napon belül</div></div>
+      <div class="decc"><div class="decn">02</div><div class="dect">Weboldal About/Team oldal</div><div class="decd">Engedélyezed-e, hogy a weboldalon Alexandra neve, fotója és karriertörténete megjelenjen? Kádár Nikoletta is megjelenik-e? Ez alapja minden AI-érthetőségi munkának.</div><div class="decl">Határidő: 14 napon belül</div></div>
+      <div class="decc"><div class="decn">03</div><div class="dect">Cikksorozat indítása</div><div class="decd">Az 5 tervezett cikk elkészül-e 60 napon belül? Ki írja? Alexandra diktálja, Szandra szerkeszti? Ez a döntés határozza meg az AI-hatást.</div><div class="decl">Határidő: 21 napon belül</div></div>
+      <div class="decc"><div class="decn">04</div><div class="dect">Specialitásfókusz döntés</div><div class="decd">A cég melyik specialitás-területen mélyül el először? Household care, silicones, feed specialitások? Ez meghatározza a DACH-tartalmak irányát és a Quaker-megközelítést.</div><div class="decl">Határidő: 30 napon belül</div></div>
+      <div class="decc"><div class="decn">05</div><div class="dect">Belső strukturális döntés</div><div class="decd">A Bagdi-közös irányítás hogyan oszlik meg? Ki kezeli a pénzügyet, ki az értékesítést? Nem publikus kérdés, de a végrehajtási kapacitás ezen múlik.</div><div class="decl">Határidő: 30–45 napon belül</div></div>
+      <div class="decc"><div class="decn">06</div><div class="dect">Mérési alap meghatározása</div><div class="decd">Hogyan méred a stratégia sikerét? Google-találatok száma, LinkedIn kapcsolatok, bejövő megkeresések, DACH-tárgyalások? Alap nélkül nincs kiigazítás.</div><div class="decl">Határidő: 30 napon belül</div></div>
+    </div>
+    <div class="call call-r" style="margin-top:3rem"><div class="ctit">A legfontosabb üzenet ebből az auditból</div><p>Alexandra 20 évet épített fel belül. A következő 12 hónapban ezt a 20 évet kell <strong>kívülre is láthatóvá tenni</strong> — mert a piac és az AI-rendszerek addig nem látják, amíg digitálisan nem létezik. A befektetés minimális. A tétje annál nagyobb: ezzel dől el, hogy a Raw Materials Trade és Alexandra neve a következő 5 évben ajánlott partner lesz a DACH-régióban — vagy ismét csak egy az ismeretlen sok közül.</p></div>
+  </div></div>
+</div>
+
+<!-- EXPORT -->
+<div id="expsec">
+  <div class="expinn">
+    <div class="expt"><h3>Stratégiai terv exportálása</h3><p>Mentsd el a saját stratégiai összefoglalódat PDF-ben, nyomtatásban vagy böngészőben.</p></div>
+    <div class="expb">
+      <button class="btn btn-p" onclick="window.print()"><span class="bi"><svg><use href="#ic-download"/></svg></span>PDF / Nyomtatás</button>
+      <button class="btn btn-s" onclick="saveLoc()"><span class="bi"><svg><use href="#ic-save"/></svg></span>Mentés böngészőbe</button>
+      <button class="btn btn-s" onclick="rstWiz()"><span class="bi"><svg><use href="#ic-refresh"/></svg></span>Újrakezdés</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="fbrand">Raw Materials Trade Kft. · Digitális Entitás Audit</div>
+  <div class="fsub">Sajbán-Frőhner Alexandra · 2026. június</div>
+  <div class="fdiv"></div>
+  <div class="fcopy">Készítette: Bánhalmi Norbert e.U. · <a href="https://vipach.at">vipach.at</a><br>Az audit a megadott kérdőív-válaszok, nyilvánosan elérhető adatok és stratégiai következtetések alapján készült.<br>Nem tartalmaz garantált eredményeket. Bizalmas dokumentum.</div>
+</footer>
+</div><!-- /main -->
+<div class="toast" id="toast"></div>
+
+<script>
+const HASH='5a1af18694a3592c9e1f909d0891a19428b087d56d2e868c1f5b3f0c27e5b5dc';
+async function sha256(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function chk(){const v=document.getElementById('pin').value.trim();if(!v)return;const h=await sha256(v);if(h===HASH){localStorage.setItem('rmt_a',h);unlk()}else{const i=document.getElementById('pin');i.classList.add('err');document.getElementById('perr').classList.add('show');setTimeout(()=>i.classList.remove('err'),600);i.value='';i.focus()}}
+function unlk(){const l=document.getElementById('lock'),m=document.getElementById('main');l.style.animation='lout .7s ease-out forwards';setTimeout(()=>{l.style.display='none';m.style.display='block';m.classList.add('on');aniB();ldLoc()},700)}
+window.addEventListener('DOMContentLoaded',async()=>{if(localStorage.getItem('rmt_a')===HASH){unlk();return}document.getElementById('pin').focus()});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&document.getElementById('lock').style.display!=='none')chk()});
+function togMenu(){document.getElementById('mm').classList.toggle('open')}
+function clsMenu(){document.getElementById('mm').classList.remove('open')}
+function aniB(){const o=new IntersectionObserver(es=>{es.forEach(e=>{if(!e.isIntersecting)return;e.target.querySelectorAll('[data-w]').forEach(b=>{const w=b.getAttribute('data-w');requestAnimationFrame(()=>{b.style.width=w+'%'})});o.unobserve(e.target)})},{threshold:.2});document.querySelectorAll('.dgrid,.rmg,.rgrid').forEach(g=>o.observe(g))}
+const S={step:0,goal:null,char:null,tools:[],proof:[],tempo:null};
+function goS(n){if(n>S.step)return;S.step=n;rndr()}
+function nxtS(){const ks=['goal','char','tools','proof','tempo'];const k=ks[S.step];const v=S[k];if(!v||(Array.isArray(v)&&!v.length)){shT('Kérlek válassz legalább egy opciót.');return}S.step++;rndr()}
+function prvS(){if(S.step>0){S.step--;rndr()}}
+function rndr(){document.querySelectorAll('.wstep').forEach((s,i)=>s.classList.toggle('act',i===S.step));document.querySelectorAll('.wp').forEach((w,i)=>{w.classList.toggle('act',i===S.step);w.classList.toggle('dn',i<S.step)})}
+function pOne(el,k){el.closest('.ogrid').querySelectorAll('.ocard').forEach(c=>c.classList.remove('sel'));el.classList.add('sel');S[k]=el.getAttribute('data-v')}
+function pMany(el,k){const v=el.getAttribute('data-v');el.classList.toggle('sel');const a=S[k];const i=a.indexOf(v);if(i>-1)a.splice(i,1);else a.push(v)}
+const RD={
+  ai:{ti:'Fő irány: AI-érthetőség és digitális alap',desc:'A kiválasztott cél az AI-rendszerek és keresők számára való láthatóság megteremtése. Ez az alap, amelyre minden más épülhet — DACH-belépés, személyes márka, cégérték növelés.',st:[{t:'LinkedIn profil teljes optimalizálás',d:'Alexandra neve, karriertörténete (Brenntag→Variachem→RMT tulajdonos), a cég linkje és az ISO/GMP+ tanúsítványok megjelennek. Ez az első AI-jel.'},{t:'Weboldal About/Team oldal',d:'Alexandra és Kádár Nikoletta megjelenik névvel, fotóval, rövid szerepleírással. Angolul is. Az AI számára összekötő pont személy ↔ cég.'},{t:'Schema.org markup bevezetése',d:'Organization + Person schema a weboldalon. Cégnév, URL, alapítás dátuma, tevékenység, kapcsolattartó. Az AI-rendszerek ezekből tanulnak.'},{t:'Az 5 részes cikksorozat publikálása',d:'Iparági témák, Alexandra hangján. Weboldalon és LinkedIn-en. Minden cikkbe bekerül a neve, a cég neve és a témák kulcsszavai.'},{t:'ISO 9001 + GMP+ digitalizálása',d:'Letölthető PDF, látható badge a weboldalon és LinkedIn-en. Bizalomépítő AI-jel és DACH-belépési bizonyíték.'}],res:'12 hónap után: Alexandra neve megjelenik az AI-válaszokban vegyipari alapanyag-keresésekre. A cég neve összekapcsolt a vezető személyével és szaktudással.',ris:'1. Tartalom nélkül az AI-jel gyengül — rendszeres frissítés szükséges. 2. Schema markup helytelen implementálása esetén nincs hatás. 3. Co-owner digitális asszociáció folyamatos figyelmet igényel.'},
+  dach:{ti:'Fő irány: DACH-piaci belépés',desc:'Közvetlen cél az új stabil partnerek és vevők megszerzése Ausztriában, Németországban, Svájcban.',st:[{t:'DACH-specifikus weboldal tartalom',d:'About oldal, szolgáltatásleírások angolul és/vagy németül. 3-4 kulcsoldal elég az induláshoz.'},{t:'ISO 9001 + GMP+ EU-s értelmezése',d:'DACH-ban ezek belépési feltételek. Weboldalon és anyagokban kiemelve, EU-s kontextusban.'},{t:'Vegyipari szakmai adatbázisok',d:'Europages, DACH-specifikus vegyipari platformok, B2B katalógusok. Alexandra profilja és a cég adatai feltöltve.'},{t:'LinkedIn DACH-kapcsolatépítés',d:'Aktív kapcsolatkeresés DACH-régió begyártó cégek beszerző menedzserei körében. Heti 5-10 targeted connection kérés.'},{t:'Quaker / célzott partnerek megkeresése',d:'Digitális névjegy (1 oldalas kompakt PDF EN/DE). Célzott megkeresés Alexandra által azonosított cégeknek.'}],res:'12 hónap után: 1-3 aktív DACH-tárgyalás folyamatban. Legalább 1 stabil DACH-partner megszerezve.',ris:'1. AI-alap nélkül a DACH-megkeresések sikerességi rátája alacsonyabb. 2. Nyelvtudás korlát — a német tartalmakhoz fordítói segítség szükséges. 3. Forgó tőke a megnövelt logisztikához.'},
+  brand:{ti:'Fő irány: Személyes szakértői márka',desc:'Alexandra neve legyen a vegyipari specialitások azonosítható hangja Magyarországon és a DACH-régióban.',st:[{t:'LinkedIn thought leader profil',d:'Nem csak önéletrajz — szakmai hang. Banner, headline, Featured szekció a cikksorozattal.'},{t:'Cikksorozat publikálása és terjesztése',d:'5 témát megírva, LinkedIn Articles-ben közzétéve. Minden cikk után engagement: komment kérés, megosztás.'},{t:'Iparági hangként megjelenés',d:'Kommentálás vegyipari LinkedIn-posztokra (Brenntag, Solvay, BASF). Szakmai láthatóság a versenytársak körében.'},{t:'Második cikksorozat tematizálása',d:'A specialitás-területen mélyebb, iparági szakértői sorozat. Ez az, amit az AI tanulni fog tőle.'},{t:'Karriertörténet nyilvános keretezése',d:'A "sufniból lett" narratíva megjelenik — büszkén és tényszerűen. Brenntag→Variachem→tulajdonos ív.'}],res:'12 hónap után: Alexandra LinkedIn-hálózata aktív, 500+ releváns kapcsolat. A neve megjelenik AI-válaszokban. Az iparágban felismerik — mind belföldön, mind DACH-ban.',ris:'1. Időigényes — rendszeres tartalomgyártás elkötelezettsége szükséges. 2. Ha a tartalom minősége ingadozik, a prémium hatás gyengül. 3. Az iparági kritika növekszik láthatósággal.'},
+  value:{ti:'Fő irány: Cégérték és hosszú távú pozicionálás',desc:'A cég válik dokumentált, stabil, befektető-barát entitássá. Ez az AI-alapra és a személyes márkára épül.',st:[{t:'Digitális névjegy rendszer',d:'Minden érintkezési ponton egységes, prémium benyomás. ISO/GMP+, karriertörténet, Solvay-asszociáció — mind látható, hiteles.'},{t:'Anonymizált referencia-portfólió',d:'Legalább 3 iparág × 2 esettanulmány: probléma → megoldás → eredmény formátumban.'},{t:'Strukturált adatrendszer',d:'Schema markup, Google Business Profile, vegyipari adatbázisok — mindenütt konzisztens adatok.'},{t:'Cégtörténet dokumentálás',d:'Alapítás (2021), Solvay-kapcsolat, ISO/GMP+ megszerzése, Alexandra-belépés (2024→2025) — cégérték-növelő mérföldkövek.'},{t:'Havi KPI riport rendszer',d:'Megkeresések száma, DACH-érintkezések, AI-válaszok minősége, organikus forgalom.'}],res:'18 hónap után: A Raw Materials Trade Kft. eladható lenne lényegesen magasabb értéken. Az AI egyértelműen azonosítja. Alexandra neve elválaszthatatlanul összekapcsolt a prémium pozícióval.',ris:'1. Leghosszabb időtávú út — türelem és fegyelem szükséges. 2. Ha a belső struktúra nem rendeződik, a cégérték-értékelés bizonytalan.'},
+  lead:{ti:'Fő irány: Több megkeresés és üzleti növekedés',desc:'Azonnali hatás: több inbound megkeresés, új partnerlehetőségek.',st:[{t:'Google Business + iparági platformok',d:'Ahol lehet, ingyenesen és gyorsan megjelenik a cég: Google Business, Europages alap, vegyipari B2B katalógusok.'},{t:'LinkedIn direkt kapcsolatépítés push',d:'Heti 10 célzott connection kérés: begyártó cégek beszerző menedzserei Magyarországon és DACH-ban.'},{t:'Az 5 cikk gyors kiadása',d:'A cikksorozat egyszerre kerül ki — 1 hét alatt. Ez hirtelen AI-jelet ad és LinkedIn aktivitást generál.'},{t:'Proaktív bemutatkozó anyag',d:'5-10 célzott cégnek kiküldött rövid, professzionális bemutatkozó üzenet + digitális névjegy PDF.'},{t:'Mérhető cél: 3 hónap múlva 5 új ajánlatkérés',d:'Konkrét, mérhető cél. Minden taktikát ehhez kell kötni. Ha nem hozza — kiigazítás.'}],res:'6 hónap után: 3-8 új B2B kapcsolat, legalább 1-2 konkrét ajánlatkérés DACH-ból.',ris:'1. Pozicionálás nélküli push esetén az árverseny marad. 2. Ha a tartalom gyenge, a gyors kiadás nem segít.'},
+  all:{ti:'Fő irány: Komplex átalakulás',desc:'Minden front egyszerre: AI-érthetőség, személyes márka, DACH-belépés, cégérték. Legambiciózusabb, de legszinergikusabb út.',st:[{t:'Havi sprint rendszer',d:'Minden hónapban egy fókuszterület. Jan: LinkedIn + About. Feb: cikksorozat. Már: schema. Ápr: DACH profilok. Máj: esettanulmányok.'},{t:'Heti 2-3 óra dedikált stratégiai idő',d:'Szandra koordinálja, Alexandra hitelesíti. Ez a minimum, ami minden frontnál mozgásban tartja a munkát.'},{t:'Havonta AI-jel ellenőrzés',d:'ChatGPT, Perplexity, Claude — mit mondanak a cégről és Alexandráról? Melyik front halad?'},{t:'Specialitásfókusz döntés és kampány',d:'Az egyik kiválasztott specialitás számára önálló landing oldal + DACH-specifikus tartalom + célzott megkeresés.'},{t:'12 hónapos teljes audit',d:'A mostani audit megismétlése. Mérőszámok összehasonlítása. A második ciklus adatokon alapuló döntésekkel indul.'}],res:'12 hónap után: teljes digitális identitás felépítve, AI-ban látható és ajánlott, DACH-ban aktív kapcsolatok, személyes márka látható, cégérték dokumentált és emelkedett.',ris:'1. Fókuszhiány — ha minden egyszerre zajlik, semmi sem jut befejezésre. Havi sprint rendszer nélkül valós veszély. 2. Végrehajtási terhelés Szandrán — külső segítség szükséges lehet.'}
+};
+const CM={safe:'Óvatos, biztonságos',premium:'Prémium, szelektív',expert:'Mély szakértői pozíció',growth:'Gyors piaci láthatóság',intl:'Nemzetközi, kétnyelvű'};
+const TM={fast:'6 hónapos gyors',balanced:'9 hónapos kiegyensúlyozott',deep:'12 hónapos mély'};
+const TLS={linkedin:'LinkedIn stratégia',articles:'Cikksorozat publikálás',website:'Weboldal fejlesztés',schema:'Strukturált adatok',press:'Szakmai megjelenések',network:'Partner profilok'};
+const PM={certs:'ISO/GMP+ kiemelés',cases:'Anonymizált esettanulmányok',solvay:'Solvay-kapcsolat keretezés',numbers:'Számadatok/eredmények',history:'Karriertörténet',testim:'Partneri megerősítések'};
+function bldSum(){if(!S.tempo){shT('Kérlek válassz tempót!');return}const d=RD[S.goal]||RD.ai;document.getElementById('sdate').textContent='Generálva: '+new Date().toLocaleDateString('hu-HU');document.getElementById('srtit').textContent=d.ti;document.getElementById('srdesc').textContent=d.desc;document.getElementById('smeta').innerHTML=[{l:'Fő cél',v:d.ti.replace('Fő irány: ','')},{l:'Stratégiai karakter',v:CM[S.char]||'—'},{l:'Végrehajtási tempó',v:TM[S.tempo]||'—'},{l:'Kiválasztott eszközök',v:S.tools.map(t=>TLS[t]).filter(Boolean).join(', ')||'—'},{l:'Bizonyítéképítés',v:S.proof.map(p=>PM[p]).filter(Boolean).join(', ')||'—'},{l:'Ügyfél',v:'Sajbán-Frőhner Alexandra / RMT Kft.'}].map(i=>`<div><div class="sml">${i.l}</div><div class="smv">${i.v}</div></div>`).join('');document.getElementById('ssteps').innerHTML=d.st.map(s=>`<li><div><div class="stt">${s.t}</div><div class="std">${s.d}</div></div></li>`).join('');document.getElementById('sres').textContent=d.res;document.getElementById('srisk').textContent=d.ris;const el=document.getElementById('gsum');el.classList.add('on');el.scrollIntoView({behavior:'smooth',block:'start'});saveLoc(true)}
+function shT(m,t=3000){const el=document.getElementById('toast');el.textContent=m;el.classList.add('on');setTimeout(()=>el.classList.remove('on'),t)}
+function saveLoc(silent=false){try{localStorage.setItem('rmt_s',JSON.stringify(S));const s=document.getElementById('gsum');if(s&&s.innerHTML)localStorage.setItem('rmt_sum',s.innerHTML);if(!silent)shT('✓ Sikeresen mentve.')}catch(e){if(!silent)shT('Mentési hiba: '+e.message)}}
+function ldLoc(){try{const sv=localStorage.getItem('rmt_s');if(!sv)return;const ps=JSON.parse(sv);Object.assign(S,ps);['goal','char','tempo'].forEach(k=>{if(S[k]){const c=document.querySelector(`.ocard[data-k="${k}"][data-v="${S[k]}"]`);if(c)c.classList.add('sel')}});['tools','proof'].forEach(k=>{(S[k]||[]).forEach(v=>{const c=document.querySelector(`.ocard[data-k="${k}"][data-v="${v}"]`);if(c)c.classList.add('sel')})});rndr();const sh=localStorage.getItem('rmt_sum');if(sh){const el=document.getElementById('gsum');el.innerHTML=sh;el.classList.add('on')}shT('Előző munkamenet visszatöltve.')}catch(e){}}
+function rstWiz(){if(!confirm('Biztosan újrakezded? A kiválasztott opciók elvesznek.'))return;S.step=0;S.goal=null;S.char=null;S.tools=[];S.proof=[];S.tempo=null;document.querySelectorAll('.ocard').forEach(c=>c.classList.remove('sel'));rndr();document.getElementById('gsum').classList.remove('on');localStorage.removeItem('rmt_s');localStorage.removeItem('rmt_sum');document.getElementById('wizard').scrollIntoView({behavior:'smooth'});shT('Újrakezdve.')}
+</script>
+</body>
+</html>
