@@ -1096,18 +1096,39 @@
     .pdf-export-document .pdf-meta {
       color: #4b5563;
       font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .pdf-export-document .pdf-summary {
+      color: #374151;
+      font-size: 12px;
+      font-weight: 700;
       margin-bottom: 20px;
       border-bottom: 1px solid #d1d5db;
       padding-bottom: 12px;
     }
+    .pdf-export-document .pdf-section {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      margin: 24px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #1f2937;
+      color: #111827;
+      break-after: avoid;
+      page-break-after: avoid;
+    }
     .pdf-export-document .pdf-answer {
       break-inside: avoid;
       page-break-inside: avoid;
-      margin: 0 0 12px;
-      padding: 12px;
+      margin: 0 0 10px;
+      padding: 11px 13px;
       border: 1px solid #e5e7eb;
       border-radius: 8px;
       background: #f9fafb;
+    }
+    .pdf-export-document .pdf-answer--empty {
+      background: #ffffff;
+      border-style: dashed;
+      border-color: #d1d5db;
     }
     .pdf-export-document .pdf-question {
       display: block;
@@ -1119,6 +1140,9 @@
       white-space: pre-wrap;
       color: #1f2937;
       font-size: 13px;
+    }
+    .pdf-export-document .pdf-answer--empty .pdf-value {
+      color: #9ca3af;
     }
 
     /* =========================================================
@@ -3110,53 +3134,142 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
 
-      const collectAnsweredFields = () => {
+      const EMPTY_VALUE_MARK = '—';
+
+      // Megkeresi a mezőhöz tartozó szakaszcímet (legközelebbi korábbi .section-title h2),
+      // hogy a PDF a kérdőív szerkezetét tükrözze.
+      const getSectionTitleForField = (field) => {
+        if (!field || !form) return '';
+        const titles = Array.from(form.querySelectorAll('.section-title h2'));
+        if (!titles.length) return '';
+        let current = '';
+        for (const title of titles) {
+          // A title a mező ELŐTT van a DOM-ban?
+          const relation = title.compareDocumentPosition(field);
+          if (relation & Node.DOCUMENT_POSITION_FOLLOWING) {
+            current = cleanLabelText(title.textContent);
+          } else {
+            break;
+          }
+        }
+        return current;
+      };
+
+      // MINDEN mezőt összegyűjt — kitöltöttet és üreset is —, a kérdőív sorrendjében,
+      // szakaszokra bontva. A radio/checkbox csoportokat egyetlen sorként kezeli.
+      const collectAllFields = () => {
         const rows = [];
-        const groupedChoices = new Map();
+        const groupOrder = [];
+        const groupMap = new Map();
 
         getSerializableFields().forEach((field) => {
           if (field.type === 'checkbox' || field.type === 'radio') {
-            if (!field.checked) return;
-            const question = getGroupQuestion(field) || field.name;
-            const existing = groupedChoices.get(field.name) || { question, values: [] };
-            existing.values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
-            groupedChoices.set(field.name, existing);
+            const name = field.name;
+            if (!groupMap.has(name)) {
+              const entry = {
+                type: 'group',
+                question: getGroupQuestion(field) || cleanLabelText(field.name),
+                section: getSectionTitleForField(field),
+                values: [],
+                order: rows.length + groupOrder.length
+              };
+              groupMap.set(name, entry);
+              groupOrder.push(name);
+              // Helyfoglaló a sorrend megőrzéséhez
+              rows.push(entry);
+            }
+            if (field.checked) {
+              groupMap.get(name).values.push(getFieldLabel(field) || field.value || 'Kiválasztva');
+            }
             return;
           }
 
-          const value = getOptionText(field);
-          if (!value) return;
-          rows.push({ question: getFieldLabel(field), value });
+          rows.push({
+            type: 'single',
+            question: getFieldLabel(field) || cleanLabelText(field.name),
+            section: getSectionTitleForField(field),
+            value: getOptionText(field)
+          });
         });
 
-        groupedChoices.forEach((item) => {
-          rows.push({ question: item.question, value: item.values.join('\n') });
-        });
+        // Normalizálás: minden sor kap egy szöveges value-t, üresnél jelölés.
+        return rows.map((row) => {
+          if (row.type === 'group') {
+            return {
+              question: row.question,
+              section: row.section,
+              value: row.values.length ? row.values.join('\n') : EMPTY_VALUE_MARK,
+              answered: row.values.length > 0
+            };
+          }
+          const val = (row.value || '').trim();
+          return {
+            question: row.question,
+            section: row.section,
+            value: val || EMPTY_VALUE_MARK,
+            answered: Boolean(val)
+          };
+        }).filter((row) => row.question);
+      };
 
-        return rows.filter((row) => row.question && row.value);
+      // Visszafelé kompatibilis: csak a kitöltött mezők (pl. „van-e mit menteni?" ellenőrzéshez).
+      const collectAnsweredFields = () => {
+        return collectAllFields().filter((row) => row.answered);
       };
 
       const buildPdfMarkup = () => {
-        const rows = collectAnsweredFields();
-        const title = 'Digitális Entitásépítési Audit — kitöltött válaszok';
+        const rows = collectAllFields();
+        const title = 'Digitális Entitásépítési Audit — válaszok';
         const meta = `Generálva: ${new Date().toLocaleString('hu-HU')} · Forrás: ${window.location.href}`;
-        const content = rows.length
-          ? rows.map((row) => `<div class="pdf-answer"><span class="pdf-question">${escapeHtml(row.question)}</span><div class="pdf-value">${escapeHtml(row.value)}</div></div>`).join('')
-          : '<p>Nincs még kitöltött válasz.</p>';
-        return `<div class="pdf-export-document"><h1>${escapeHtml(title)}</h1><div class="pdf-meta">${escapeHtml(meta)}</div>${content}</div>`;
+
+        const answeredCount = rows.filter((row) => row.answered).length;
+        const summary = `Összesen ${rows.length} mező · Kitöltve: ${answeredCount} · Üresen: ${rows.length - answeredCount}`;
+
+        let content = '';
+        if (!rows.length) {
+          content = '<p>Nincs megjeleníthető mező.</p>';
+        } else {
+          let lastSection = null;
+          rows.forEach((row) => {
+            if (row.section && row.section !== lastSection) {
+              content += `<h2 class="pdf-section">${escapeHtml(row.section)}</h2>`;
+              lastSection = row.section;
+            }
+            const emptyClass = row.answered ? '' : ' pdf-answer--empty';
+            content += `<div class="pdf-answer${emptyClass}"><span class="pdf-question">${escapeHtml(row.question)}</span><div class="pdf-value">${escapeHtml(row.value)}</div></div>`;
+          });
+        }
+
+        return `<div class="pdf-export-document"><h1>${escapeHtml(title)}</h1><div class="pdf-meta">${escapeHtml(meta)}</div><div class="pdf-summary">${escapeHtml(summary)}</div>${content}</div>`;
       };
 
       const buildFormattedAnswersText = () => {
-        const rows = collectAnsweredFields();
+        const rows = collectAllFields();
+        const answeredCount = rows.filter((row) => row.answered).length;
         const header = [
-          'Digitális Entitásépítési Audit — kitöltött válaszok',
-          'Beküldés ideje: ' + new Date().toLocaleString('hu-HU'),
-          'Forrásoldal: ' + window.location.href
+          'Digitális Entitásépítési Audit — válaszok',
+          'Generálva: ' + new Date().toLocaleString('hu-HU'),
+          'Forrásoldal: ' + window.location.href,
+          `Összesen ${rows.length} mező · Kitöltve: ${answeredCount} · Üresen: ${rows.length - answeredCount}`
         ].join('\n');
 
-        const body = rows.length
-          ? rows.map((row, index) => `${index + 1}. Kérdés:\n${row.question}\n\nVálasz:\n${row.value}`).join('\n\n---\n\n')
-          : 'Nincs kitöltött válasz.';
+        let body = '';
+        if (!rows.length) {
+          body = 'Nincs megjeleníthető mező.';
+        } else {
+          let lastSection = null;
+          let index = 0;
+          const parts = [];
+          rows.forEach((row) => {
+            if (row.section && row.section !== lastSection) {
+              parts.push('\n=== ' + row.section + ' ===');
+              lastSection = row.section;
+            }
+            index += 1;
+            parts.push(`${index}. Kérdés:\n${row.question}\n\nVálasz:\n${row.value}`);
+          });
+          body = parts.join('\n\n---\n\n');
+        }
 
         return header + '\n\n' + body;
       };
@@ -3166,9 +3279,9 @@
       };
 
       const downloadAnswersAsPdf = async () => {
-        const rows = collectAnsweredFields();
+        const rows = collectAllFields();
         if (!rows.length) {
-          showAlert('Még nincs kitöltött válasz, amit PDF-be lehetne menteni.');
+          showAlert('Nincs megjeleníthető mező az űrlapon.');
           return;
         }
 
@@ -3202,7 +3315,7 @@
               showAlert('A PDF exporthoz engedélyezni kell az új ablak megnyitását, vagy próbálja újra később.');
               return;
             }
-            printWindow.document.write('<!doctype html><html><head><title>Audit válaszok</title><style>body{font-family:Arial,sans-serif;color:#111827;padding:24px}.pdf-answer{break-inside:avoid;margin:0 0 12px;padding:12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb}.pdf-question{display:block;font-weight:700;margin-bottom:5px}.pdf-value{white-space:pre-wrap;font-size:13px}</style></head><body>' + buildPdfMarkup() + '</body></html>');
+            printWindow.document.write('<!doctype html><html><head><title>Audit válaszok</title><style>body{font-family:Arial,sans-serif;color:#111827;padding:24px}h1{font-size:22px;margin:0 0 6px}.pdf-meta,.pdf-summary{color:#4b5563;font-size:12px;margin-bottom:6px}.pdf-summary{margin-bottom:18px;font-weight:700;color:#374151}.pdf-section{font-size:15px;margin:22px 0 10px;padding-bottom:5px;border-bottom:2px solid #1f2937;color:#111827}.pdf-answer{break-inside:avoid;margin:0 0 10px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb}.pdf-answer--empty{background:#fff;border-style:dashed}.pdf-question{display:block;font-weight:700;margin-bottom:4px}.pdf-value{white-space:pre-wrap;font-size:13px}.pdf-answer--empty .pdf-value{color:#9ca3af}</style></head><body>' + buildPdfMarkup() + '</body></html>');
             printWindow.document.close();
             printWindow.focus();
             printWindow.print();
