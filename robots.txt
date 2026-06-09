@@ -1,3 +1,71 @@
+# A teljes oldal indexelésének és AI célú feltérképezésének tiltása.
+# A keresőmotorok számára az oldal HTML-ben is noindex/nofollow meta beállítást kapott.
+
+# OpenAI / ChatGPT
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow: /
+
+# Anthropic / Claude
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-User
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+# Google AI training opt-out
+User-agent: Google-Extended
+Disallow: /
+
+# Common AI / LLM data crawlers
+User-agent: CCBot
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Applebot-Extended
+Disallow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /
+
+User-agent: Meta-ExternalFetcher
+Disallow: /
+
+User-agent: FacebookBot
+Disallow: /
+
+User-agent: Amazonbot
+Disallow: /
+
+User-agent: YouBot
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+# Általános szabály: más robotok ne járják be az oldalt.
+# Megjegyzés: ha egy oldal már indexben van, a HTML noindex meta segíti a kivezetést.
 User-agent: *
-Disallow: /index.html
-Allow: /
+Disallow: /
