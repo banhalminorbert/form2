@@ -15,14 +15,14 @@ const CONFIG = {
   DEFAULT_SUCCESS_URL: 'https://form.vipach.at/?sent=1',
 
   // Élesítés után átállítható true-ra, ha csak a saját domainről engednéd a beküldést.
-  STRICT_SOURCE_CHECK: false,
-  ALLOWED_SOURCE_PREFIXES: ['https://form.vipach.at'],
+  STRICT_SOURCE_CHECK: true,
+  ALLOWED_SOURCE_PREFIXES: ['https://form.vipach.at', 'http://form.vipach.at'],
 };
 
 function doGet() {
   return HtmlService.createHtmlOutput(
     '<!doctype html><html><body style="font-family:Arial,sans-serif;padding:24px">' +
-    '<h2>Digitális Entitás Audit form endpoint aktív.</h2>' +
+    '<h2>VIPACH for Business stratégiai diagnózis form endpoint aktív.</h2>' +
     '<p>Ez az URL a HTML űrlap beküldési végpontja. A form POST kéréssel küldi ide az adatokat.</p>' +
     '</body></html>'
   );

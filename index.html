@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Digitális Entitásépítési Audit és Deep Search Stratégia | Bánhalmi Norbert e.U.</title>
-  <meta name="description" content="C-level digitális entitásépítési és deep search audit személyes márkáknak, cégeknek és márkáknak a magyar és nemzetközi piaci láthatóság erősítésére." />
+  <title>VIPACH for Business | Stratégiai diagnózis és Digitális Entitás Audit űrlap</title>
+  <meta name="description" content="Jelszóval védett VIPACH for Business stratégiai diagnózis és digitális entitás audit űrlap form.vipach.at domainen." />
   <meta name="author" content="Bánhalmi Norbert e.U." />
   <!-- Keresőmotorok és AI-crawlerek indexelésének tiltása -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
@@ -14,7 +14,6 @@
   <meta name="duckduckbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
   <meta name="yandex" content="noindex, nofollow, noarchive, nosnippet, noimageindex, notranslate" />
   <meta name="theme-color" content="#17283D" />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* =========================================================
        DESIGN SYSTEM — Premium executive strategic audit
@@ -1383,6 +1382,55 @@
     @media (prefers-reduced-motion: reduce) {
       * { transition: none !important; scroll-behavior: auto !important; }
     }
+
+
+    /* =========================================================
+       VIPACH for Business design harmonisation — form.vipach.at
+       Navy blue + óarany, system typography, no external fonts
+       ========================================================= */
+    :root {
+      --paper:#F6F4EF; --paper-2:#EEE8DC; --card:#FFFFFF; --card-tint:#FBFAF6;
+      --ink:#071D33; --ink-soft:#162E48; --body:#26394D; --muted:#6D7480; --muted-2:#8E9298;
+      --blue:#071D33; --blue-dark:#06182B; --blue-mid:#0C2947; --blue-line:rgba(7,29,51,.14); --blue-soft:rgba(7,29,51,.055);
+      --gold:#B08A3C; --gold-soft:#D2B36A; --gold-deep:#8F6F2F; --gold-line:rgba(176,138,60,.34); --gold-tint:rgba(176,138,60,.10);
+      --on-dark:#F6F4EF; --on-dark-soft:rgba(246,244,239,.84);
+      --hairline:rgba(7,29,51,.12);
+      --shadow-sm:0 1px 2px rgba(7,29,51,.04),0 6px 16px rgba(7,29,51,.055);
+      --shadow-md:0 2px 6px rgba(7,29,51,.05),0 14px 34px rgba(7,29,51,.075);
+      --shadow-lg:0 4px 10px rgba(7,29,51,.07),0 26px 60px rgba(7,29,51,.12);
+      --serif:-apple-system,BlinkMacSystemFont,'SF Pro Display','Helvetica Neue',Arial,sans-serif;
+      --sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Helvetica Neue',Arial,sans-serif;
+    }
+    body { background: var(--paper); color: var(--body); font-family: var(--sans); }
+    h1,h2,h3,h4,header h1,.intro-box h2,.story-box h2,.promise-box h2 { font-family: var(--sans); letter-spacing:-.045em; }
+    header { background:linear-gradient(180deg,#fff 0%,#FBFAF6 100%); border-color:var(--hairline); box-shadow:var(--shadow-md); }
+    header h1 { max-width: 19ch; font-size: clamp(2.1rem,4.2vw,3.35rem); font-weight: 720; }
+    .header-brand { color:var(--muted); }
+    .eyebrow,.stag { color:var(--gold-deep); background:var(--gold-tint); border-color:var(--gold-line); }
+    header::before,.progress-bar, .gate-card::before { background:linear-gradient(90deg,var(--blue),var(--gold),var(--blue-mid)); }
+    .promise-box, .commercial-card.feature, .password-gate { background:linear-gradient(155deg,var(--blue-dark),var(--blue),var(--blue-mid)); }
+    .promise-box h2,.commercial-card.feature h3 { color:#E7C76A; }
+    .promise-box p,.commercial-card.feature p { color:var(--on-dark-soft); }
+    .btn-p, button[type="submit"], .password-form button { background:var(--gold); color:#fff; box-shadow:0 10px 28px rgba(176,138,60,.25); }
+    .btn-p:hover, button[type="submit"]:hover, .password-form button:hover { background:var(--gold-deep); }
+    .btn-s, .button-secondary, .button-tertiary { color:var(--blue); border-color:var(--blue-line); background:#fff; }
+    .intro-box { border-left-color:var(--gold); }
+    .path-card:hover,.accordion:hover,.checkbox-item:hover,.radio-item:hover { border-color:var(--gold-line); }
+    .checkbox-item input:checked + label, .radio-item input:checked + label { color:var(--ink); }
+    .checkbox-item:has(input:checked), .radio-item:has(input:checked) { border-color:var(--gold-line); background:var(--gold-tint); }
+    .form-group input:focus,.form-group textarea:focus,.form-group select:focus,.password-form input:focus { border-color:var(--gold); box-shadow:0 0 0 4px rgba(176,138,60,.18); }
+    .privacy-panel summary,.terms-panel summary { color:var(--ink); }
+    .privacy-body a,.terms-body a, footer a { color:var(--gold-deep); }
+    .gdpr-intake-notice { margin: 24px 0 30px; padding: 22px 24px; border-radius: var(--radius); background: #fff; border: 1px solid var(--gold-line); box-shadow: var(--shadow-sm); display:grid; grid-template-columns: 1fr 1fr; gap:18px; }
+    .gdpr-intake-notice div { color: var(--body); font-size:.93rem; line-height:1.65; }
+    .gdpr-intake-notice strong { color:var(--ink); }
+    .gate-shell { max-width:1120px; }
+    .gate-card,.gate-login { border-color:rgba(246,244,239,.16); }
+    .gate-eyebrow { color:#E7C76A; }
+    .gate-card h1,.gate-login h2 { font-family:var(--sans); letter-spacing:-.045em; }
+    .gate-callout { background:rgba(246,244,239,.08); border-color:rgba(231,199,106,.28); }
+    @media(max-width: 820px){ .gdpr-intake-notice{ grid-template-columns:1fr; padding:18px; } }
+
   </style>
 </head>
 <body class="locked">
@@ -1445,7 +1493,7 @@
 
       <div class="promise-box">
         <h2>96 órás digitális entitásdiagnózis</h2>
-        <p>A beküldés után <strong>96 órán belül</strong> megmutatjuk, hogyan látja Önt, a cégét vagy a márkáját a digitális világ — és mit kell megépíteni ahhoz, hogy az AI pontosan értse és ajánlani tudja.</p>
+        <p>A beküldés után <strong>96 órán belül</strong> megmutatjuk, hogyan látja Önt, a cégét vagy a márkáját a digitális világ — és mit kell megépíteni ahhoz, hogy a keresők, partnerek és AI-rendszerek pontosabban, ellenőrizhetőbb forrásokból értsék.</p>
         <p>Ez nem szépen becsomagolt általánosság, hanem döntési anyag: feltárja, hol erős az entitás, hol hiányos a jel, hol tévedhet az AI, és milyen sorrendben érdemes építkezni.</p>
         <p>A cél egyszerű: lássuk a valóságot, tisztítsuk a jelet, építsük fel az entitást.</p>
       </div>
@@ -1505,7 +1553,7 @@
 
 
       <div class="success-message" id="successMessage">
-        ✓ Köszönjük a válaszokat. A beküldött adatok alapján elindul a 96 órás deep search alapú audit és stratégiai előkészítés.
+        ✓ Köszönjük a válaszokat. A beküldött adatok alapján elindulhat a 96 órás deep search alapú audit és stratégiai előkészítés.
       </div>
 
       <div class="progress-shell" aria-label="Űrlap kitöltési állapot">
@@ -1518,6 +1566,16 @@
       </div>
 
       <div class="form-alert" id="formAlert" role="alert"></div>
+
+      <section class="gdpr-intake-notice" aria-label="Adatvédelmi és adatminimalizálási figyelmeztetés">
+        <div>
+          <strong>Adatminimalizálási figyelmeztetés.</strong>
+          Ez az űrlap a kapcsolatfelvétel utáni stratégiai diagnózis előkészítésére szolgál. Kérjük, csak olyan adatot adjon meg, amely az audit szempontjából valóban szükséges. Ne írjon be különleges kategóriájú személyes adatot — például egészségügyi adatot, politikai véleményt, vallási meggyőződést, szakszervezeti tagságot, szexuális életre vonatkozó információt vagy biometrikus/genetikai adatot — és harmadik személy üzleti vagy személyes titkát csak akkor említse, ha annak megosztására jogosult.
+        </div>
+        <div>
+          Az űrlap jelszóval védett, noindex beállítású, Google Workspace / Apps Script / Google Sheets technikai feldolgozással működik, és helyi böngészős automatikus mentést használ. A részletes adatkezelési tájékoztató lent, az űrlap részeként olvasható.
+        </div>
+      </section>
 
       <div class="form-lead">
         <h2>Hogyan érdemes kitölteni?</h2>
@@ -1973,7 +2031,7 @@
 
           <div class="form-group">
             <label for="sensitiveTopics">Milyen érzékeny témákra, múltbeli ügyekre vagy kérdésekre kell felkészülni?</label>
-            <span class="field-help">Ezek nem feltétlenül negatív dolgok, de ha egy AI vagy újságíró rákérdez, a válasznak pontosnak, arányosnak és ellenőrizhetőnek kell lennie.</span>
+            <span class="field-help">Kérjük, itt is kerülje a különleges kategóriájú személyes adatokat és harmadik személy bizalmas adatait. Üzleti, reputációs vagy nyilvánosan ismert kontextust írjon le, nem érzékeny részleteket.</span>
             <textarea id="sensitiveTopics" name="sensitiveTopics"></textarea>
           </div>
         </div>
@@ -2535,35 +2593,35 @@
           <div class="form-group">
             <div class="checkbox-item">
               <input type="checkbox" id="consent_1" name="agreeDataProcessing" required />
-              <label for="consent_1">Hozzájárulok személyes adataim kezeléséhez az audit elkészítése és az ügyfélkommunikáció céljából, és tudomásul veszem, hogy az űrlap technikai feldolgozása Google Workspace / Google Apps Script / Google Sheets környezetben történik, a GDPR és az osztrák DSG szerint. <span class="required">*</span></label>
+              <label for="consent_1">Tudomásul veszem, hogy a megadott adatokat a VIPACH for Business kapcsolatfelvétel, stratégiai diagnózis, audit-előkészítés, esetleges ajánlatkészítés és ügyfélkommunikáció céljából kezeli. A jogalap az adatkezelési cél szerint szerződéskötést megelőző lépés, hozzájárulás, jogos érdek vagy jogi kötelezettség lehet. <span class="required">*</span></label>
             </div>
           </div>
 
           <div class="form-group">
             <div class="checkbox-item">
               <input type="checkbox" id="consent_2" name="agreeResearch" required />
-              <label for="consent_2">Tudomásul veszem, hogy az előzetes elemzés nyilvános forrásokra, a megadott adatokra és deep search kutatásra épülhet. <span class="required">*</span></label>
+              <label for="consent_2">Tudomásul veszem, hogy az előzetes elemzés nyilvános forrásokra, az általam megadott adatokra, deep search kutatásra és emberi szakmai értelmezésre épülhet; az AI-eszközök csak elemzési segédeszközként használhatók, nem önálló döntéshozóként. <span class="required">*</span></label>
             </div>
           </div>
 
           <div class="form-group">
             <div class="checkbox-item">
               <input type="checkbox" id="consent_3" name="agreeEmail" required />
-              <label for="consent_3">Hozzájárulok az audittal kapcsolatos e-mail kommunikációhoz. <span class="required">*</span></label>
+              <label for="consent_3">Tudomásul veszem, hogy az audittal, pontosító kérdésekkel és ajánlat-előkészítéssel kapcsolatos kommunikáció e-mailben vagy szükség esetén telefonon történhet. Ez nem hírlevél-feliratkozás. <span class="required">*</span></label>
             </div>
           </div>
 
           <div class="form-group">
             <div class="checkbox-item">
               <input type="checkbox" id="consent_4" name="agreeConfidentiality" required />
-              <label for="consent_4">Tudomásul veszem, hogy az audit során megadott információk bizalmasan kezelendők, és az elemzés elkészítéséhez használhatók. <span class="required">*</span></label>
+              <label for="consent_4">Tudomásul veszem, hogy az audit során megadott üzleti, reputációs és stratégiai információk bizalmasan kezelendők, és az elemzés elkészítéséhez, dokumentálásához és ajánlat-előkészítéshez használhatók. <span class="required">*</span></label>
             </div>
           </div>
 
           <div class="form-group">
             <div class="checkbox-item">
               <input type="checkbox" id="consent_5" name="agreeTerms" required />
-              <label for="consent_5">Elfogadom a Bánhalmi Norbert e.U. adatvédelmi tájékoztatóját, és tudomásul veszem, hogy a szakmai tanácsadási feltételek az űrlap végén külön lenyíló blokkban olvashatók. <span class="required">*</span></label>
+              <label for="consent_5">Elolvastam az űrlapban szereplő adatvédelmi tájékoztatót és szolgáltatói adatokat, és tudomásul veszem, hogy a szakmai tanácsadási feltételek az űrlap végén külön lenyíló blokkban olvashatók. <span class="required">*</span></label>
             </div>
           </div>
 
@@ -2575,55 +2633,95 @@
 
 
       <details class="privacy-panel" id="privacyPanel">
-        <summary>Adatvédelmi tájékoztató röviden — mit kezelünk, miért és milyen Google-szolgáltatással?</summary>
+        <summary>Adatvédelmi tájékoztató — GDPR / DSGVO / DSG / Google Workspace feldolgozás</summary>
         <div class="privacy-body">
-          <p><strong>Adatkezelő:</strong> Bánhalmi Norbert e.U., Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria. Kapcsolat: office@vipach.at.</p>
-          <p><strong>Adatkezelés célja:</strong> digitális entitásépítési és deep search audit előkészítése, kapcsolattartás, számlázási és szerződéskötési előkészítés, stratégiai elemzés és egyedi ajánlatkészítés.</p>
-          <p><strong>Technikai feldolgozás:</strong> az űrlap beküldése nem FormSubmit rendszeren keresztül történik, hanem Google Workspace környezetben működő Google Apps Script webalkalmazáson keresztül. A beküldött adatok e-mail értesítésként az office@vipach.at címre kerülhetnek továbbításra, valamint Google Sheets archívumban is rögzítésre kerülhetnek.</p>
+          <h3>1. Adatkezelő</h3>
+          <p><strong>Bánhalmi Norbert e.U. / VIPACH for Business</strong><br>Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria<br>E-mail: <a href="mailto:office@vipach.at">office@vipach.at</a> · Web: <a href="https://form.vipach.at" target="_blank" rel="noopener noreferrer">form.vipach.at</a></p>
+
+          <h3>2. Az űrlap célja</h3>
+          <p>Ez az űrlap nem nyilvános marketingfelület, hanem jelszóval védett stratégiai diagnosztikai eszköz. Célja a Digitális Entitás Audit, deep search alapú előkészítés, kapcsolatfelvétel, pontosító kérdések, auditdokumentum elkészítése és esetleges későbbi ajánlat előkészítése.</p>
+
+          <h3>3. Kezelt adatkategóriák</h3>
           <ul>
-            <li>A beküldött adatok az audit elkészítéséhez, az esetleges szerződéskötéshez, számlázáshoz és az ügyfélkommunikációhoz szükségesek.</li>
-            <li>A beküldés során technikai közreműködőként Google-szolgáltatások vehetnek részt: Google Apps Script, Google Sheets és Google Workspace / Gmail.</li>
-            <li>A Google a Google Workspace szolgáltatások részeként technikai adatfeldolgozóként működhet közre; az adatok nem marketinglista-építés vagy hirdetési célból kerülnek továbbításra.</li>
-            <li>A kutatás nyilvános forrásokra, a megadott linkekre és az ügyfél által megosztott háttérinformációkra épülhet.</li>
-            <li>A stratégiai, reputációs, üzleti, pénzügyi és személyes információkat bizalmasan kell kezelni.</li>
-            <li>Az adatokhoz kizárólag az audit előkészítésében és ügyfélkommunikációban részt vevő jogosult személyek férhetnek hozzá.</li>
+            <li>kapcsolattartási adatok: név, e-mail, telefonszám, preferált nyelv;</li>
+            <li>céges és márkaadatok: cégnév, weboldal, nyilvános profilok, piac, célország, szakmai háttér;</li>
+            <li>stratégiai és reputációs válaszok: múlt, jelen, célok, kockázatok, ismert félreértések, tartalmi és piaci háttér;</li>
+            <li>számlázási adatok csak akkor, ha azokat Ön önkéntesen megadja vagy későbbi szerződéskötéshez szükségessé válnak;</li>
+            <li>technikai adatok: beküldés ideje, forrásoldal URL-je, böngésző user-agent, Google Apps Script feldolgozási napló, Google Sheet archívumsor;</li>
+            <li>helyi böngészős mentés: a kitöltött mezők a saját böngészőjében localStorage segítségével ideiglenesen visszatölthetők.</li>
           </ul>
-          <p><strong>Jogalap:</strong> az audit előkészítéséhez és az ügyfélkommunikációhoz kapcsolódó hozzájárulás, szerződéskötést megelőző lépések, illetve jogos üzleti érdek az ajánlatkészítés és dokumentált kapcsolattartás körében.</p>
-          <p><strong>Megőrzés:</strong> a beküldött adatokat az audit, ajánlatkészítés, szerződéskötési előkészítés és jogi/számviteli dokumentáció céljához szükséges ideig őrizzük meg. Sikertelen vagy meg nem valósuló együttműködés esetén az adatok törlése vagy korlátozása kérhető.</p>
-          <p><strong>Jogok:</strong> hozzáférés, helyesbítés, törlés, korlátozás, tiltakozás és adathordozhatóság az alkalmazandó GDPR/DSG keretek szerint. Kérését az office@vipach.at címen tudja jelezni.</p>
-          <p><strong>Verzió:</strong> Privacy-HU-Entity-Audit-GoogleWorkspace-2026-06-08.</p>
+
+          <h3>4. Különleges kategóriájú adatok és harmadik személyek</h3>
+          <p>Kérjük, ne adjon meg különleges kategóriájú személyes adatot, például egészségügyi adatot, politikai véleményt, vallási vagy világnézeti meggyőződést, szakszervezeti tagságot, szexuális életre vonatkozó adatot, genetikai vagy biometrikus adatot. Harmadik személy személyes vagy üzleti titkát csak akkor említse, ha az átadásra jogosult. Ha egy reputációs téma mégis releváns, azt üzleti és nyilvánosan ellenőrizhető kontextusban, arányosan írja le.</p>
+
+          <h3>5. Jogalapok</h3>
+          <ul>
+            <li><strong>szerződéskötést megelőző lépések:</strong> audit- és ajánlat-előkészítés, pontosítás, ügyfélkommunikáció;</li>
+            <li><strong>hozzájárulás:</strong> önkéntesen megadott kiegészítő információk, opcionális háttéranyagok és kommunikációs hozzájárulások;</li>
+            <li><strong>jogos érdek:</strong> csalás- és spamvédelem, dokumentált kapcsolattartás, üzleti igények igazolása, informatikai biztonság;</li>
+            <li><strong>jogi kötelezettség:</strong> ha később szerződés, számla vagy számviteli dokumentáció jön létre.</li>
+          </ul>
+
+          <h3>6. Címzettek és adatfeldolgozók</h3>
+          <p>Az űrlap technikai feldolgozása Google Workspace környezetben történik. A beküldés Google Apps Script webalkalmazáson keresztül érkezik, az adatok e-mail értesítésként az <a href="mailto:office@vipach.at">office@vipach.at</a> címre továbbítódhatnak, és Google Sheets archívumban rögzülhetnek. Technikai közreműködő lehet: Google Apps Script, Google Sheets, Gmail / Google Workspace, valamint a weboldal tárhelyszolgáltatója / DNS-szolgáltatója. Marketinglista-építés, hirdetési célú továbbítás vagy automatikus remarketing az űrlap alapján nem történik.</p>
+
+          <h3>7. AVV / DPA és harmadik országbeli adattovábbítás</h3>
+          <p>A Google Workspace szolgáltatásoknál a Google adatfeldolgozóként járhat el a Google vonatkozó Data Processing Addendum / AVV feltételei szerint. A Google csoport globális infrastruktúrát használhat, ezért harmadik országba történő adattovábbítás elvileg előfordulhat; ennek jogi alapja a szolgáltató által alkalmazott adatvédelmi garanciarendszer, például EU Standard Contractual Clauses és kapcsolódó biztonsági intézkedések lehetnek. A konkrét Workspace-admin beállítások, jogosultságok és DPA/AVV elfogadásának ellenőrzése az élesítés része.</p>
+
+          <h3>8. AI-eszközök használata</h3>
+          <p>Az audit előkészítése során AI-alapú vagy deep search elemzőeszközök szakmai segédeszközként használhatók. Ezek nem hoznak kizárólag automatizált, joghatással vagy hasonlóan jelentős hatással járó döntést. A stratégiai következtetés emberi szakmai kontroll mellett készül. Ahol lehetséges, adatminimalizálást, anonimizálást vagy pszeudonimizálást kell alkalmazni.</p>
+
+          <h3>9. Megőrzési idő</h3>
+          <ul>
+            <li>sikertelen vagy meg nem valósuló együttműködés esetén: jellemzően legfeljebb 12 hónap, kivéve, ha jogi igény igazolása vagy védekezés miatt hosszabb megőrzés szükséges;</li>
+            <li>szerződés, számla vagy fizetett teljesítés esetén: a jogszabályi számviteli és adózási megőrzési idők szerint;</li>
+            <li>helyi böngészős mentés: az Ön böngészőjében marad, amíg nem törli, nem küldi be az űrlapot, vagy nem törli az oldaladatokat.</li>
+          </ul>
+
+          <h3>10. Érintetti jogok és panaszjog</h3>
+          <p>Ön jogosult hozzáférést, helyesbítést, törlést, korlátozást, adathordozhatóságot kérni, illetve tiltakozhat a jogos érdeken alapuló adatkezelés ellen. Kérését az <a href="mailto:office@vipach.at">office@vipach.at</a> címen jelezheti. Panasszal az osztrák Datenschutzbehörde felé fordulhat.</p>
+
+          <h3>11. Cookie, tracking, helyi mentés</h3>
+          <p>Az űrlap nem használ marketing célú cookie-t, Meta Pixelt, Google Analyticset vagy remarketing kódot. A kitöltés kényelme érdekében helyi böngészős mentés működik; ez nem szerveroldali tracking, hanem az Ön eszközén tárolt űrlapállapot. Megosztott vagy céges gépen a beküldés után használja a „Helyi mentés törlése” gombot.</p>
+
+          <p><strong>Verzió:</strong> Privacy-HU-VIPACH-Form-DSGVO-AVV-GoogleWorkspace-2026-06-12.</p>
         </div>
       </details>
 
       <details class="privacy-panel" id="impressumPanel">
-        <summary>Impresszum és szolgáltatói adatok</summary>
+        <summary>Impresszum, szolgáltatói adatok, WKO és AmCham háttér</summary>
         <div class="privacy-body">
-          <p><strong>Szolgáltató:</strong> Bánhalmi Norbert e.U.</p>
-          <p><strong>Tulajdonos:</strong> Norbert Bánhalmi.</p>
-          <p><strong>Jogi forma:</strong> Bejegyzett egyéni vállalkozás (e.U.).</p>
-          <p><strong>Cím:</strong> Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria.</p>
-          <p><strong>Web:</strong> form.vipach.at · <strong>E-mail:</strong> office@vipach.at.</p>
-          <p><strong>Telefon:</strong> Tel (AT): +43 677 616 55592 · Tel (HU): +36 70 469 83 97.</p>
-          <p><strong>GISA:</strong> 36592951 · <strong>EU adószám:</strong> ATU80445314.</p>
-          <p>A szolgáltatás üzleti, stratégiai és technológiai tanácsadási jellegű. Nem minősül jogi, adózási, befektetési vagy hatósági tanácsadásnak.</p>
+          <p><strong>Szolgáltató / Medieninhaber:</strong> Bánhalmi Norbert e.U. / VIPACH for Business</p>
+          <p><strong>Tulajdonos:</strong> Norbert Bánhalmi</p>
+          <p><strong>Jogi forma:</strong> bejegyzett egyéni vállalkozás, e.U.</p>
+          <p><strong>Cím:</strong> Schwedenplatz 2, Laurenzerberg 5/I/8-9, 1010 Wien, Austria</p>
+          <p><strong>Web:</strong> <a href="https://form.vipach.at" target="_blank" rel="noopener noreferrer">form.vipach.at</a> · <strong>E-mail:</strong> <a href="mailto:office@vipach.at">office@vipach.at</a></p>
+          <p><strong>Telefon:</strong> <a href="tel:+436776165592">+43 677 6165592</a></p>
+          <p><strong>UID / VAT:</strong> ATU80445314</p>
+          <p><strong>GISA-Zahl Berufsfotograf:</strong> 36592951 · <strong>GISA-Zahl Werbeagentur:</strong> 36593897</p>
+          <p><strong>WKO / Firmen A-Z:</strong> WKO FirmenID 12bd142c-5fcf-4457-9a90-47fbff162b40, StandortID 1. Profil: <a href="https://firmen.wko.at/norbert-banhalmi-executive-portr%C3%A4t-und-visuelle-positionierung/wien/?firmaid=12bd142c-5fcf-4457-9a90-47fbff162b40&standortid=1" target="_blank" rel="noopener noreferrer">WKO Firmen A-Z</a></p>
+          <p><strong>Kamara / szakmai háttér:</strong> Wirtschaftskammer Wien / WKO. Alkalmazandó szakmai keretek: Gewerbeordnung és az érintett szakmai tevékenységekre vonatkozó osztrák szabályok.</p>
+          <p><strong>AmCham Austria:</strong> a vállalkozás az American Chamber of Commerce in Austria üzleti hálózatához kapcsolódó tagsági háttérrel rendelkezik. Nyilvános taglista: <a href="https://amcham.at/members-list/" target="_blank" rel="noopener noreferrer">amcham.at/members-list</a>. Ez üzleti hálózati háttér, nem hatósági minősítés vagy eredménygarancia.</p>
+          <p><strong>Blattlinie / oldal célja:</strong> jelszóval védett stratégiai diagnosztikai űrlap digitális entitásépítés, deep search audit, DACH-piaci digitális bizalom, AI-érthetőség, márka- és reputációs stratégia témában.</p>
+          <p><strong>Felelősségi megjegyzés:</strong> a szolgáltatás üzleti, stratégiai, kommunikációs és technológiai tanácsadási jellegű. Nem minősül jogi, adózási, pénzügyi, befektetési, biztosítási vagy hatósági tanácsadásnak. Google-, AI-, sajtó-, üzleti vagy cégérték-növekedési eredmény nem garantálható.</p>
         </div>
       </details>
 
       <div class="section-title">
         <h2>E. Számlázási adatok</h2>
-        <p>Az alábbi adatok az esetleges későbbi szerződéskötéshez, díjbekérőhöz vagy számlázáshoz szükségesek. A jelen felmérés az előzetes egyeztetés alapján díjmentes, de ha később megvalósítási munka indul, ezek az adatok segítenek a pontos adminisztrációban.</p>
+        <p>Az alábbi adatok az esetleges későbbi szerződéskötéshez, díjbekérőhöz vagy számlázáshoz lehetnek szükségesek. Szigorú adatminimalizálási okból ebben az auditindítási űrlapban nem kötelezők; ha később megrendelés indul, külön pontosításra kerülhetnek. A jelen felmérés csak előzetes írásos visszaigazolás esetén díjmentes; ha később megvalósítási munka indul, ezek az adatok segíthetnek a pontos adminisztrációban.</p>
       </div>
 
       <details class="accordion">
         <summary>Számlázási és EU adószám adatok</summary>
         <div class="accordion-body">
-          <p class="micro-intro">A szakmai tanácsadási audit elfogadásához és számlázásához pontos számlázási adatok szükségesek. Az EU-s adószám külön mezőben szerepel, mert osztrák szolgáltatóval kötött B2B megbízásnál ez az adózási és számlázási besorolás egyik fontos adata.</p>
+          <p class="micro-intro">A szakmai tanácsadási audit esetleges későbbi megrendeléséhez és számlázásához pontos számlázási adatok lehetnek szükségesek. Az EU-s adószám külön mezőben szerepel, mert osztrák szolgáltatóval kötött B2B megbízásnál ez az adózási és számlázási besorolás egyik fontos adata.</p>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="billingName">Számlázási név <span class="required">*</span></label>
+              <label for="billingName">Számlázási név</label>
               <span class="field-help">Az a cégnév, egyéni vállalkozói név vagy szervezeti név, amelyre az auditdíj számlázása történik.</span>
-              <input type="text" id="billingName" name="billingName" autocomplete="organization" required />
+              <input type="text" id="billingName" name="billingName" autocomplete="organization" />
             </div>
             <div class="form-group">
               <label for="billingContact">Számlázási kapcsolattartó</label>
@@ -2634,33 +2732,33 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label for="billingEmail">Számlázási e-mail-cím <span class="required">*</span></label>
+              <label for="billingEmail">Számlázási e-mail-cím</label>
               <span class="field-help">Ide érkezhet a számla, díjbekérő vagy a számlázással kapcsolatos pontosítás.</span>
-              <input type="email" id="billingEmail" name="billingEmail" autocomplete="email" required />
+              <input type="email" id="billingEmail" name="billingEmail" autocomplete="email" />
             </div>
             <div class="form-group">
-              <label for="billingCountry">Számlázási ország <span class="required">*</span></label>
+              <label for="billingCountry">Számlázási ország</label>
               <span class="field-help">Az ország alapján lehet helyesen értelmezni az ÁFA/VAT-kezelést és az esetleges EU-s B2B számlázást.</span>
-              <input type="text" id="billingCountry" name="billingCountry" autocomplete="country-name" required />
+              <input type="text" id="billingCountry" name="billingCountry" autocomplete="country-name" />
             </div>
           </div>
 
           <div class="form-group">
-            <label for="billingAddress">Számlázási cím <span class="required">*</span></label>
+            <label for="billingAddress">Számlázási cím</label>
             <span class="field-help">A hivatalos számlázási cím: irányítószám, település, utca, házszám és szükség esetén emelet/ajtó.</span>
-            <textarea id="billingAddress" name="billingAddress" autocomplete="billing street-address" required></textarea>
+            <textarea id="billingAddress" name="billingAddress" autocomplete="billing street-address"></textarea>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label for="billingTaxNumber">Belföldi adószám / adóazonosító <span class="required">*</span></label>
+              <label for="billingTaxNumber">Belföldi adószám / adóazonosító</label>
               <span class="field-help">A megrendelő országában használt adószám vagy vállalkozói adóazonosító. Ha nincs külön adószám, ezt itt jelezni kell.</span>
-              <input type="text" id="billingTaxNumber" name="billingTaxNumber" required />
+              <input type="text" id="billingTaxNumber" name="billingTaxNumber" />
             </div>
             <div class="form-group">
               <label for="billingEuVatId">EU-s adószám / közösségi adószám <span class="required">*</span></label>
               <span class="field-help">Külön mező, mert EU-n belüli B2B szolgáltatásnál ez döntő lehet. Ha a megrendelő nem rendelkezik EU-s adószámmal, ezt a mezőben külön jelezni kell.</span>
-              <input type="text" id="billingEuVatId" name="billingEuVatId" required />
+              <input type="text" id="billingEuVatId" name="billingEuVatId" />
             </div>
           </div>
 
@@ -2739,7 +2837,7 @@
             </div>
 
             <h3>1. A feltételek hatálya</h3>
-            <p>Ezek a feltételek a digitális entitásépítési, deep search, márka-audit, piacérthetőségi, reputációs és stratégiai tanácsadási szolgáltatásokra vonatkoznak, amelyeket az ügyfél Bánhalmi Norbert e.U.-val kötött egyedi megbízás vagy írásos visszaigazolás alapján rendel meg. A szolgáltatás első szakasza a 2 000 EUR értékű audit és stratégiai terv, amely az előzetes egyeztetés alapján jelen esetben díjmentesen készül.</p>
+            <p>Ezek a feltételek a digitális entitásépítési, deep search, márka-audit, piacérthetőségi, reputációs és stratégiai tanácsadási szolgáltatásokra vonatkoznak, amelyeket az ügyfél Bánhalmi Norbert e.U.-val kötött egyedi megbízás vagy írásos visszaigazolás alapján rendel meg. A szolgáltatás első szakasza a 2 000 EUR értékű audit és stratégiai terv, amely csak akkor készül díjmentesen, ha ezt előzetesen írásban visszaigazoltuk.</p>
             <p>A szolgáltatás elsősorban vállalkozásoknak, cégvezetőknek, márkatulajdonosoknak, szakmai szereplőknek és B2B ügyfeleknek készül. Fogyasztói megrendelés csak külön írásos megállapodás alapján értelmezhető.</p>
 
             <h3>2. Szerződés létrejötte</h3>
@@ -2758,7 +2856,7 @@
             <p>Az audit nem garantál automatikus Google-helyezést, AI-ajánlást, sajtómegjelenést vagy üzletszerzést. A cél az, hogy a személy, cég vagy márka digitális entitása tisztábban, pontosabban és ellenőrizhetőbben legyen felépíthető.</p>
 
             <h3>4. Díjazás, beszámítás és minimális megrendelési érték</h3>
-            <p>Az audit és stratégiai terv szakmai értéke 2 000 EUR. Az előzetes egyeztetés alapján jelen felmérés és stratégiai előkészítés díjmentesen készül. Amennyiben az ügyfél később megvalósítási munkát rendel meg, annak tartalma, ütemezése és díjazása külön egyedi ajánlatban és külön megállapodásban kerül rögzítésre.</p>
+            <p>Az audit és stratégiai terv szakmai értéke 2 000 EUR. A jelen felmérés és stratégiai előkészítés csak akkor díjmentes, ha ezt előzetesen írásban visszaigazoltuk. Amennyiben az ügyfél később megvalósítási munkát rendel meg, annak tartalma, ütemezése és díjazása külön egyedi ajánlatban és külön megállapodásban kerül rögzítésre.</p>
             <p>A díjak adózási és ÁFA/VAT-kezelése a számlázási adatok, az ügyfél státusza, országa és az alkalmazandó jogszabályok szerint kerül meghatározásra. A számlázási adatok pontosságáért a megrendelő felel.</p>
 
             <h3>5. Egyedi stratégia és változó technológiai környezet</h3>
@@ -2782,14 +2880,14 @@
         <div class="acknowledgement-panel">
           <div class="checkbox-item">
             <input type="checkbox" id="terms_acknowledgement" name="agreeConsultingTerms" required />
-            <label for="terms_acknowledgement">Elolvastam és elfogadom a fenti általános szakmai tanácsadási feltételeket, és tudomásul veszem, hogy a felmérés 2 000 EUR szakmai értékű auditnak minősül, amely az előzetes egyeztetés alapján jelen esetben díjmentesen készül. <span class="required">*</span></label>
+            <label for="terms_acknowledgement">Elolvastam és elfogadom a fenti általános szakmai tanácsadási feltételeket, és tudomásul veszem, hogy a felmérés 2 000 EUR szakmai értékű auditnak minősül, amely csak akkor készül díjmentesen, ha ezt előzetesen írásban visszaigazoltuk. <span class="required">*</span></label>
           </div>
         </div>
 
         <div class="acknowledgement-panel">
           <div class="checkbox-item">
             <input type="checkbox" id="commercial_acknowledgement" name="agreeCommercialTerms" required />
-            <label for="commercial_acknowledgement">Megértettem, hogy a 96 órás digitális entitásdiagnózis és stratégiai terv szakmai értéke 2 000 EUR, de az előzetes egyeztetés alapján jelen felmérés díjmentes. Tudomásul veszem, hogy az audit végén esetleges megvalósítási javaslat és egyedi ajánlat készülhet, amely csak külön elfogadás esetén válik megrendeléssé. <span class="required">*</span></label>
+            <label for="commercial_acknowledgement">Megértettem, hogy a 96 órás digitális entitásdiagnózis és stratégiai terv szakmai értéke 2 000 EUR, de jelen felmérés csak akkor díjmentes, ha ezt előzetesen írásban visszaigazoltuk. Tudomásul veszem, hogy az audit végén esetleges megvalósítási javaslat és egyedi ajánlat készülhet, amely csak külön elfogadás esetén válik megrendeléssé. <span class="required">*</span></label>
           </div>
           <p class="fineprint">Az űrlap beküldése nem jelenti automatikusan a 6–18 hónapos megvalósítási program megrendelését. A pontos szerződéses, számlázási és teljesítési feltételeket az auditot követő egyedi ajánlat és megállapodás tartalmazza. Az audit viszont már önmagában is használható stratégiai iránytű: megmutatja, merre van észak, mielőtt a teljes csapat elindulna délnek.</p>
         </div>
@@ -3278,7 +3376,7 @@
           if (percent === 0) progressHint.textContent = 'Kezdje az alapadatokkal. A kitöltési állapot most 0%, mert az űrlap még tiszta lappal indul.';
           else if (percent < 35) progressHint.textContent = 'Kezdje az alapadatokkal és az audit fókuszával. A többi blokk zárva marad, hogy ne legyen ijesztő a folyamat.';
           else if (percent < 70) progressHint.textContent = 'Jó úton halad. A legértékesebb válaszok általában ott születnek, ahol a múlt, a jelen és a cél végre egy mondatba kerül.';
-          else if (percent < 100) progressHint.textContent = 'Már csak a kötelező jogi, számlázási és elfogadási pontok hiányozhatnak. A 96 órás audit innen tud tisztán elindulni.';
+          else if (percent < 100) progressHint.textContent = 'Már csak a kötelező jogi és elfogadási pontok hiányozhatnak. A 96 órás audit innen tud tisztán elindulni.';
           else progressHint.textContent = 'Minden kötelező pont kész. Beküldés után indulhat a 96 órás deep search alapú előkészítés.';
         }
       };
@@ -3286,7 +3384,7 @@
       const validateCustomRules = () => {
         clearAlert();
         const fieldsToClear = [
-          'contactName','ownerFullName','companyName','companyWebsite','billingName','billingEmail','billingCountry','billingAddress','billingTaxNumber','billingEuVatId','terms_acknowledgement','commercial_acknowledgement'
+          'contactName','ownerFullName','companyName','companyWebsite','terms_acknowledgement','commercial_acknowledgement'
         ].map(id => document.getElementById(id)).filter(Boolean);
         fieldsToClear.forEach(field => field.setCustomValidity(''));
 
@@ -3321,24 +3419,6 @@
           return false;
         }
 
-        const requiredBillingFields = [
-          [document.getElementById('billingName'), 'Kérjük, adja meg a számlázási nevet az esetleges szerződéskötéshez és számlázáshoz.'],
-          [document.getElementById('billingEmail'), 'Kérjük, adja meg a számlázási e-mail-címet.'],
-          [document.getElementById('billingCountry'), 'Kérjük, adja meg a számlázási országot.'],
-          [document.getElementById('billingAddress'), 'Kérjük, adja meg a számlázási címet.'],
-          [document.getElementById('billingTaxNumber'), 'Kérjük, adja meg a belföldi adószámot vagy írja be, hogy nincs.'],
-          [document.getElementById('billingEuVatId'), 'Kérjük, adja meg az EU-s adószámot, vagy írja be, hogy nincs / nem releváns.']
-        ];
-
-        for (const [field, message] of requiredBillingFields) {
-          if (field && !field.value.trim()) {
-            field.setCustomValidity(message);
-            showAlert(message);
-            openAndFocus(field);
-            return false;
-          }
-        }
-
         const termsAcknowledgement = document.getElementById('terms_acknowledgement');
         if (termsAcknowledgement && !termsAcknowledgement.checked) {
           const msg = 'Kérjük, erősítse meg, hogy elfogadta az általános szakmai tanácsadási feltételeket.';
@@ -3350,7 +3430,7 @@
 
         const commercialAcknowledgement = document.getElementById('commercial_acknowledgement');
         if (commercialAcknowledgement && !commercialAcknowledgement.checked) {
-          const msg = 'Kérjük, erősítse meg, hogy megértette: ez a felmérés 2 000 EUR szakmai értékű, de az előzetes egyeztetés alapján díjmentes; az esetleges későbbi megvalósítás külön ajánlat alapján történik.';
+          const msg = 'Kérjük, erősítse meg, hogy megértette: ez a felmérés 2 000 EUR szakmai értékű, de csak előzetes írásos visszaigazolás alapján díjmentes; az esetleges későbbi megvalósítás külön ajánlat alapján történik.';
           commercialAcknowledgement.setCustomValidity(msg);
           showAlert(msg);
           openAndFocus(commercialAcknowledgement);

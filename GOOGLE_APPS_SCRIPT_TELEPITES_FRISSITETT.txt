@@ -1,34 +1,27 @@
-GOOGLE WORKSPACE / GOOGLE APPS SCRIPT TELEPÍTÉS
+GOOGLE WORKSPACE / GOOGLE APPS SCRIPT TELEPÍTÉS — VIPACH FORM
 
-1) Nyisd meg: https://script.google.com
-2) New project / Új projekt
-3) Töröld a meglévő kódot, majd illeszd be a google-apps-script-Code.gs tartalmát.
-4) Ellenőrizd a CONFIG.RECIPIENT_EMAIL sort:
-   RECIPIENT_EMAIL: 'office@vipach.at'
-5) Futtasd egyszer a testSetup() függvényt.
-   - Engedélyezd a jogosultságokat.
-   - Nézd meg, hogy megérkezik-e a teszt email az office@vipach.at címre.
-   - A script létrehoz egy Google Sheet archívumot is.
-6) Deploy / Telepítés -> New deployment / Új telepítés
-   - Type: Web app
-   - Execute as: Me / Én
-   - Who has access: Anyone / Bárki
-7) Másold ki a Web app URL-t. Ilyen formátumú lesz:
-   https://script.google.com/macros/s/.../exec
-8) Nyisd meg az index-google-apps-script.html fájlt, és keresd ezt:
-   https://script.google.com/macros/s/IDE_ILESZD_BE_A_GOOGLE_APPS_SCRIPT_WEB_APP_URLT/exec
-   Cseréld le a saját Web app URL-edre.
-9) Töltsd fel az index-google-apps-script.html fájlt a form.vipach.at oldalra index.html néven.
-10) Teszteld egy rövid beküldéssel.
+Éles form domain: https://form.vipach.at
 
-Fontos:
-- A válaszok a Google Sheetben is megmaradnak, ezért nem csak emailre támaszkodik a rendszer.
-- Ha átírod a scriptet, a Deploy -> Manage deployments alatt új verziót kell publikálni.
-- Élesítés után a Code.gs-ben a STRICT_SOURCE_CHECK átállítható true-ra.
-
-
-ÉLES WEB APP URL BEÁLLÍTVA AZ HTML-BEN:
+Éles Web App URL az index.html-ben:
 https://script.google.com/macros/s/AKfycbzBg2mqGap0S3vJpyEeHx_awSHYsCBMY_elTMq0HOlTJ7yOypdpuAfny88H0r3YaV1ILg/exec
 
-GDPR megjegyzés:
-Az HTML adatvédelmi tájékoztatója frissítve lett: a beküldés Google Workspace / Google Apps Script / Google Sheets technikai feldolgozáson keresztül történik, FormSubmit nélkül.
+CONFIG ellenőrzés a google-apps-script-Code.gs fájlban:
+- RECIPIENT_EMAIL: office@vipach.at
+- DEFAULT_SUCCESS_URL: https://form.vipach.at/?sent=1
+- STRICT_SOURCE_CHECK: true
+- ALLOWED_SOURCE_PREFIXES: https://form.vipach.at, http://form.vipach.at
+
+Telepítés:
+1. Nyisd meg: https://script.google.com
+2. Új projekt.
+3. Illeszd be a google-apps-script-Code.gs teljes tartalmát.
+4. Futtasd egyszer a testSetup() függvényt és engedélyezd a jogosultságokat.
+5. Ellenőrizd, hogy létrejött-e a Google Sheet és megérkezett-e a teszt e-mail.
+6. Deploy / New deployment / Web app.
+7. Execute as: Me.
+8. Who has access: Anyone.
+9. Ha új Web App URL keletkezik, cseréld az index.html form action URL-jében.
+10. Éles teszt: https://form.vipach.at alatt rövid beküldés.
+
+GDPR / AVV megjegyzés:
+Az adatvédelmi tájékoztató az űrlapban bővítve lett: Google Apps Script, Google Sheets, Gmail / Google Workspace, helyi böngészős mentés, AI-segédeszközök, megőrzési idő, érintetti jogok, panaszjog. A Workspace oldalon külön ellenőrizni kell, hogy a Google DPA / AVV elfogadása és az admin jogosultságok rendben vannak-e.
