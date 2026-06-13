@@ -1,7 +1,5 @@
-# G.O.A.T standalone exact visual build
+# G.O.A.T Apple typography tuned build
 
-This version is standalone: each language HTML file contains its own CSS and JavaScript inline. No external CSS, no external JS, no assets folder dependency. This fixes broken previews where relative assets were not served.
+Standalone HTML build with inline CSS/JS. Typography has been tuned toward an Apple-like visual rhythm: lighter display weights, tighter headline tracking, larger vertical spacing between text blocks, more air around cards and sections, and refined footer spacing.
 
-Visual direction implemented from the supplied demo: warm white background, muted gold icon system, deep navy typography/footer, Apple-system font stack, dotted globe/route SVG, trust strip, services cards, credibility metrics, process flow and footer.
-
-The site remains noindex until legal/company/licence/insurance details and a secure inquiry backend are verified.
+No external CSS or JS dependency. The site remains noindex until legal/licence/insurance/backend verification is complete.
