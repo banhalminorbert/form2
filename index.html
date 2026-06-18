@@ -3051,6 +3051,7 @@
       const resetButton = document.getElementById('resetButton');
       const clearDraftButton = document.getElementById('clearDraftButton');
       const autosaveStatus = document.getElementById('autosaveStatus');
+      const formattedAnswers = document.getElementById('formattedAnswers');
       const AUTOSAVE_KEY = 'vipach_entity_audit_draft_v35';
 
       const setRuntimeMeta = () => {
@@ -3113,7 +3114,8 @@
       const getFieldLabel = (field) => {
         if (!field) return '';
         const groupQuestion = getGroupQuestion(field);
-        const directLabel = field.id ? form.querySelector(`label[for="${CSS.escape(field.id)}"]`) : null;
+        const cssEscape = (typeof CSS !== 'undefined' && CSS.escape) ? CSS.escape : (s => String(s).replace(/[^a-zA-Z0-9_-]/g, '\\$&'));
+        const directLabel = field.id ? form.querySelector(`label[for="${cssEscape(field.id)}"]`) : null;
         const parentLabel = field.closest('label');
         const ownLabel = directLabel || parentLabel;
         const ownText = cleanLabelText(ownLabel?.textContent || '');
@@ -3131,7 +3133,7 @@
         if (!field) return '';
         if (field.tagName === 'SELECT') {
           const selectedText = cleanLabelText(field.selectedOptions?.[0]?.textContent || '');
-          return selectedText === 'Kérem válasszon' ? '' : selectedText;
+          return selectedText.indexOf('Kérem válasszon') === 0 ? '' : selectedText;
         }
         if (field.type === 'checkbox' || field.type === 'radio') {
           return getFieldLabel(field) || field.value || 'Kiválasztva';
