@@ -1636,6 +1636,49 @@
           </div>
 
           <div class="form-group">
+            <label for="targetMarket">Célpiac, amelyre a kutatás készüljön <span class="required">*</span></label>
+            <span class="field-help">Ez a legfontosabb mező az automatikus stratégiai kutatáshoz. Adja meg azt az országot, régiót vagy nyelvi piacot, amelyre a 96 órás auditnak fókuszálnia kell. Minél pontosabb, annál célzottabb lesz a generált stratégia.</span>
+            <select id="targetMarket" name="targetMarket" required>
+              <option value="">Kérem válasszon célpiacot</option>
+              <option value="Ausztria (DACH)">Ausztria (DACH)</option>
+              <option value="Németország">Németország</option>
+              <option value="Svájc">Svájc</option>
+              <option value="Magyarország">Magyarország</option>
+              <option value="Franciaország">Franciaország</option>
+              <option value="Olaszország">Olaszország</option>
+              <option value="Lengyelország">Lengyelország</option>
+              <option value="Hollandia / Belgium">Hollandia / Belgium</option>
+              <option value="Egyesült Királyság">Egyesült Királyság</option>
+              <option value="Egyesült Arab Emírségek / MENA">Egyesült Arab Emírségek / MENA</option>
+              <option value="Egyesült Államok">Egyesült Államok</option>
+              <option value="Több piac (a válaszokban részletezve)">Több piac (a válaszokban részletezve)</option>
+              <option value="Egyéb (a megjegyzésben megadva)">Egyéb (a megjegyzésben megadva)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="industry">Üzletág / iparág <span class="required">*</span></label>
+            <span class="field-help">Ez alapján szabjuk az elemzést az Ön szektorára. Válassza ki azt, amelyik a legközelebb áll a fő tevékenységéhez.</span>
+            <select id="industry" name="industry" required>
+              <option value="">Kérem válasszon üzletágat</option>
+              <option value="Gyártás és ipar">Gyártás és ipar</option>
+              <option value="Kereskedelem és nagykereskedelem">Kereskedelem és nagykereskedelem</option>
+              <option value="Szolgáltatás (B2B)">Szolgáltatás (B2B)</option>
+              <option value="Szolgáltatás (B2C)">Szolgáltatás (B2C)</option>
+              <option value="Kreatív, média és design">Kreatív, média és design</option>
+              <option value="Tanácsadás és szakértői szolgáltatás">Tanácsadás és szakértői szolgáltatás</option>
+              <option value="IT, szoftver és technológia">IT, szoftver és technológia</option>
+              <option value="Egészségügy és wellness">Egészségügy és wellness</option>
+              <option value="Vendéglátás és turizmus">Vendéglátás és turizmus</option>
+              <option value="Ingatlan és építőipar">Ingatlan és építőipar</option>
+              <option value="Pénzügy és jog">Pénzügy és jog</option>
+              <option value="Oktatás és képzés">Oktatás és képzés</option>
+              <option value="Kiskereskedelem és e-commerce">Kiskereskedelem és e-commerce</option>
+              <option value="Egyéb (a megjegyzésben megadva)">Egyéb (a megjegyzésben megadva)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
             <span class="field-label">Mire készüljön elsődlegesen az audit?</span>
             <span class="field-help">Ez kijelöli a kutatás fő útvonalát. Több cél is választható, mert a tulajdonos és a cég digitális képe sokszor kézen fogva jár — néha túl szorosan is.</span>
             <div class="checkbox-group">
@@ -3384,11 +3427,32 @@
       const validateCustomRules = () => {
         clearAlert();
         const fieldsToClear = [
-          'contactName','ownerFullName','companyName','companyWebsite','terms_acknowledgement','commercial_acknowledgement'
+          'contactName','targetMarket','industry','ownerFullName','companyName','companyWebsite','terms_acknowledgement','commercial_acknowledgement'
         ].map(id => document.getElementById(id)).filter(Boolean);
         fieldsToClear.forEach(field => field.setCustomValidity(''));
 
         const contactName = document.getElementById('contactName');
+
+        const targetMarket = document.getElementById('targetMarket');
+        if (targetMarket && !targetMarket.value.trim()) {
+          const msg = 'Kérjük, válasszon célpiacot — erre készül a stratégiai kutatás.';
+          targetMarket.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(targetMarket);
+          return false;
+        }
+        if (targetMarket) targetMarket.setCustomValidity('');
+
+        const industry = document.getElementById('industry');
+        if (industry && !industry.value.trim()) {
+          const msg = 'Kérjük, válasszon üzletágat — ez alapján szabjuk az elemzést.';
+          industry.setCustomValidity(msg);
+          showAlert(msg);
+          openAndFocus(industry);
+          return false;
+        }
+        if (industry) industry.setCustomValidity('');
+
         const selectedFocus = form.querySelectorAll('input[name="auditFocus"]:checked');
         if (selectedFocus.length === 0) {
           const msg = 'Kérjük, válasszon legalább egy audit fókuszt: személyes márka, cég/márka, AI-érthetőség vagy piaci cél.';
