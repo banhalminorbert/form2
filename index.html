@@ -3544,7 +3544,20 @@
           }
           if (!validateCustomRules() || !form.checkValidity()) {
             event.preventDefault();
-            form.reportValidity();
+            // Keressük meg az első natívan érvénytelen mezőt, és nyissuk ki a tartalmazó accordiont,
+            // hogy a böngésző hibabuboréka biztosan látható helyen jelenjen meg (ne zárt blokkban).
+            const firstInvalid = form.querySelector(':invalid');
+            if (firstInvalid) {
+              const parentDetails = firstInvalid.closest('details');
+              if (parentDetails && !parentDetails.open) parentDetails.open = true;
+              // a kinyitás után egy pillanattal jelenítjük meg a natív hibát
+              setTimeout(() => {
+                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                form.reportValidity();
+              }, 60);
+            } else {
+              form.reportValidity();
+            }
             updateProgress();
             return;
           }
