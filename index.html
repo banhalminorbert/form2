@@ -1553,7 +1553,7 @@
 
 
       <div class="success-message" id="successMessage">
-        ✓ Köszönjük a válaszokat. A beküldött adatok alapján elindulhat a 96 órás deep search alapú audit és stratégiai előkészítés.
+        ✓ Köszönjük a válaszokat! A beküldést megkaptuk, és visszaigazoló e-mailt küldtünk a megadott címre. A beküldött adatok alapján elindul a célpiacra szabott, deep search alapú stratégiai előkészítés.
       </div>
 
       <div class="progress-shell" aria-label="Űrlap kitöltési állapot">
@@ -3073,15 +3073,20 @@
         if (!field) return;
         const parentDetails = field.closest('details');
         if (parentDetails) parentDetails.open = true;
-        field.focus({ preventScroll: true });
-        field.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        try { field.focus({ preventScroll: true }); } catch (e) {}
+        try { field.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
       };
 
-      const showAlert = (message) => {
-        if (!formAlert) return;
-        formAlert.textContent = message;
-        formAlert.classList.add('show');
-        formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const showAlert = (message, popup) => {
+        if (formAlert) {
+          formAlert.textContent = message;
+          formAlert.classList.add('show');
+          try { formAlert.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+        }
+        // Felugró ablakban is jelezzük, ha kérték (egyedi validációs szabályoknál).
+        if (popup) {
+          window.setTimeout(() => window.alert(message), 80);
+        }
       };
 
       const clearAlert = () => {
@@ -3439,7 +3444,7 @@
         if (targetMarket && !targetMarket.value.trim()) {
           const msg = 'Kérjük, válasszon célpiacot — erre készül a stratégiai kutatás.';
           targetMarket.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(targetMarket);
           return false;
         }
@@ -3449,7 +3454,7 @@
         if (industry && !industry.value.trim()) {
           const msg = 'Kérjük, válasszon üzletágat — ez alapján szabjuk az elemzést.';
           industry.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(industry);
           return false;
         }
@@ -3459,7 +3464,7 @@
         if (selectedFocus.length === 0) {
           const msg = 'Kérjük, válasszon legalább egy audit fókuszt: személyes márka, cég/márka, AI-érthetőség vagy piaci cél.';
           if (contactName) contactName.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(contactName || form.querySelector('input[name="auditFocus"]'));
           return false;
         }
@@ -3469,7 +3474,7 @@
         if (ownerFocus?.checked && ownerFullName && !ownerFullName.value.trim()) {
           const msg = 'Személyes márka fókusz esetén kérjük, adja meg a tulajdonos / ügyvezető nevét.';
           ownerFullName.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(ownerFullName);
           return false;
         }
@@ -3480,7 +3485,7 @@
         if (companyFocus?.checked && companyName && companyWebsite && !companyName.value.trim() && !companyWebsite.value.trim()) {
           const msg = 'Cég vagy márka fókusz esetén kérjük, adja meg legalább a cég/márka nevét vagy weboldalát.';
           companyName.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(companyName);
           return false;
         }
@@ -3489,7 +3494,7 @@
         if (termsAcknowledgement && !termsAcknowledgement.checked) {
           const msg = 'Kérjük, erősítse meg, hogy elfogadta az általános szakmai tanácsadási feltételeket.';
           termsAcknowledgement.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(termsAcknowledgement);
           return false;
         }
@@ -3498,7 +3503,7 @@
         if (commercialAcknowledgement && !commercialAcknowledgement.checked) {
           const msg = 'Kérjük, erősítse meg, hogy megértette: ez a felmérés 2 000 EUR szakmai értékű, de csak előzetes írásos visszaigazolás alapján díjmentes; az esetleges későbbi megvalósítás külön ajánlat alapján történik.';
           commercialAcknowledgement.setCustomValidity(msg);
-          showAlert(msg);
+          showAlert(msg, true);
           openAndFocus(commercialAcknowledgement);
           return false;
         }
@@ -3514,6 +3519,9 @@
           message.classList.add('show');
           message.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+        window.setTimeout(() => {
+          window.alert('✓ Köszönjük! A beküldést megkaptuk, és visszaigazoló e-mailt küldtünk a megadott címre.');
+        }, 300);
       }
 
       if (form) {
@@ -3544,17 +3552,22 @@
           }
           if (!validateCustomRules() || !form.checkValidity()) {
             event.preventDefault();
-            // Keressük meg az első natívan érvénytelen mezőt, és nyissuk ki a tartalmazó accordiont,
-            // hogy a böngésző hibabuboréka biztosan látható helyen jelenjen meg (ne zárt blokkban).
+            // Keressük meg az első natívan érvénytelen mezőt, nyissuk ki a tartalmazó accordiont,
+            // ugorjunk oda, és felugró ablakban is nevezzük meg, mi hiányzik.
             const firstInvalid = form.querySelector(':invalid');
             if (firstInvalid) {
               const parentDetails = firstInvalid.closest('details');
               if (parentDetails && !parentDetails.open) parentDetails.open = true;
-              // a kinyitás után egy pillanattal jelenítjük meg a natív hibát
+              const fieldName = getFieldLabel(firstInvalid) || 'egy kötelező mező';
+              const nativeMsg = firstInvalid.validationMessage || '';
               setTimeout(() => {
-                firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                try { firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+                try { firstInvalid.focus({ preventScroll: true }); } catch (e) {}
+                window.alert('Hiányzó vagy hibás mező:\n\n„' + fieldName + '"\n\n' +
+                  (nativeMsg ? nativeMsg + '\n\n' : '') +
+                  'Kérjük, töltse ki, majd küldje be újra.');
                 form.reportValidity();
-              }, 60);
+              }, 80);
             } else {
               form.reportValidity();
             }
