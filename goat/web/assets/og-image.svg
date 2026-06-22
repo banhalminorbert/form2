@@ -1,0 +1,21 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#14213A"/>
+  <g fill="none" stroke="#B8A269" stroke-opacity="0.18" stroke-width="1.2">
+    <path d="M120 470 C 420 280, 820 280, 1100 180" stroke-dasharray="2 9"/>
+  </g>
+  <g fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="1">
+    <path d="M120 500 C 440 300, 840 300, 1100 210"/>
+    <path d="M120 440 C 400 250, 800 250, 1100 150"/>
+  </g>
+  <!-- Mark -->
+  <g transform="translate(96,150)">
+    <circle cx="36" cy="36" r="33" fill="none" stroke="#F6F3EC" stroke-width="1.6"/>
+    <circle cx="36" cy="36" r="24" fill="none" stroke="#B8A269" stroke-width="1"/>
+    <path d="M50 25 A20 20 0 1 0 50 47 L38 47 L38 37.5 L50 37.5" fill="none" stroke="#F6F3EC" stroke-width="3.2"/>
+  </g>
+  <text x="200" y="200" font-family="Georgia, serif" font-size="40" fill="#F6F3EC" font-weight="600" letter-spacing="2">G.O.A.T</text>
+  <text x="200" y="232" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#B8A269" letter-spacing="6">GUARDIANS OF ALL TERRITORIES</text>
+  <text x="96" y="360" font-family="Georgia, serif" font-size="58" fill="#F6F3EC" font-weight="600">Discreet Executive Protection</text>
+  <text x="96" y="430" font-family="Georgia, serif" font-size="58" fill="#F6F3EC" font-weight="600">Between Europe and the Gulf</text>
+  <text x="96" y="510" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#9A9CA2">Founder-led · Vetted protective cells · Confidential verification</text>
+</svg>

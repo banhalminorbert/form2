@@ -1,0 +1,12 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="G.O.A.T">
+  <!-- Concentric protective perimeter, intentionally abstract -->
+  <circle cx="32" cy="32" r="29" fill="none" stroke="#14213A" stroke-width="1.4"/>
+  <circle cx="32" cy="32" r="21.5" fill="none" stroke="#B8A269" stroke-width="1"/>
+  <!-- Negative-space 'G' formed by an open arc -->
+  <path d="M44.5 22.5
+           A18 18 0 1 0 44.5 41.5
+           L34 41.5 L34 33.5 L44.5 33.5"
+        fill="none" stroke="#14213A" stroke-width="3" stroke-linejoin="miter"/>
+  <!-- Quiet centre point -->
+  <circle cx="32" cy="32" r="1.6" fill="#B8A269"/>
+</svg>

@@ -1,0 +1,21 @@
+# robots.txt — G.O.A.T (Guardians Of All Territories)
+#
+# ----------------------------------------------------------------------
+# STAGING (current): indexing is suppressed.
+# Every page also carries <meta name="robots" content="noindex,nofollow">.
+# While staging, keep the Disallow rule below active.
+# ----------------------------------------------------------------------
+#
+# PRODUCTION: to allow indexing, (1) remove the noindex meta tag from every
+# HTML page, and (2) replace the block below with the PRODUCTION block.
+# See README_GO_LIVE.md.
+
+# --- STAGING BLOCK (active) ---
+User-agent: *
+Disallow: /
+
+# --- PRODUCTION BLOCK (commented; enable for go-live) ---
+# User-agent: *
+# Allow: /
+#
+# Sitemap: https://www.example.com/sitemap.xml

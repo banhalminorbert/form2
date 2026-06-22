@@ -1,0 +1,24 @@
+/* TEAM */
+
+  Entity: G.O.A.T UG (Guardians Of All Territories)
+  Founder & Operational Lead: Pál Lauko
+  Location: Rosenheim, Germany
+
+/* CONTACT */
+
+  Confidential inquiries: inquiries@[verified-domain]
+
+/* SITE */
+
+  Languages: English, Arabic, German, Hungarian
+  Standards: HTML5, semantic landmarks, WCAG-aware contrast, RTL support
+  Components: hand-written HTML/CSS, minimal JavaScript
+  Fonts: system font stacks only (no external fonts)
+  Privacy: no cookies, no analytics, no third-party trackers
+  Hosting: static (GitHub Pages)
+
+/* NOTE */
+
+  This is a public, security-first website. No client names, team identities,
+  certificates or operational details are published. Credentials are verified
+  privately during confidential qualification.

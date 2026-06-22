@@ -1,0 +1,11 @@
+# security.txt — G.O.A.T (Guardians Of All Territories)
+# For production, also serve this file at /.well-known/security.txt
+# Reference: RFC 9116. Verify contact, expiry date and canonical URL before go-live.
+
+Contact: mailto:security@[verified-domain]
+Expires: 2027-06-30T00:00:00.000Z
+Preferred-Languages: en, de, ar
+Canonical: https://www.example.com/.well-known/security.txt
+
+# Please report security issues relating to this website responsibly.
+# Do not include sensitive client, itinerary or threat details in reports.
