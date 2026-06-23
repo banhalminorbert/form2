@@ -53,7 +53,7 @@ Verify and complete every `placeholder` span:
 ## 4. Indexing: staging → production
 
 - [ ] Remove `<meta name="robots" content="noindex,nofollow">` from **every**
-      HTML page (root, en, ar, de, hu, all legal/ and privacy/ pages, 404.html).
+      HTML page (root, en, ar, de, all legal/ and privacy/ pages, 404.html).
 - [ ] In `robots.txt`, disable the STAGING block and enable the PRODUCTION block
       (including the `Sitemap:` line).
 
@@ -78,7 +78,7 @@ grep -rn "noindex" .
       Results Test.
 - [ ] Submit `sitemap.xml` in Google Search Console.
 - [ ] Submit the site in Bing Webmaster Tools.
-- [ ] Confirm hreflang reciprocity (en/ar/de/hu + x-default) resolves correctly.
+- [ ] Confirm hreflang reciprocity (en/ar/de + x-default) resolves correctly.
 - [ ] Update `Expires` in `security.txt` if needed.
 
 ## 7. Repository history hygiene (security-critical)
@@ -103,7 +103,6 @@ compromised and create a fresh repository.
 
 - [ ] Arabic native review (MSA, tone, RTL rendering, numerals)
 - [ ] German legal-tone review
-- [ ] Confirm Hungarian remains secondary (footer/gateway only, not primary nav)
 
 ## 9. Final legal review
 
@@ -120,7 +119,6 @@ compromised and create a fresh repository.
   /en/index.html             English (canonical content)
   /ar/index.html             Arabic (RTL)
   /de/index.html             German
-  /hu/index.html             Hungarian (secondary)
   /legal/index.html          Legal notice (EN)
   /legal/de/index.html       Impressum (DE)
   /legal/ar/index.html       Legal notice (AR)

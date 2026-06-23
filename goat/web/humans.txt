@@ -10,7 +10,7 @@
 
 /* SITE */
 
-  Languages: English, Arabic, German, Hungarian
+  Languages: English, Arabic, German
   Standards: HTML5, semantic landmarks, WCAG-aware contrast, RTL support
   Components: hand-written HTML/CSS, minimal JavaScript
   Fonts: system font stacks only (no external fonts)

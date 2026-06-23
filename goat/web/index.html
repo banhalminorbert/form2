@@ -4,21 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>G.O.A.T — Guardians Of All Territories</title>
-<meta name="description" content="G.O.A.T (Guardians Of All Territories) — founder-led, discreet executive protection between Europe and the Gulf. Choose your language.">
+<meta name="description" content="G.O.A.T (Guardians Of All Territories) — founder-led quiet protection for principals, families and private offices between Europe and the Gulf. Choose your language.">
 <link rel="canonical" href="https://www.example.com/">
 <link rel="alternate" hreflang="en" href="https://www.example.com/en/">
 <link rel="alternate" hreflang="ar" href="https://www.example.com/ar/">
 <link rel="alternate" hreflang="de" href="https://www.example.com/de/">
-<link rel="alternate" hreflang="hu" href="https://www.example.com/hu/">
 <link rel="alternate" hreflang="x-default" href="https://www.example.com/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="G.O.A.T — Guardians Of All Territories">
-<meta property="og:description" content="Founder-led, discreet executive protection between Europe and the Gulf.">
+<meta property="og:description" content="Founder-led, discreet protection for principals, families and private offices between Europe and the Gulf.">
 <meta property="og:url" content="https://www.example.com/">
 <meta property="og:image" content="https://www.example.com/assets/og-image.svg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="G.O.A.T — Guardians Of All Territories">
-<meta name="twitter:description" content="Founder-led, discreet executive protection between Europe and the Gulf.">
+<meta name="twitter:description" content="Founder-led, discreet protection for principals, families and private offices between Europe and the Gulf.">
 <meta name="twitter:image" content="https://www.example.com/assets/og-image.svg">
 <meta name="robots" content="noindex,nofollow"><!-- STAGING: remove this line for production. See README_GO_LIVE.md -->
 <link rel="icon" href="assets/goat-mark.svg" type="image/svg+xml">
@@ -44,13 +43,13 @@
         "addressLocality": "Rosenheim",
         "addressCountry": "DE"
       },
-      "areaServed": ["Europe", "Gulf region", "Middle East", "Germany", "Austria", "Hungary", "United Kingdom", "United Arab Emirates", "Saudi Arabia", "Qatar", "Iraq"],
+      "areaServed": ["Europe", "Gulf region", "Middle East", "Germany", "Austria", "United Kingdom", "United Arab Emirates", "Saudi Arabia", "Qatar", "Iraq"],
       "knowsAbout": ["Executive Protection", "Close Protection", "Secure Movement", "Family Office Security", "Protective Intelligence", "Diplomatic Security", "UHNW Security", "Privacy Risk", "Travel Risk"],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "confidential inquiries",
         "email": "inquiries@example.com",
-        "availableLanguage": ["en", "ar", "de", "hu"]
+        "availableLanguage": ["en", "ar", "de"]
       }
     },
     {
@@ -66,7 +65,7 @@
       "url": "https://www.example.com/",
       "name": "G.O.A.T – Guardians Of All Territories",
       "publisher": { "@id": "https://www.example.com/#organization" },
-      "inLanguage": ["en", "ar", "de", "hu"]
+      "inLanguage": ["en", "ar", "de"]
     }
   ]
 }
@@ -78,7 +77,7 @@
   <div>
     <img class="mark" src="assets/goat-mark.svg" alt="G.O.A.T monogram" width="64" height="64">
     <h1>G.O.A.T</h1>
-    <p class="sub">Guardians Of All Territories · Discreet Executive Protection</p>
+    <p class="sub">Guardians Of All Territories · Quiet Protection</p>
     <nav class="gateway-langs" aria-label="Language selection">
       <a href="/en/" hreflang="en">
         <span class="l-name">English</span>
@@ -93,17 +92,14 @@
         <span class="l-meta">Deutschland</span>
       </a>
     </nav>
-    <p class="gateway-foot">
-      Also available in <a href="/hu/" hreflang="hu" lang="hu">Magyar</a>.
-    </p>
-  </div>
+    </div>
 </main>
 <script src="assets/script.js"></script>
 <script>
 /* Optional, non-aggressive browser-language hint. Users retain full manual control. */
 (function () {
   try {
-    var supported = { en: "/en/", ar: "/ar/", de: "/de/", hu: "/hu/" };
+    var supported = { en: "/en/", ar: "/ar/", de: "/de/" };
     var langs = (navigator.languages || [navigator.language || "en"]);
     for (var i = 0; i < langs.length; i++) {
       var code = (langs[i] || "").slice(0, 2).toLowerCase();
@@ -113,7 +109,7 @@
           var hint = document.createElement("p");
           hint.className = "gateway-foot";
           hint.style.marginTop = "1.4rem";
-          var label = { en: "Continue in English", ar: "المتابعة بالعربية", de: "Auf Deutsch fortfahren", hu: "Folytatás magyarul" }[code];
+          var label = { en: "Continue in English", ar: "المتابعة بالعربية", de: "Auf Deutsch fortfahren" }[code];
           hint.innerHTML = '<a href="' + supported[code] + '">' + label + ' →</a>';
           box.parentNode.insertBefore(hint, box.nextSibling);
         }
